@@ -8,7 +8,7 @@ import { testimonials } from '@/data/testimonials';
 
 export function TestimonialsPreview() {
   return (
-    <SectionWrapper bgColor="light" className="industrial-grid">
+    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 lg:pb-32">
       <Container>
         <SectionHeading
           title="Our Impact"

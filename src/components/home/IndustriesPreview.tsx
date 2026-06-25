@@ -11,7 +11,7 @@ import { DynamicIcon } from '@/components/common/DynamicIcon';
 
 export function IndustriesPreview() {
   return (
-    <SectionWrapper bgColor="white">
+    <SectionWrapper bgColor="white" hasPadding={false} className="pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 lg:pb-32">
       <Container>
         <SectionHeading
           subtitle="Market Expertise"

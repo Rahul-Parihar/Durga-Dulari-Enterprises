@@ -14,7 +14,7 @@ export function ResourcesPreview() {
   const featuredResources = blogResources.slice(0, 3);
 
   return (
-    <SectionWrapper bgColor="light" className="industrial-grid">
+    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid pt-16 md:pt-24 lg:pt-32 pb-6 md:pb-8 lg:pb-10">
       <Container>
         <SectionHeading
           title="Industry Resources"

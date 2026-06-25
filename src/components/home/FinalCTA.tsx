@@ -8,7 +8,7 @@ export function FinalCTA() {
   return (
     <section className="bg-gradient-to-br from-[#0B2545] to-[#040e1b] py-16 sm:py-20 text-white relative overflow-hidden dark-industrial-grid">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-orange/5 rounded-full blur-[140px] pointer-events-none animate-glow-drift-2" />
-      
+
       <Container>
         <div className="text-center space-y-7 sm:space-y-8 max-w-4xl mx-auto min-w-0">
           <div className="space-y-4">

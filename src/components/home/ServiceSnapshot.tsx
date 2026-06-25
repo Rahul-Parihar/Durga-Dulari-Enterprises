@@ -15,7 +15,7 @@ export function ServiceSnapshot() {
   const row2 = services.slice(midPoint);
 
   return (
-    <SectionWrapper bgColor="white">
+    <SectionWrapper bgColor="white" hasPadding={false} className="pt-16 md:pt-24 lg:pt-32 pb-6 md:pb-8 lg:pb-10">
       <Container>
         <SectionHeading
           subtitle="Our Capabilities"

@@ -6,7 +6,7 @@ import { Button } from '@/components/common/Button';
 
 export function TrainingPreview() {
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#0B2545] to-[#081b33] text-white relative overflow-hidden dark-industrial-grid">
+    <section className="pt-6 sm:pt-8 md:pt-10 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-br from-[#0B2545] to-[#081b33] text-white relative overflow-hidden dark-industrial-grid">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-orange/5 rounded-full blur-[100px] pointer-events-none animate-glow-drift-1" />
       
       <Container>
