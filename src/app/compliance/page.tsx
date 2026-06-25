@@ -102,7 +102,6 @@ export default function CompliancePage() {
         </Container>
       </section>
 
-      {/* CTA */}
       <section className="py-16 bg-primary-orange text-white text-center">
         <Container>
           <h2 className="text-3xl font-bold mb-4">Verify Our Credentials</h2>
