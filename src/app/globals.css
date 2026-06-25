@@ -378,3 +378,35 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* Infinite Scrolling Marquee */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-left {
+  animation: marqueeLeft 40s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marqueeRight 40s linear infinite;
+}
+
+.hover-pause:hover {
+  animation-play-state: paused;
+}
+
+

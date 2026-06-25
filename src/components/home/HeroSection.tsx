@@ -20,7 +20,7 @@ export function HeroSection() {
 
       <Container>
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 sm:space-y-10 animate-fade-in-up min-w-0 relative z-10">
-          
+
           {/* Subtitle Badge */}
           <span className="inline-flex max-w-full items-center gap-1.5 bg-primary-orange/15 border border-primary-orange/30 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase text-primary-orange leading-snug">
             <Cpu size={14} className="animate-spin-slow" />
