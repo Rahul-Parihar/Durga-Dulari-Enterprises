@@ -11,7 +11,13 @@ export const metadata: Metadata = {
   description: 'Get in touch with our team for manpower requirements, maintenance services, or custom solutions.',
 };
 
-export default function ContactPage() {
+export default function ContactPage({
+  searchParams,
+}: {
+  searchParams?: { requirement?: string };
+}) {
+  const defaultRequirement = searchParams?.requirement;
+
   return (
     <main className="bg-white">
       {/* Hero */}
@@ -90,7 +96,7 @@ export default function ContactPage() {
               <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8 md:p-12 shadow-sm">
                 <h2 className="text-3xl font-extrabold text-primary-navy mb-2 tracking-tight">Send Us a Message</h2>
                 <p className="text-slate-500 font-semibold mb-8">We typically respond within <strong>2 hours</strong> during business shifts.</p>
-                <LeadForm submitButtonText="Submit Inquiry" />
+                <LeadForm submitButtonText="Submit Inquiry" defaultRequirement={defaultRequirement} />
               </div>
             </div>
           </div>

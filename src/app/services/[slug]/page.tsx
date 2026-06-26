@@ -18,6 +18,7 @@ export default function ServiceDetailPage({
   params: { slug: string };
 }) {
   const service = services.find((s) => s.slug === params.slug);
+  const consultationHref = `/contact?requirement=${encodeURIComponent(service?.slug || '')}`;
 
   if (!service) {
     return (
@@ -52,7 +53,7 @@ export default function ServiceDetailPage({
               </div>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8">
                 <Button variant="secondary" asChild>
-                  <Link href="/contact" className="gap-2">
+                  <Link href={consultationHref} className="gap-2">
                     Request Consultation <ArrowRight size={18} />
                   </Link>
                 </Button>
@@ -176,7 +177,7 @@ export default function ServiceDetailPage({
           <p className="text-lg mb-8 max-w-2xl mx-auto text-white/90">Get in touch with our experts to discuss your specific requirements.</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Button variant="primary" size="lg" asChild>
-              <Link href="/contact" className="gap-2">
+              <Link href={consultationHref} className="gap-2">
                 <PhoneCall size={18} />
                 {service.cta.primary}
               </Link>
