@@ -10,8 +10,8 @@ export const COLORS = {
   },
 };
 
-export const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91-XXXXXXXXXX';
-export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+export const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91 97520 61681';
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919752061681';
 export const EMAIL = process.env.NEXT_PUBLIC_EMAIL || 'info@example.com';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -49,7 +49,7 @@ export const SERVICE_ROUTES = [
 ];
 
 export const SOCIAL_LINKS = {
-  whatsapp: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`,
-  phone: `tel:${process.env.NEXT_PUBLIC_PHONE_NUMBER}`,
+  whatsapp: `https://wa.me/${WHATSAPP_NUMBER}`,
+  phone: `tel:${PHONE_NUMBER}`,
   email: `mailto:${process.env.NEXT_PUBLIC_EMAIL}`,
 };

@@ -2,19 +2,23 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MessageCircle, Phone, MapPin } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { Input } from '@/components/ui/Input';
+import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/common/Button';
 import { Toast } from '@/components/ui/Toast';
 import { footerLinks } from '@/data/navigation';
-import { PHONE_NUMBER, EMAIL, COMPANY_NAME } from '@/lib/constants';
+import { PHONE_NUMBER, WHATSAPP_NUMBER, EMAIL, COMPANY_NAME } from '@/lib/constants';
 import { validateIndianPhone } from '@/lib/validations';
+
+const callbackRecipientEmail = 'anandcoder0@gmail.com';
 
 export function Footer() {
   const [callbackForm, setCallbackForm] = useState({
     name: '',
     phone: '',
+    message: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -32,9 +36,26 @@ export function Footer() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+      const params = new URLSearchParams({
+        view: 'cm',
+        fs: '1',
+        tf: '1',
+        to: callbackRecipientEmail,
+        su: `Callback Request from ${callbackForm.name}`,
+        body: [
+          'New callback request received from Durga Dulari Enterprises website:',
+          '',
+          `Name: ${callbackForm.name}`,
+          `Phone Number: ${callbackForm.phone}`,
+          `Message: ${callbackForm.message.trim() || 'Not provided'}`,
+        ].join('\n'),
+      });
+
+      window.open(`https://mail.google.com/mail/u/0/?${params.toString()}`, '_blank', 'noopener,noreferrer');
+
       setSubmitted(true);
       setShowToast(true);
-      setCallbackForm({ name: '', phone: '' });
+      setCallbackForm({ name: '', phone: '', message: '' });
 
       setTimeout(() => {
         setSubmitted(false);
@@ -70,6 +91,24 @@ export function Footer() {
                 <MapPin size={16} className="flex-shrink-0 mt-1" />
                 <span className="text-gray-300">Pan India Operations</span>
               </div>
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary-orange px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-orange-600"
+              >
+                <Phone size={16} />
+                Call Now
+              </a>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:border-primary-orange hover:text-primary-orange"
+              >
+                <MessageCircle size={16} />
+                WhatsApp
+              </a>
             </div>
           </div>
 
@@ -108,12 +147,12 @@ export function Footer() {
           </div>
 
           {/* Quick Request Callback */}
-          <div>
+          <div id="request-callback" className="scroll-mt-28">
             <h4 className="text-lg font-semibold mb-4 text-white dark:text-white">Request Callback</h4>
             {submitted ? (
               <div className="bg-green-600 text-white p-4 rounded text-center">
                 <p className="font-semibold">Thank you!</p>
-                <p className="text-sm">We'll contact you shortly.</p>
+                <p className="text-sm">Your email draft is ready.</p>
               </div>
             ) : (
               <form onSubmit={handleCallbackSubmit} className="space-y-3">
@@ -129,6 +168,13 @@ export function Footer() {
                   value={callbackForm.phone}
                   onChange={(e) => setCallbackForm({ ...callbackForm, phone: e.target.value })}
                   error={errors.phone}
+                  className="bg-gray-100 text-neutral-text placeholder-gray-500"
+                />
+                <Textarea
+                  placeholder="Message"
+                  value={callbackForm.message}
+                  onChange={(e) => setCallbackForm({ ...callbackForm, message: e.target.value })}
+                  rows={3}
                   className="bg-gray-100 text-neutral-text placeholder-gray-500"
                 />
                 <Button type="submit" variant="secondary" size="sm" fullWidth>
@@ -163,7 +209,7 @@ export function Footer() {
       {showToast && (
         <Toast
           type="success"
-          message="We'll call you back shortly!"
+          message="Callback email draft is ready. Please press Send in Gmail."
           onClose={() => setShowToast(false)}
           autoClose
           duration={4000}

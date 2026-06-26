@@ -39,10 +39,10 @@ export function FinalCTA() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto border-slate-500 text-white hover:bg-white/10 hover:border-white flex items-center gap-2 font-bold btn-premium"
+              className="w-full sm:w-auto flex items-center gap-2 border-2 border-black bg-white text-primary-navy hover:bg-primary-orange hover:border-primary-orange hover:text-white dark:border-white/35 dark:bg-white/10 dark:text-white dark:hover:bg-primary-orange dark:hover:border-primary-orange font-bold btn-premium shadow-none hover:shadow-none"
               asChild
             >
-              <Link href="/contact">
+              <Link href="/#request-callback">
                 <PhoneCall size={18} className="shrink-0" />
                 <span>Request Callback</span>
               </Link>

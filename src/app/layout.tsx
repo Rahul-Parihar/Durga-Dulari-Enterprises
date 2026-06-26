@@ -22,7 +22,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
       </head>
-      <body className="font-body text-neutral-text bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+      <body className="font-body text-neutral-text bg-white dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
         <SmoothScroll />
         <SplashScreen />
         <SiteHeader />
