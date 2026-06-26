@@ -39,6 +39,8 @@ const courses = [
   },
 ];
 
+const trainingContactHref = '/contact?requirement=training-recruitment';
+
 export default function TrainingPage() {
   return (
     <main className="bg-white">
@@ -77,7 +79,7 @@ export default function TrainingPage() {
                     Duration: {course.duration}
                   </span>
                   <Button variant="outline" size="sm" className="font-bold" asChild>
-                    <Link href="/contact">Enroll Info</Link>
+                    <Link href={trainingContactHref}>Enroll Info</Link>
                   </Button>
                 </div>
               </Card>
@@ -152,7 +154,7 @@ export default function TrainingPage() {
                 </li>
               </ul>
               <Button variant="secondary" className="w-full font-bold" asChild>
-                <Link href="/contact">Request Workers</Link>
+                <Link href={trainingContactHref}>Request Workers</Link>
               </Button>
             </Card>
 
@@ -177,7 +179,7 @@ export default function TrainingPage() {
                 </li>
               </ul>
               <Button variant="outline" className="w-full font-bold" asChild>
-                <Link href="/contact">Apply for Training</Link>
+                <Link href={trainingContactHref}>Apply for Training</Link>
               </Button>
             </Card>
           </div>

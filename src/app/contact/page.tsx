@@ -21,21 +21,21 @@ export default function ContactPage({
   return (
     <main className="bg-white">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#0B2545] to-[#040e1b] text-white py-20 relative overflow-hidden dark-industrial-grid">
+      <section className="bg-gradient-to-br from-[#0B2545] to-[#040e1b] text-white py-12 md:py-14 relative overflow-hidden dark-industrial-grid">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-orange/5 rounded-full blur-[100px] pointer-events-none" />
-        <Container>
+        <Container className="text-center">
           <span className="inline-block bg-primary-orange text-white px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             Contact Channels
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Get In Touch</h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl font-medium">Available 24×7 for your urgent requirements.</p>
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium">Available 24×7 for your urgent requirements.</p>
         </Container>
       </section>
 
       {/* Content */}
-      <section className="py-24">
+      <section className="pt-10 pb-20 md:pt-12 md:pb-24">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
             {/* Contact Info */}
             <div className="space-y-6">
               <h2 className="text-3xl font-extrabold text-primary-navy mb-2 tracking-tight">Quick Contact</h2>
