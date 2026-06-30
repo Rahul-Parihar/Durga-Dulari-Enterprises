@@ -21,19 +21,22 @@ import {
   ShieldAlert,
   Gauge,
   Building2,
-  Layers
+  Layers,
+  X
 } from 'lucide-react';
-import { PHONE_NUMBER, WHATSAPP_NUMBER } from '@/lib/constants';
+import { WHATSAPP_NUMBER } from '@/lib/constants';
 
 export function HeroSection() {
+  const [previewImage, setPreviewImage] = React.useState<{ src: string; alt: string } | null>(null);
+
   const coreServices = [
-    { title: 'Textile Manpower', icon: <Users size={18} /> },
-    { title: 'Mechanical Maintenance', icon: <Wrench size={18} /> },
-    { title: 'Electrical Maintenance', icon: <Zap size={18} /> },
-    { title: 'Electronics & Automation', icon: <Cpu size={18} /> },
-    { title: 'Plant Projects & Turnkey', icon: <Factory size={18} /> },
-    { title: 'Consultancy & Improvement', icon: <TrendingUp size={18} /> },
-    { title: 'Training & Development', icon: <GraduationCap size={18} /> },
+    { title: 'Textile Manpower', href: '/services/textile-manpower-supply', icon: <Users size={18} /> },
+    { title: 'Mechanical Maintenance', href: '/services/mechanical-maintenance', icon: <Wrench size={18} /> },
+    { title: 'Electrical Maintenance', href: '/services/electrical-maintenance', icon: <Zap size={18} /> },
+    { title: 'Electronics & Automation', href: '/services/textile-electronics-automation', icon: <Cpu size={18} /> },
+    { title: 'Plant Projects & Turnkey', href: '/services/projects-division', icon: <Factory size={18} /> },
+    { title: 'Consultancy & Improvement', href: '/services/textile-consultancy', icon: <TrendingUp size={18} /> },
+    { title: 'Training & Development', href: '/training-recruitment', icon: <GraduationCap size={18} /> },
   ];
 
   const results = [
@@ -210,14 +213,19 @@ export function HeroSection() {
 
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3 justify-items-center text-center">
                 {coreServices.map((service, index) => (
-                  <div key={index} className="flex flex-col items-center group cursor-pointer">
+                  <Link
+                    key={index}
+                    href={service.href}
+                    className="flex flex-col items-center group cursor-pointer rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-orange/80 focus:ring-offset-2 focus:ring-offset-[#041124]"
+                    aria-label={`Open ${service.title} page`}
+                  >
                     <div className="w-9 h-9 rounded-full bg-[#081b33] border border-[#0d2c52] flex items-center justify-center text-slate-300 group-hover:text-white group-hover:bg-primary-orange/20 group-hover:border-primary-orange/50 transition-all duration-300">
                       {service.icon}
                     </div>
                     <span className="text-slate-400 group-hover:text-white text-[8px] sm:text-[9px] font-bold mt-1.5 leading-tight max-w-[85px] transition-colors duration-200">
                       {service.title.toUpperCase()}
                     </span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -258,9 +266,12 @@ export function HeroSection() {
             <div className="h-[500px] lg:h-[600px] relative">
               <div className="grid grid-rows-5 gap-3.5 h-full w-full">
                 {slantedPanels.map((panel, idx) => (
-                  <div
+                  <button
                     key={idx}
-                    className="relative overflow-hidden rounded-xl border border-slate-800/80 skew-container-custom"
+                    type="button"
+                    onClick={() => setPreviewImage({ src: panel.img, alt: `${panel.title} ${panel.subtitle}` })}
+                    className="group relative overflow-hidden rounded-xl border border-slate-800/80 skew-container-custom cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-primary-orange/80 focus:ring-offset-2 focus:ring-offset-[#020813]"
+                    aria-label={`View ${panel.title} ${panel.subtitle} image`}
                   >
                     {/* The image container (skewed & scaled to cover corners) */}
                     <div className="h-full w-full relative skew-child-custom">
@@ -298,7 +309,7 @@ export function HeroSection() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -310,13 +321,18 @@ export function HeroSection() {
               <div className="absolute bottom-0 left-0 w-20 h-20 bg-blue-500/5 rounded-full blur-lg pointer-events-none" />
 
               {/* Photo on the Left */}
-              <div className="w-[35%] shrink-0 select-none flex items-stretch py-1">
+              <button
+                type="button"
+                onClick={() => setPreviewImage({ src: '/images/founder.png', alt: 'Vijay Kumar Ojha' })}
+                className="w-[35%] shrink-0 select-none flex items-stretch py-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-orange/80 focus:ring-offset-2 focus:ring-offset-[#020813] rounded-xl"
+                aria-label="View Vijay Kumar Ojha image"
+              >
                 <img
                   src="/images/founder.png"
                   alt="Vijay Kumar Ojha"
-                  className="w-full h-full object-cover object-top rounded-xl border border-white/10 shadow-sm"
+                  className="w-full h-full object-cover object-top rounded-xl border border-white/10 shadow-sm transition-transform duration-300 hover:scale-[1.02]"
                 />
-              </div>
+              </button>
 
               {/* Content on the Right */}
               <div className="w-[65%] pl-4 flex flex-col justify-center relative z-20">
@@ -355,10 +371,10 @@ export function HeroSection() {
         </div>
 
         {/* Footer Trusted Mills Section */}
-        <div className="mt-14 border-t border-slate-800/80 pt-8">
+        <div className="mt-8 border-t border-slate-800/80 pt-5">
 
           {/* Section Divider & Heading */}
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-3 mb-4">
             <div className="flex-1 h-[1px] bg-slate-800/60" />
             <span className="text-primary-orange text-[10px] sm:text-xs font-black uppercase tracking-widest text-center whitespace-nowrap px-2">
               Trusted by Spinning Mills Across India
@@ -367,15 +383,15 @@ export function HeroSection() {
           </div>
 
           {/* Grid of Logos & Pillars */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
 
             {/* Logos Grid Column (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[10px] sm:text-xs font-black tracking-wider text-slate-300">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-[10px] sm:text-xs font-black tracking-wider text-slate-300">
                 {trustedMills.map((mill, index) => (
                   <div
                     key={index}
-                    className="group flex items-center gap-2.5 bg-[#041124]/40 border border-slate-800/40 hover:border-slate-800 hover:bg-[#03152d]/60 rounded-2xl py-3 px-3.5 hover:text-white transition-all duration-300 cursor-default shadow-sm hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
+                    className="group flex items-center gap-2 bg-[#041124]/40 border border-slate-800/40 hover:border-slate-800 hover:bg-[#03152d]/60 rounded-2xl py-2.5 px-3 hover:text-white transition-all duration-300 cursor-default shadow-sm hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
                   >
                     <div className="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800/60 group-hover:border-slate-700 shrink-0">
                       {mill.icon}
@@ -387,8 +403,8 @@ export function HeroSection() {
             </div>
 
             {/* Core Pillars Column (5 cols) */}
-            <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-6 lg:pt-0 lg:pl-8">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-4 lg:pt-0 lg:pl-5">
+              <div className="grid grid-cols-2 gap-2.5">
                 {[
                   { label: 'PAN India Operations', icon: <Globe size={18} className="text-sky-400" /> },
                   { label: 'Certified & Compliant', icon: <ShieldCheck size={18} className="text-emerald-400" /> },
@@ -397,7 +413,7 @@ export function HeroSection() {
                 ].map((pillar, index) => (
                   <div
                     key={index}
-                    className="group flex items-center gap-3 p-3 bg-[#041124]/20 border border-slate-900/60 rounded-2xl hover:border-slate-800/80 hover:bg-[#03152d]/40 transition-all duration-300 text-slate-400 hover:text-white"
+                    className="group flex items-center gap-2.5 p-2.5 bg-[#041124]/20 border border-slate-900/60 rounded-2xl hover:border-slate-800/80 hover:bg-[#03152d]/40 transition-all duration-300 text-slate-400 hover:text-white"
                   >
                     <div className="bg-slate-900/50 p-2 rounded-xl border border-slate-800/60 shrink-0">
                       {pillar.icon}
@@ -414,6 +430,34 @@ export function HeroSection() {
         </div>
 
       </Container>
+
+      {previewImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-default"
+            onClick={() => setPreviewImage(null)}
+            aria-label="Close image preview"
+          />
+
+          <div className="relative z-10 w-full max-w-5xl">
+            <button
+              type="button"
+              onClick={() => setPreviewImage(null)}
+              className="absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/90 text-white hover:border-primary-orange hover:text-primary-orange transition-colors focus:outline-none focus:ring-2 focus:ring-primary-orange"
+              aria-label="Close image preview"
+            >
+              <X size={22} />
+            </button>
+
+            <img
+              src={previewImage.src}
+              alt={previewImage.alt}
+              className="max-h-[82vh] w-full rounded-2xl border border-white/15 object-contain shadow-2xl bg-slate-950"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
