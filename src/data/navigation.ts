@@ -40,6 +40,10 @@ export const mainNavigation: NavLink[] = [
     href: '/training-recruitment',
   },
   {
+    label: 'School Services',
+    href: '/school-services',
+  },
+  {
     label: 'Resources',
     href: '/resources',
   },
@@ -73,6 +77,7 @@ export const footerLinks = {
     { label: 'Downloads', href: '/downloads' },
     { label: 'Case Studies', href: '/case-studies' },
     { label: 'Training & Recruitment', href: '/training-recruitment' },
+    { label: 'School Services', href: '/school-services' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '/privacy-policy' },
