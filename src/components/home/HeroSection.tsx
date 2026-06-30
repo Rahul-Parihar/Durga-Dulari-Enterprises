@@ -432,7 +432,7 @@ export function HeroSection() {
       </Container>
 
       {previewImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-3 py-14 sm:px-6 sm:py-16">
           <button
             type="button"
             className="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-default"
@@ -440,11 +440,11 @@ export function HeroSection() {
             aria-label="Close image preview"
           />
 
-          <div className="relative z-10 w-full max-w-5xl">
+          <div className="relative z-10 flex max-h-[88vh] w-full max-w-[94vw] items-center justify-center">
             <button
               type="button"
               onClick={() => setPreviewImage(null)}
-              className="absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/90 text-white hover:border-primary-orange hover:text-primary-orange transition-colors focus:outline-none focus:ring-2 focus:ring-primary-orange"
+              className="absolute right-0 top-0 -translate-y-12 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/90 text-white hover:border-primary-orange hover:text-primary-orange transition-colors focus:outline-none focus:ring-2 focus:ring-primary-orange"
               aria-label="Close image preview"
             >
               <X size={22} />
@@ -453,7 +453,7 @@ export function HeroSection() {
             <img
               src={previewImage.src}
               alt={previewImage.alt}
-              className="max-h-[82vh] w-full rounded-2xl border border-white/15 object-contain shadow-2xl bg-slate-950"
+              className="max-h-[88vh] max-w-full rounded-2xl border border-white/15 object-contain shadow-2xl bg-slate-950"
             />
           </div>
         </div>
