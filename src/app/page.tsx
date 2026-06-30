@@ -4,7 +4,6 @@ import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { ServiceSnapshot } from '@/components/home/ServiceSnapshot';
 import { IndustriesPreview } from '@/components/home/IndustriesPreview';
 import { ProcessSection } from '@/components/home/ProcessSection';
-import { TrustStrip } from '@/components/home/TrustStrip';
 import { CaseStudiesPreview } from '@/components/home/CaseStudiesPreview';
 import { TrainingPreview } from '@/components/home/TrainingPreview';
 import { ResourcesPreview } from '@/components/home/ResourcesPreview';
@@ -21,7 +20,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <TrustStrip />
       <WhyChooseUs />
       <ServiceSnapshot />
       <IndustriesPreview />
