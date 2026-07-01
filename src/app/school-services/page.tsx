@@ -3,7 +3,6 @@ import Link from 'next/link';
 import {
   ArrowRight,
   Building2,
-  GraduationCap,
   Bed,
   FlaskConical,
   BookOpen,
@@ -25,13 +24,6 @@ import {
   HardHat,
   CircuitBoard,
   ChevronRight,
-  Maximize2,
-  LayoutGrid,
-  Home,
-  UtensilsCrossed,
-  Car,
-  Trees,
-  LandPlot,
   CheckCircle2,
   Star,
   Trophy,
@@ -145,32 +137,8 @@ const specLabels: Record<string, string> = {
   waterSupply: 'Water Supply',
 };
 
-const masterLayoutBlocks = [
-  { name: 'Administrative Block', area: '250 sq.m.', detail: 'Director Office · Placement Cell · Reception · Meeting Room · Accounts · Record Room', color: 'bg-blue-500', icon: Building2 },
-  { name: 'Academic Block', area: '600 sq.m.', detail: '4 Smart Classrooms (75 each) · Seminar Hall (200-seat) · Library (500 titles) · Computer Lab (50 nodes)', color: 'bg-indigo-500', icon: GraduationCap },
-  { name: 'Laboratory Complex', area: '700 sq.m.', detail: 'Spinning · Mechanical · Electrical · Electronics/PLC · Utility · Garment · Knitting · Computer · Tool Room · Safety · Motor Rewinding · Pneumatic/Hydraulic', color: 'bg-primary-orange', icon: FlaskConical },
-  { name: 'Boys Hostel', area: '250 sq.m.', detail: '150 Beds · 38 Rooms (4-bed each) · Toilet Blocks · Study Room · Warden', color: 'bg-cyan-500', icon: Home },
-  { name: 'Girls Hostel', area: '250 sq.m.', detail: '150 Beds · 38 Rooms (4-bed each) · Lady Warden · CCTV · Separate Entry', color: 'bg-pink-500', icon: Home },
-  { name: 'Dining Hall + Kitchen', area: '150 sq.m.', detail: '200-Seat Dining Hall · Commercial Kitchen · Stores & Pantry', color: 'bg-amber-500', icon: UtensilsCrossed },
-  { name: 'Parking', area: '300 sq.m.', detail: 'Cars + 2-wheelers · Internal Road 5m wide', color: 'bg-slate-500', icon: Car },
-  { name: 'Open / Playground', area: '1,000 sq.m.', detail: 'Badminton · Volleyball · Morning PT Ground', color: 'bg-emerald-500', icon: Trees },
-];
 
-const adminRooms = [
-  { name: "Director's Office", area: '400 sq.ft', detail: 'Private cabin · Meeting table · CCTV terminal' },
-  { name: 'Conference Room', area: '300 sq.ft', detail: '20-seater · Projector · Whiteboard' },
-  { name: 'Placement Cell', area: '300 sq.ft', detail: '4 terminals · Interview room · Portal' },
-  { name: 'Reception & Waiting', area: '250 sq.ft', detail: 'Visitor registration · Display' },
-  { name: 'Accounts', area: '150 sq.ft', detail: 'Tally · GST billing' },
-  { name: 'Record Room & Store', area: '200 sq.ft', detail: 'Documentation archive' },
-];
 
-const academicRooms = [
-  { name: 'Smart Classroom 1–4', area: '75 trainees each', detail: 'Smart Board · Projector · AC · CCTV' },
-  { name: 'Seminar Hall', area: '200-Seat', detail: 'Stage · PA System · Projector · Inauguration / Placement Drives' },
-  { name: 'Library', area: '500 Titles', detail: '50-seat Reading Room · Reference + Journals' },
-  { name: 'Computer Lab', area: '50 Nodes', detail: 'i5 Systems · 100 Mbps Internet · Online Assessment' },
-];
 
 const labData = [
   { name: 'Spinning Lab', area: '120 sq.m.', batch: 30, icon: Layers, color: 'from-orange-500 to-red-500', equipment: ['Ring Frame (10-spindle)', 'Auto Coner', 'Speed Frame', 'Compact Spinning Setup', 'Uster Tester & Quality Inst.'] },
@@ -213,19 +181,6 @@ const blockSummary = [
   { block: 'Open + Playground', floors: '–', area: '1,000', capacity: '–', facilities: 'Badminton, Volleyball, Morning PT ground' },
 ];
 
-const expansionBlocks = [
-  { name: 'Admin Block', area: '500 sq.m.', detail: 'G+1 · 50 staff', icon: Building2, color: 'bg-blue-500' },
-  { name: 'Academic Block', area: '1,200 sq.m.', detail: '4 Smart Classrooms · Seminar Hall · Library', icon: GraduationCap, color: 'bg-indigo-500' },
-  { name: 'Lab Complex Phase 1', area: '700 sq.m.', detail: 'Existing — All 12 Labs', icon: FlaskConical, color: 'bg-primary-orange' },
-  { name: 'Lab Complex Phase 2', area: '800 sq.m.', detail: 'Expansion — Advanced CoE Labs · R&D · Testing', icon: FlaskConical, color: 'bg-amber-500' },
-  { name: 'Boys Hostel', area: '600 sq.m.', detail: 'G+2 · 300 Beds Total', icon: Home, color: 'bg-cyan-500' },
-  { name: 'Girls Hostel', area: '600 sq.m.', detail: 'G+2 · 300 Beds Total', icon: Home, color: 'bg-pink-500' },
-  { name: 'Multipurpose Hall', area: '500 sq.m.', detail: 'Events · Placement Drives · Industry Exhibitions', icon: LayoutGrid, color: 'bg-violet-500' },
-  { name: 'Dining & Kitchen', area: '300 sq.m.', detail: '400-seat · Commercial Kitchen', icon: UtensilsCrossed, color: 'bg-amber-600' },
-  { name: 'Open Playground', area: '3,000 sq.m.', detail: 'Football · Volleyball · Badminton Courts', icon: Trees, color: 'bg-emerald-500' },
-  { name: 'Parking', area: '600 sq.m.', detail: '60 cars + 100 two-wheelers', icon: Car, color: 'bg-slate-500' },
-  { name: 'Expansion Reserve', area: '4,500 sq.m.', detail: 'Future growth area', icon: LandPlot, color: 'bg-teal-500' },
-];
 
 /* ─────────────────────── COMPONENTS ─────────────────────── */
 
@@ -334,215 +289,492 @@ export default function SchoolServicesPage() {
         </Container>
       </section>
 
-      {/* ═══════════ PAGE 2: MODEL COMPARISON ═══════════ */}
+      {/* ═══════════ PAGE 2: MODEL COMPARISON — BLUEPRINT ═══════════ */}
       <section id="page-2" className="py-20 sm:py-28">
         <Container>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={LayoutGrid} label="Campus Model Comparison" />
-            <PageBadge page={2} />
-          </div>
-          <h2 className="mb-3 text-3xl font-bold text-slate-950 dark:text-white sm:text-4xl">
-            1 Acre · 2 Acre · 5 Acre
-          </h2>
-          <p className="mb-12 max-w-2xl text-base text-slate-600 dark:text-slate-300">
-            Three campus models designed for phased growth — from a lean starter unit to a full-scale Centre of Excellence.
-          </p>
+          {/* Blueprint Container */}
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
 
-          {/* Comparison cards */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {modelComparison.map((model) => (
-              <div
-                key={model.name}
-                className={`relative overflow-hidden rounded-2xl border ${model.recommended ? 'border-primary-orange/50 ring-2 ring-primary-orange/20' : 'border-slate-200 dark:border-slate-800'} bg-white transition-all duration-300 hover:-translate-y-1 dark:bg-slate-900/60`}
-              >
-                {/* Header */}
-                <div className={`bg-gradient-to-r ${model.color} px-6 py-5`}>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-white/80">{model.budget} Project</p>
-                      <h3 className="text-xl font-bold text-white">{model.name}</h3>
-                    </div>
-                    {model.recommended && (
-                      <span className="flex items-center gap-1 rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">
-                        <Star size={12} /> RECOMMENDED
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Specs list */}
-                <div className="p-5">
-                  <div className="space-y-2.5">
-                    {Object.entries(model.specs).map(([key, val]) => (
-                      <div key={key} className="flex items-start justify-between gap-2 text-sm">
-                        <span className="font-medium text-slate-500 dark:text-slate-400">{specLabels[key]}</span>
-                        <span className="text-right font-semibold text-slate-800 dark:text-slate-200">{val}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Recommendation callout */}
-          <div className="mt-8 rounded-2xl border border-primary-orange/30 bg-gradient-to-r from-primary-orange/5 via-amber-500/5 to-transparent p-6 dark:from-primary-orange/10 dark:via-amber-500/5">
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-orange text-white">
-                <Trophy size={20} />
-              </div>
+            {/* ── Top Header Bar (Navy) ── */}
+            <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
               <div>
-                <p className="text-sm font-bold uppercase tracking-wider text-primary-orange">Recommended Model for Initial Launch</p>
-                <p className="text-base font-semibold text-slate-700 dark:text-slate-200">
-                  2-Acre Standard (₹5 Crore) — Best balance of capacity (300 trainees), PMKVY eligibility, bank loan feasibility, and hostel residential facility.
+                <h2 className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl md:text-2xl">
+                  Durga Dulari Textile Skill Development Institute
+                </h2>
+                <p className="mt-0.5 text-sm font-bold uppercase tracking-wider text-primary-orange sm:text-base">
+                  Campus Model Comparison
                 </p>
               </div>
+              <div className="shrink-0 text-right">
+                <p className="text-xs font-medium text-slate-300 sm:text-sm">Campus Layout & Infrastructure Plan</p>
+                <p className="text-[11px] text-slate-400">1 Acre · 2 Acre · 5 Acre</p>
+              </div>
+            </div>
+
+            {/* ── Body ── */}
+            <div className="p-3 sm:p-5">
+
+              {/* Comparison cards */}
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                {modelComparison.map((model) => (
+                  <div
+                    key={model.name}
+                    className={`relative overflow-hidden rounded-md border-2 ${model.recommended ? 'border-primary-orange/50 ring-2 ring-primary-orange/20' : 'border-slate-300/60 dark:border-slate-700'} bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-slate-900/60`}
+                  >
+                    {/* Header */}
+                    <div className={`bg-gradient-to-r ${model.color} px-5 py-4`}>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-[11px] font-medium text-white/80">{model.budget} Project</p>
+                          <h3 className="text-lg font-bold text-white">{model.name}</h3>
+                        </div>
+                        {model.recommended && (
+                          <span className="flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
+                            <Star size={11} /> RECOMMENDED
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Specs list */}
+                    <div className="p-4">
+                      <div className="space-y-2">
+                        {Object.entries(model.specs).map(([key, val]) => (
+                          <div key={key} className="flex items-start justify-between gap-2 text-[12px]">
+                            <span className="font-medium text-slate-500 dark:text-slate-400">{specLabels[key]}</span>
+                            <span className="text-right font-semibold text-slate-800 dark:text-slate-200">{val}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Recommendation callout */}
+              <div className="mt-4 flex items-center gap-3 rounded-md border-2 border-primary-orange/30 bg-white p-4 dark:border-primary-orange/20 dark:bg-slate-900/60">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-orange text-white">
+                  <Trophy size={18} />
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-primary-orange">Recommended Model for Initial Launch: 2-Acre Standard (■ ₹5 Crore)</p>
+                  <p className="mt-0.5 text-[12px] font-medium text-slate-700 dark:text-slate-300">
+                    Best balance of capacity (300 trainees), PMKVY eligibility, bank loan feasibility, and hostel residential facility.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Bottom Footer ── */}
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+              <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
+              <p className="font-bold text-slate-500 dark:text-slate-400">Page 2</p>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ═══════════ PAGE 3: MASTER LAYOUT PLAN ═══════════ */}
+      {/* ═══════════ PAGE 3: MASTER LAYOUT PLAN — BLUEPRINT ═══════════ */}
       <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-20 dark:border-slate-800 dark:bg-slate-900/30 sm:py-28">
         <Container>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={MapPin} label="2-Acre Standard Campus" />
-            <PageBadge page={3} />
-          </div>
-          <h2 className="mb-3 text-3xl font-bold text-slate-950 dark:text-white sm:text-4xl">
-            Master Layout Plan
-          </h2>
-          <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-            Scale: Approx. 1:500 · All dimensions in metres
-          </p>
+          {/* Blueprint Container */}
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
 
-          {/* Campus Map - Interactive blocks */}
-          <div className="mb-10 overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lg dark:border-slate-700 dark:bg-slate-900/80 sm:p-8">
-            {/* Layout legend */}
-            <div className="mb-6 flex flex-wrap gap-3">
-              {masterLayoutBlocks.map((b) => (
-                <div key={b.name} className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
-                  <span className={`h-3 w-3 rounded-sm ${b.color}`} />
-                  {b.name}
-                </div>
-              ))}
+            {/* ── Top Header Bar (Navy) ── */}
+            <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
+              <div>
+                <h2 className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl md:text-2xl">
+                  Durga Dulari Textile Skill Development Institute
+                </h2>
+                <p className="mt-0.5 text-sm font-bold uppercase tracking-wider text-primary-orange sm:text-base">
+                  2-Acre Standard Campus — Master Layout Plan
+                </p>
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-xs font-medium text-slate-300 sm:text-sm">Campus Layout & Infrastructure Plan</p>
+                <p className="text-[11px] text-slate-400">Scale: Approx. 1:500 | All dimensions in metres</p>
+              </div>
             </div>
 
-            {/* Campus Grid Representation */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {masterLayoutBlocks.map((block) => {
-                const Icon = block.icon;
-                return (
-                  <div
-                    key={block.name}
-                    className="group relative overflow-hidden rounded-xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-700/60 dark:from-slate-800/60 dark:to-slate-900/60"
-                  >
-                    <div className={`absolute right-0 top-0 h-1 w-full ${block.color} opacity-60`} />
-                    <div className={`mb-2 flex h-8 w-8 items-center justify-center rounded-lg ${block.color} text-white`}>
-                      <Icon size={16} />
+            {/* ── Campus Map Body ── */}
+            <div className="p-3 sm:p-5">
+
+              {/* Legend + Compass Row */}
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap gap-2.5">
+                  {[
+                    { label: 'Administrative Block', color: 'bg-blue-500' },
+                    { label: 'Academic Block', color: 'bg-indigo-500' },
+                    { label: 'Laboratory Complex', color: 'bg-primary-orange' },
+                    { label: 'Boys Hostel', color: 'bg-cyan-500' },
+                    { label: 'Girls Hostel', color: 'bg-pink-500' },
+                    { label: 'Dining & Kitchen', color: 'bg-amber-500' },
+                    { label: 'Open / Playground', color: 'bg-emerald-500' },
+                    { label: 'Internal Roads', color: 'bg-slate-400' },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center gap-1.5 text-[10px] font-medium text-slate-600 dark:text-slate-400">
+                      <span className={`h-2.5 w-2.5 rounded-sm ${item.color}`} />
+                      {item.label}
                     </div>
-                    <h4 className="text-sm font-bold text-slate-800 dark:text-white">{block.name}</h4>
-                    <p className="mb-2 text-lg font-bold text-primary-orange">{block.area}</p>
-                    <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">{block.detail}</p>
+                  ))}
+                </div>
+                {/* Compass */}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-400/50 bg-white text-sm font-black text-[#0b2545] dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+                  N
+                </div>
+              </div>
+
+              {/* ── Main Campus Grid ── */}
+              <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_2fr]">
+
+                {/* ━━━ LEFT COLUMN ━━━ */}
+                <div className="space-y-3">
+
+                  {/* Girls Hostel */}
+                  <div className="overflow-hidden rounded-md border-2 border-pink-400/40 transition-all hover:shadow-lg">
+                    <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-3 py-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Girls Hostel</h4>
+                      <p className="text-[11px] font-semibold text-pink-100">(250 sq.m.)</p>
+                    </div>
+                    <div className="bg-[#fff0f5] p-3 dark:bg-[#3a1e28]">
+                      <div className="space-y-1 text-[11px] text-slate-700 dark:text-slate-300">
+                        <p className="font-semibold">150 Beds | 38 Rooms</p>
+                        <p>Lady Warden | CCTV</p>
+                        <p>Separate Entry</p>
+                      </div>
+                    </div>
                   </div>
-                );
-              })}
+
+                  {/* Dining Hall + Kitchen */}
+                  <div className="overflow-hidden rounded-md border-2 border-amber-400/40 transition-all hover:shadow-lg">
+                    <div className="bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Dining Hall + Kitchen</h4>
+                      <p className="text-[11px] font-semibold text-amber-100">(150 sq.m.)</p>
+                    </div>
+                    <div className="bg-[#fef8e8] p-3 dark:bg-[#3a3520]">
+                      <div className="space-y-1 text-[11px] text-slate-700 dark:text-slate-300">
+                        <p className="font-semibold">200-Seat Dining Hall</p>
+                        <p>Commercial Kitchen</p>
+                        <p>Stores & Pantry</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Open Area */}
+                  <div className="overflow-hidden rounded-md border-2 border-emerald-400/40 transition-all hover:shadow-lg">
+                    <div className="bg-gradient-to-r from-emerald-500 to-green-600 px-3 py-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Open Area & Playground</h4>
+                      <p className="text-[11px] font-semibold text-emerald-100">(1,000 sq.m.)</p>
+                    </div>
+                    <div className="bg-[#e8fde8] p-3 dark:bg-[#1a3a1e]">
+                      <div className="space-y-1 text-[11px] text-slate-700 dark:text-slate-300">
+                        <p className="font-semibold">Badminton + Volleyball</p>
+                        <p>Morning PT Ground</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ━━━ RIGHT COLUMN ━━━ */}
+                <div className="space-y-3">
+
+                  {/* Lab Complex — Full Width */}
+                  <div className="overflow-hidden rounded-md border-2 border-orange-400/40 transition-all hover:shadow-lg">
+                    <div className="bg-gradient-to-r from-primary-orange to-amber-500 px-4 py-2.5">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Laboratory Complex</h4>
+                          <p className="text-[11px] font-semibold text-orange-100">(700 sq.m.)</p>
+                        </div>
+                        <span className="rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white">Ground Floor — East Wing</span>
+                      </div>
+                    </div>
+                    <div className="bg-[#fff5ee] p-3 dark:bg-[#3a2c1e]">
+                      <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
+                        <span className="font-semibold">Spinning Lab</span> | <span className="font-semibold">Mechanical Lab</span> | <span className="font-semibold">Electrical Lab</span> | <span className="font-semibold">Electronics/PLC Lab</span>
+                      </p>
+                      <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
+                        <span className="font-semibold">Utility Lab</span> | <span className="font-semibold">Garment Lab</span> | <span className="font-semibold">Knitting Lab</span> | <span className="font-semibold">Computer Lab</span>
+                      </p>
+                      <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
+                        <span className="font-semibold">Tool Room</span> | <span className="font-semibold">Safety Equipment Room</span> | <span className="font-semibold">Motor Rewinding Lab</span> | <span className="font-semibold">Pneumatic/Hydraulic Lab</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Row: Boys Hostel + Admin Block */}
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {/* Boys Hostel */}
+                    <div className="overflow-hidden rounded-md border-2 border-cyan-400/40 transition-all hover:shadow-lg">
+                      <div className="bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-2">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Boys Hostel</h4>
+                        <p className="text-[11px] font-semibold text-cyan-100">(250 sq.m.)</p>
+                      </div>
+                      <div className="bg-[#e8f7fd] p-3 dark:bg-[#1a2a3a]">
+                        <div className="space-y-1 text-[11px] text-slate-700 dark:text-slate-300">
+                          <p className="font-semibold">150 Beds | 38 Rooms</p>
+                          <p>(4-bed each)</p>
+                          <p>Toilet Blocks | Study Room</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Administrative Block */}
+                    <div className="overflow-hidden rounded-md border-2 border-blue-400/40 transition-all hover:shadow-lg">
+                      <div className="bg-gradient-to-r from-blue-600 to-blue-800 px-3 py-2">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Administrative Block</h4>
+                        <p className="text-[11px] font-semibold text-blue-200">(250 sq.m.)</p>
+                      </div>
+                      <div className="bg-[#eef2ff] p-3 dark:bg-[#1e2540]">
+                        <div className="space-y-1 text-[11px] text-slate-700 dark:text-slate-300">
+                          <p className="font-semibold">Director Office | Placement Cell</p>
+                          <p>Reception | Meeting Room</p>
+                          <p>Accounts | Record Room</p>
+                          <span className="mt-1 inline-block rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-bold text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Ground Floor</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Academic Block — Full Width */}
+                  <div className="overflow-hidden rounded-md border-2 border-indigo-400/40 transition-all hover:shadow-lg">
+                    <div className="bg-gradient-to-r from-indigo-500 to-violet-600 px-4 py-2.5">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Academic Block</h4>
+                          <p className="text-[11px] font-semibold text-indigo-100">(600 sq.m.)</p>
+                        </div>
+                        <span className="rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white">G+1 Floor</span>
+                      </div>
+                    </div>
+                    <div className="bg-[#eef0ff] p-3 dark:bg-[#1e2040]">
+                      <p className="text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
+                        <span className="font-semibold">4 Smart Classrooms</span> (75 each) | <span className="font-semibold">Seminar Hall</span> (200-seat) | <span className="font-semibold">Library</span> (500 titles) | <span className="font-semibold">Computer Lab</span> (50 nodes)
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Bottom Row: Utilities + Parking + Gate */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* DG Set + Solar */}
+                    <div className="overflow-hidden rounded-md border-2 border-yellow-400/40 transition-all hover:shadow-lg">
+                      <div className="bg-gradient-to-r from-yellow-500 to-amber-600 px-3 py-2">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-white sm:text-xs">DG Set + Solar Inverter</h4>
+                      </div>
+                      <div className="bg-[#fefbe8] p-2.5 dark:bg-[#3a3520]">
+                        <div className="flex items-center gap-1.5 text-[10px] text-slate-700 dark:text-slate-300">
+                          <Zap size={12} className="text-yellow-600" />
+                          <span className="font-semibold">62.5 KVA DG</span>
+                        </div>
+                        <div className="mt-1 flex items-center gap-1.5 text-[10px] text-slate-700 dark:text-slate-300">
+                          <Sun size={12} className="text-orange-500" />
+                          <span className="font-semibold">25 KW Solar</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* OHT + Pump */}
+                    <div className="overflow-hidden rounded-md border-2 border-blue-300/40 transition-all hover:shadow-lg">
+                      <div className="bg-gradient-to-r from-blue-400 to-cyan-500 px-3 py-2">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-white sm:text-xs">OHT + Pump Room</h4>
+                      </div>
+                      <div className="bg-[#e8f4fd] p-2.5 dark:bg-[#1a2a3a]">
+                        <div className="flex items-center gap-1.5 text-[10px] text-slate-700 dark:text-slate-300">
+                          <Droplets size={12} className="text-blue-500" />
+                          <span className="font-semibold">Borewell + OHT + RO</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Parking */}
+                    <div className="overflow-hidden rounded-md border-2 border-slate-400/40 transition-all hover:shadow-lg">
+                      <div className="bg-gradient-to-r from-slate-500 to-slate-600 px-3 py-2">
+                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-white sm:text-xs">Parking</h4>
+                        <p className="text-[10px] font-semibold text-slate-200">(300 sq.m.)</p>
+                      </div>
+                      <div className="bg-[#f0f0ea] p-2.5 dark:bg-[#2a2a28]">
+                        <div className="text-[10px] text-slate-700 dark:text-slate-300">
+                          <p className="font-semibold">Cars + 2-wheelers</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Security / Main Gate Strip ── */}
+              <div className="mt-4 flex items-center gap-3">
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
+                <div className="flex items-center gap-2 rounded-md border-2 border-slate-400/50 bg-white px-4 py-1.5 dark:border-slate-600 dark:bg-slate-700">
+                  <ShieldCheck size={14} className="text-emerald-600" />
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300">Security — Main Gate</p>
+                </div>
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
+              </div>
             </div>
 
-            {/* Infrastructure strip */}
-            <div className="mt-6 flex flex-wrap items-center gap-4 rounded-xl bg-slate-100/80 p-4 dark:bg-slate-800/50">
-              <div className="flex items-center gap-2 text-sm">
-                <Zap size={16} className="text-yellow-500" />
-                <span className="font-medium text-slate-600 dark:text-slate-300">DG Set + Solar Inverter</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Droplets size={16} className="text-blue-500" />
-                <span className="font-medium text-slate-600 dark:text-slate-300">OHT + Pump Room</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <ShieldCheck size={16} className="text-emerald-500" />
-                <span className="font-medium text-slate-600 dark:text-slate-300">Security · Main Gate</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Sun size={16} className="text-orange-400" />
-                <span className="font-medium text-slate-600 dark:text-slate-300">25 KW Solar</span>
-              </div>
+            {/* ── Bottom Footer ── */}
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+              <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
+              <p className="font-bold text-slate-500 dark:text-slate-400">Page 3</p>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ═══════════ PAGE 4: ADMIN & ACADEMIC BLOCK ═══════════ */}
+      {/* ═══════════ PAGE 4: ADMIN & ACADEMIC BLOCK — FLOOR PLAN ═══════════ */}
       <section id="page-4" className="py-20 sm:py-28">
         <Container>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={Building2} label="Administrative & Academic Block" />
-            <PageBadge page={4} />
-          </div>
-          <h2 className="mb-3 text-3xl font-bold text-slate-950 dark:text-white sm:text-4xl">
-            Detailed Floor Plan
-          </h2>
-          <p className="mb-12 text-sm text-slate-500 dark:text-slate-400">
-            Ground Floor · Scale: Approx. 1:200
-          </p>
+          {/* Floor Plan Blueprint Container */}
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* Admin Block */}
-            <div>
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 text-white">
-                  <Building2 size={20} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-950 dark:text-white">Administrative Block</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">250 sq.m. · Ground Floor</p>
-                </div>
+            {/* ── Top Header Bar (Navy) ── */}
+            <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
+              <div>
+                <h2 className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl md:text-2xl">
+                  Durga Dulari Textile Skill Development Institute
+                </h2>
+                <p className="mt-0.5 text-sm font-bold uppercase tracking-wider text-primary-orange sm:text-base">
+                  Administrative & Academic Block — Floor Plan
+                </p>
               </div>
-              <div className="space-y-3">
-                {adminRooms.map((room) => (
-                  <div
-                    key={room.name}
-                    className="rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-blue-300/50 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-blue-500/30"
-                  >
-                    <div className="flex items-start justify-between">
-                      <h4 className="text-sm font-bold text-slate-800 dark:text-white">{room.name}</h4>
-                      <span className="rounded-md bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-                        {room.area}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{room.detail}</p>
-                  </div>
-                ))}
+              <div className="shrink-0 text-right">
+                <p className="text-xs font-medium text-slate-300 sm:text-sm">Campus Layout & Infrastructure Plan</p>
+                <p className="text-[11px] italic text-slate-400">Ground Floor | Scale: Approx. 1:200</p>
               </div>
             </div>
 
-            {/* Academic Block */}
-            <div>
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500 text-white">
-                  <GraduationCap size={20} />
+            {/* ── Floor Plan Body ── */}
+            <div className="grid grid-cols-1 gap-0 lg:grid-cols-[38%_62%]">
+
+              {/* ━━━ ADMINISTRATIVE BLOCK (Left) ━━━ */}
+              <div className="border-b-2 border-r-0 border-slate-300 p-4 dark:border-slate-600 lg:border-b-0 lg:border-r-2 sm:p-5">
+                {/* Admin header bar */}
+                <div className="mb-4 rounded-t-lg bg-[#2b5797] px-4 py-2.5">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white sm:text-base">
+                    Administrative Block <span className="font-normal text-blue-200">(250 sq.m.)</span>
+                  </h3>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-950 dark:text-white">Academic Block</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">600 sq.m. · Ground + First Floor</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {academicRooms.map((room) => (
-                  <div
-                    key={room.name}
-                    className="rounded-xl border border-slate-200 bg-white p-4 transition-all duration-200 hover:border-indigo-300/50 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-indigo-500/30"
-                  >
-                    <div className="flex items-start justify-between">
-                      <h4 className="text-sm font-bold text-slate-800 dark:text-white">{room.name}</h4>
-                      <span className="rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">
-                        {room.area}
-                      </span>
+
+                {/* Admin room grid — 3 rows × 2 cols */}
+                <div className="space-y-4">
+                  {/* Row 1 — Director's Office + Conference Room */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-slate-400/60 bg-[#dce8d4] p-4 text-center transition-all hover:shadow-lg dark:border-slate-500 dark:bg-[#2a3a28]">
+                      <p className="text-xs font-bold text-blue-700 dark:text-blue-400">Director&apos;s Office</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">400 sq.ft | Private cabin</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Meeting table | CCTV terminal</p>
                     </div>
-                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{room.detail}</p>
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-slate-400/60 bg-[#c4daf0] p-4 text-center transition-all hover:shadow-lg dark:border-slate-500 dark:bg-[#1e2d40]">
+                      <p className="text-xs font-bold text-blue-700 dark:text-blue-400">Conference Room</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">300 sq.ft | 20-seater</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Projector | Whiteboard</p>
+                    </div>
                   </div>
-                ))}
+
+                  {/* Row 2 — Placement Cell + Reception */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-slate-400/60 bg-[#dce8d4] p-4 text-center transition-all hover:shadow-lg dark:border-slate-500 dark:bg-[#2a3a28]">
+                      <p className="text-xs font-bold text-blue-700 dark:text-blue-400">Placement Cell</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">300 sq.ft | 4 terminals</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Interview room | Portal</p>
+                    </div>
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-slate-400/60 bg-[#f5ecd5] p-4 text-center transition-all hover:shadow-lg dark:border-slate-500 dark:bg-[#3a3520]">
+                      <p className="text-xs font-bold text-blue-700 dark:text-blue-400">Reception</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">& Waiting</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">250 sq.ft</p>
+                    </div>
+                  </div>
+
+                  {/* Row 3 — Accounts + Record Room */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-slate-400/60 bg-[#dce8d4] p-4 text-center transition-all hover:shadow-lg dark:border-slate-500 dark:bg-[#2a3a28]">
+                      <p className="text-xs font-bold text-blue-700 dark:text-blue-400">Accounts</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">150 sq.ft</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Tally | GST</p>
+                    </div>
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-slate-400/60 bg-[#f5ecd5] p-4 text-center transition-all hover:shadow-lg dark:border-slate-500 dark:bg-[#3a3520]">
+                      <p className="text-xs font-bold text-blue-700 dark:text-blue-400">Record Room</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">& Store</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">200 sq.ft</p>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* ━━━ ACADEMIC BLOCK (Right) ━━━ */}
+              <div className="p-4 sm:p-5">
+                {/* Academic header bar */}
+                <div className="mb-4 rounded-t-lg bg-primary-orange px-4 py-2.5">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white sm:text-base">
+                    Academic Block <span className="font-normal text-orange-100">(600 sq.m.)</span>
+                  </h3>
+                </div>
+
+                {/* Academic room grid */}
+                <div className="space-y-4">
+                  {/* Row 1 — Smart Classroom 1 & 2 */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex min-h-[120px] flex-col items-center justify-center rounded border-2 border-orange-300/50 bg-[#fce8d5] p-4 text-center transition-all hover:shadow-lg dark:border-orange-700/40 dark:bg-[#3a2c1e]">
+                      <p className="text-xs font-bold text-orange-700 dark:text-orange-400">Smart Classroom 1</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">75 trainees | Smart Board</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Projector | AC | CCTV</p>
+                    </div>
+                    <div className="flex min-h-[120px] flex-col items-center justify-center rounded border-2 border-orange-300/50 bg-[#fce8d5] p-4 text-center transition-all hover:shadow-lg dark:border-orange-700/40 dark:bg-[#3a2c1e]">
+                      <p className="text-xs font-bold text-orange-700 dark:text-orange-400">Smart Classroom 2</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">75 trainees | Smart Board</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Projector | AC | CCTV</p>
+                    </div>
+                  </div>
+
+                  {/* Row 2 — Smart Classroom 3 & 4 */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex min-h-[120px] flex-col items-center justify-center rounded border-2 border-orange-300/50 bg-[#fce8d5] p-4 text-center transition-all hover:shadow-lg dark:border-orange-700/40 dark:bg-[#3a2c1e]">
+                      <p className="text-xs font-bold text-orange-700 dark:text-orange-400">Smart Classroom 3</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">75 trainees | Smart Board</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Projector | AC | CCTV</p>
+                    </div>
+                    <div className="flex min-h-[120px] flex-col items-center justify-center rounded border-2 border-orange-300/50 bg-[#fce8d5] p-4 text-center transition-all hover:shadow-lg dark:border-orange-700/40 dark:bg-[#3a2c1e]">
+                      <p className="text-xs font-bold text-orange-700 dark:text-orange-400">Smart Classroom 4</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">75 trainees | Smart Board</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Projector | AC | CCTV</p>
+                    </div>
+                  </div>
+
+                  {/* Seminar Hall — Full Width */}
+                  <div className="flex min-h-[100px] flex-col items-center justify-center rounded border-2 border-slate-300/60 bg-white p-5 text-center transition-all hover:shadow-lg dark:border-slate-600 dark:bg-slate-800/60">
+                    <p className="text-base font-extrabold uppercase tracking-wider text-slate-800 dark:text-white">Seminar Hall</p>
+                    <p className="mt-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300">200-Seat | Stage | PA System | Projector | Inauguration / Placement Drives</p>
+                  </div>
+
+                  {/* Ground Floor label */}
+                  <div className="text-center">
+                    <p className="text-[11px] font-medium italic text-slate-400 dark:text-slate-500">Ground Floor</p>
+                  </div>
+
+                  {/* Row — Library & Computer Lab */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-green-300/50 bg-[#d4ecd4] p-4 text-center transition-all hover:shadow-lg dark:border-green-700/40 dark:bg-[#1e3a20]">
+                      <p className="text-xs font-bold text-green-800 dark:text-green-400">Library</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">500 Titles</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">50-seat Reading Room</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Reference + Journals</p>
+                    </div>
+                    <div className="flex min-h-[130px] flex-col items-center justify-center rounded border-2 border-teal-300/50 bg-[#cce8e8] p-4 text-center transition-all hover:shadow-lg dark:border-teal-700/40 dark:bg-[#1a3030]">
+                      <p className="text-xs font-bold text-teal-800 dark:text-teal-400">Computer Lab</p>
+                      <p className="mt-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300">50 Nodes | i5 Systems</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">100 Mbps Internet</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">Online Assessment</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Bottom Footer ── */}
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+              <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
+              <p className="font-bold text-slate-500 dark:text-slate-400">Page 4</p>
             </div>
           </div>
         </Container>
@@ -1005,38 +1237,215 @@ export default function SchoolServicesPage() {
         </Container>
       </section>
 
-      {/* ═══════════ PAGE 8: 5-ACRE EXPANSION ═══════════ */}
+      {/* ═══════════ PAGE 8: 5-ACRE EXPANSION — BLUEPRINT ═══════════ */}
       <section id="page-8" className="py-20 sm:py-28">
         <Container>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={Maximize2} label="5-Acre Full Campus Expansion" />
-            <PageBadge page={8} />
-          </div>
-          <h2 className="mb-3 text-3xl font-bold text-slate-950 dark:text-white sm:text-4xl">
-            Expansion Layout
-          </h2>
-          <p className="mb-12 text-sm text-slate-500 dark:text-slate-400">
-            Scale: Approx. 1:800 · Total Built-up: 5,000 sq.m.
-          </p>
+          {/* Blueprint Container */}
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {expansionBlocks.map((block) => {
-              const Icon = block.icon;
-              return (
-                <div
-                  key={block.name}
-                  className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900/60"
-                >
-                  <div className={`absolute right-0 top-0 h-1 w-full ${block.color} opacity-60`} />
-                  <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${block.color} text-white shadow-sm`}>
-                    <Icon size={20} />
+            {/* ── Top Header Bar (Navy) ── */}
+            <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
+              <div>
+                <h2 className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl md:text-2xl">
+                  Durga Dulari Textile Skill Development Institute
+                </h2>
+                <p className="mt-0.5 text-sm font-bold uppercase tracking-wider text-primary-orange sm:text-base">
+                  5-Acre Full Campus Expansion Layout
+                </p>
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-xs font-medium text-slate-300 sm:text-sm">Campus Layout & Infrastructure Plan</p>
+                <p className="text-[11px] text-slate-400">Scale: Approx. 1:800 | Total Built-up: 5,000 sq.m.</p>
+              </div>
+            </div>
+
+            {/* ── Campus Expansion Body ── */}
+            <div className="p-3 sm:p-5">
+
+              {/* Top Row — Admin + Academic + Hostels */}
+              <div className="mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {/* Admin Block */}
+                <div className="overflow-hidden rounded-md border-2 border-blue-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-800 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Admin Block</h4>
+                    <p className="text-[11px] font-semibold text-blue-200">(500 sq.m.)</p>
                   </div>
-                  <h4 className="text-sm font-bold text-slate-800 dark:text-white">{block.name}</h4>
-                  <p className="text-xl font-bold text-primary-orange">{block.area}</p>
-                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{block.detail}</p>
+                  <div className="bg-[#eef2ff] p-3 dark:bg-[#1e2540]">
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">G+1 | 50 staff</p>
+                  </div>
                 </div>
-              );
-            })}
+
+                {/* Academic Block */}
+                <div className="overflow-hidden rounded-md border-2 border-indigo-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-indigo-500 to-violet-600 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Academic Block</h4>
+                    <p className="text-[11px] font-semibold text-indigo-100">(1,200 sq.m.)</p>
+                  </div>
+                  <div className="bg-[#eef0ff] p-3 dark:bg-[#1e2040]">
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">4 Smart Classrooms</p>
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">Seminar Hall | Library</p>
+                  </div>
+                </div>
+
+                {/* Boys Hostel */}
+                <div className="overflow-hidden rounded-md border-2 border-cyan-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Boys Hostel</h4>
+                    <p className="text-[11px] font-semibold text-cyan-100">(600 sq.m.)</p>
+                  </div>
+                  <div className="bg-[#e8f7fd] p-3 dark:bg-[#1a2a3a]">
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">G+2 | 300 Beds Total</p>
+                  </div>
+                </div>
+
+                {/* Girls Hostel */}
+                <div className="overflow-hidden rounded-md border-2 border-pink-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Girls Hostel</h4>
+                    <p className="text-[11px] font-semibold text-pink-100">(600 sq.m.)</p>
+                  </div>
+                  <div className="bg-[#fff0f5] p-3 dark:bg-[#3a1e28]">
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">G+2 | 300 Beds Total</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── MAIN ROAD ── */}
+              <div className="my-4 flex items-center gap-3">
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-slate-500 to-transparent" />
+                <p className="whitespace-nowrap text-xs font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-400">← Main Road →</p>
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-slate-500 to-transparent" />
+              </div>
+
+              {/* Middle Row — Lab Phase 1 + Phase 2 */}
+              <div className="mb-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+                {/* Lab Complex Phase 1 */}
+                <div className="overflow-hidden rounded-md border-2 border-orange-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-primary-orange to-amber-500 px-4 py-2.5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Lab Complex Phase 1</h4>
+                        <p className="text-[11px] font-semibold text-orange-100">(700 sq.m. — existing)</p>
+                      </div>
+                      <span className="rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white">All 12 Labs</span>
+                    </div>
+                  </div>
+                  <div className="bg-[#fff5ee] p-3 dark:bg-[#3a2c1e]">
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">Spinning | Mechanical | Electrical | Electronics/PLC</p>
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">Utility | Garment | Knitting | Computer | Tool | Safety</p>
+                  </div>
+                </div>
+
+                {/* Lab Complex Phase 2 */}
+                <div className="overflow-hidden rounded-md border-2 border-amber-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-amber-500 to-yellow-500 px-4 py-2.5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Lab Complex Phase 2</h4>
+                        <p className="text-[11px] font-semibold text-amber-100">(800 sq.m. — expansion)</p>
+                      </div>
+                      <span className="rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white">NEW</span>
+                    </div>
+                  </div>
+                  <div className="bg-[#fef8e8] p-3 dark:bg-[#3a3520]">
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">Advanced CoE Labs</p>
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">R&D Lab | Testing Lab</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Row — Dining + Multipurpose + Parking */}
+              <div className="mb-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {/* Dining Hall */}
+                <div className="overflow-hidden rounded-md border-2 border-amber-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-amber-600 to-orange-500 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Dining Hall & Kitchen</h4>
+                    <p className="text-[11px] font-semibold text-amber-100">(300 sq.m.)</p>
+                  </div>
+                  <div className="bg-[#fef8e8] p-3 dark:bg-[#3a3520]">
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">400-seat | Commercial Kitchen</p>
+                  </div>
+                </div>
+
+                {/* Multipurpose Hall */}
+                <div className="overflow-hidden rounded-md border-2 border-violet-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-violet-500 to-purple-600 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Multipurpose Hall</h4>
+                    <p className="text-[11px] font-semibold text-violet-100">(500 sq.m.)</p>
+                  </div>
+                  <div className="bg-[#f3eeff] p-3 dark:bg-[#2a1e3a]">
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">Events | Placement Drives</p>
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">Industry Exhibitions</p>
+                  </div>
+                </div>
+
+                {/* Parking */}
+                <div className="overflow-hidden rounded-md border-2 border-slate-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-slate-500 to-slate-600 px-3 py-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Parking</h4>
+                    <p className="text-[11px] font-semibold text-slate-200">(600 sq.m.)</p>
+                  </div>
+                  <div className="bg-[#f0f0ea] p-3 dark:bg-[#2a2a28]">
+                    <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">60 cars + 100 two-wheelers</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── SERVICE ROAD ── */}
+              <div className="my-4 flex items-center gap-3">
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
+                <p className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">← Service Road →</p>
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
+              </div>
+
+              {/* Bottom Row — Playground + Expansion Reserve */}
+              <div className="grid grid-cols-1 gap-3 lg:grid-cols-[2fr_1fr]">
+                {/* Open Playground */}
+                <div className="overflow-hidden rounded-md border-2 border-emerald-400/40 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-green-600 px-4 py-2.5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Open Playground</h4>
+                        <p className="text-[11px] font-semibold text-emerald-100">(3,000 sq.m.)</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-[#e8fde8] p-3 dark:bg-[#1a3a1e]">
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300">Football | Volleyball | Badminton Courts</p>
+                  </div>
+                </div>
+
+                {/* Expansion Reserve */}
+                <div className="overflow-hidden rounded-md border-2 border-dashed border-teal-400/60 transition-all hover:shadow-lg">
+                  <div className="bg-gradient-to-r from-teal-500 to-cyan-600 px-4 py-2.5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">Expansion Reserve</h4>
+                        <p className="text-[11px] font-semibold text-teal-100">(4,500 sq.m.)</p>
+                      </div>
+                      <span className="rounded bg-white/20 px-2 py-0.5 text-[10px] font-bold text-white">FUTURE</span>
+                    </div>
+                  </div>
+                  <div className="bg-[#e6f7f7] p-3 dark:bg-[#1a3030]">
+                    <p className="text-[11px] italic text-slate-600 dark:text-slate-400">Future growth area</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Gate Strip ── */}
+              <div className="mt-4 flex items-center justify-center">
+                <div className="flex items-center gap-2 rounded-md border-2 border-slate-400/50 bg-white px-5 py-1.5 dark:border-slate-600 dark:bg-slate-700">
+                  <ShieldCheck size={14} className="text-emerald-600" />
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300">Gate</p>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Bottom Footer ── */}
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+              <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
+              <p className="font-bold text-slate-500 dark:text-slate-400">Page 8</p>
+            </div>
           </div>
         </Container>
       </section>
