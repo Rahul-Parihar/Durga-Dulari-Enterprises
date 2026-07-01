@@ -208,7 +208,7 @@ export default function SchoolServicesPage() {
     <main className="bg-white dark:bg-slate-950">
 
       {/* ═══════════ HERO SECTION ═══════════ */}
-      <section className="relative overflow-hidden border-b border-slate-100 bg-white py-20 dark:border-slate-800 dark:bg-slate-950 sm:py-28">
+      <section className="relative overflow-hidden border-b border-slate-100 bg-white py-12 dark:border-slate-800 dark:bg-slate-950 sm:py-16">
         {/* Background decoration */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="animate-glow-drift-1 absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-primary-orange/10 to-amber-500/5 blur-3xl" />
@@ -289,7 +289,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 2: MODEL COMPARISON — BLUEPRINT ═══════════ */}
-      <section id="page-2" className="py-20 sm:py-28">
+      <section id="page-2" className="py-8 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -374,7 +374,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 3: MASTER LAYOUT PLAN — BLUEPRINT ═══════════ */}
-      <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-20 dark:border-slate-800 dark:bg-slate-900/30 sm:py-28">
+      <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -622,7 +622,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 4: ADMIN & ACADEMIC BLOCK — FLOOR PLAN ═══════════ */}
-      <section id="page-4" className="py-20 sm:py-28">
+      <section id="page-4" className="py-8 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -780,7 +780,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 5: LABORATORY COMPLEX — FLOOR PLAN ═══════════ */}
-      <section id="page-5" className="border-y border-slate-100 bg-slate-50/50 py-20 dark:border-slate-800 dark:bg-slate-900/30 sm:py-28">
+      <section id="page-5" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1058,7 +1058,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 6: HOSTEL BLOCK — BLUEPRINT ═══════════ */}
-      <section id="page-6" className="py-20 sm:py-28">
+      <section id="page-6" className="py-8 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1189,7 +1189,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 7: INFRASTRUCTURE SPECS — BLUEPRINT ═══════════ */}
-      <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-20 dark:border-slate-800 dark:bg-slate-900/30 sm:py-28">
+      <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1297,7 +1297,7 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 8: 5-ACRE EXPANSION — BLUEPRINT ═══════════ */}
-      <section id="page-8" className="py-20 sm:py-28">
+      <section id="page-8" className="py-8 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
