@@ -2,13 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Building2,
-  Bed,
-  FlaskConical,
-  BookOpen,
-  MapPin,
-  Ruler,
-  Users,
   Zap,
   Droplets,
   Sun,
@@ -23,7 +16,6 @@ import {
   Hammer,
   HardHat,
   CircuitBoard,
-  ChevronRight,
   CheckCircle2,
   Star,
   Trophy,
@@ -34,14 +26,6 @@ import { Button } from '@/components/common/Button';
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
-const heroStats = [
-  { label: 'Campus Area', value: '2 Acres', sub: '(Recommended)', icon: MapPin },
-  { label: 'Total Built-Up Area', value: '5,000 sq.m.', sub: '', icon: Ruler },
-  { label: 'Trainees Per Batch', value: '300', sub: '', icon: Users },
-  { label: 'Labs & Workshops', value: '12', sub: '', icon: FlaskConical },
-  { label: 'Hostel Capacity', value: '300 Beds', sub: '', icon: Bed },
-  { label: 'Training Courses', value: '8', sub: '', icon: BookOpen },
-];
 
 const modelComparison = [
   {
@@ -181,24 +165,6 @@ const blockSummary = [
 ];
 
 
-/* ─────────────────────── COMPONENTS ─────────────────────── */
-
-function SectionBadge({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
-  return (
-    <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-primary-orange/10 px-4 py-2 text-sm font-semibold text-primary-orange ring-1 ring-primary-orange/20">
-      <Icon className="h-4 w-4" aria-hidden="true" />
-      {label}
-    </div>
-  );
-}
-
-function PageBadge({ page }: { page: number }) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-md bg-slate-800/60 px-2 py-0.5 text-[10px] font-mono text-slate-400 ring-1 ring-slate-700/50">
-      Page {page}
-    </span>
-  );
-}
 
 /* ─────────────────────── MAIN PAGE ─────────────────────── */
 
@@ -207,84 +173,111 @@ export default function SchoolServicesPage() {
   return (
     <main className="bg-white dark:bg-slate-950">
 
-      {/* ═══════════ HERO SECTION ═══════════ */}
-      <section className="relative overflow-hidden border-b border-slate-100 bg-white py-12 dark:border-slate-800 dark:bg-slate-950 sm:py-16">
-        {/* Background decoration */}
+      {/* ═══════════ HERO COVER PAGE — BLUEPRINT ═══════════ */}
+      <section className="relative overflow-hidden bg-slate-50 py-16 text-slate-800 dark:bg-black dark:text-white sm:py-24">
+        {/* Decorative background glows */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="animate-glow-drift-1 absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-primary-orange/10 to-amber-500/5 blur-3xl" />
-          <div className="animate-glow-drift-2 absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-blue-500/8 to-indigo-500/5 blur-3xl" />
+          <div className="absolute -right-32 -top-32 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-primary-orange/20 to-amber-500/10 blur-3xl opacity-50 dark:opacity-30" />
+          <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 blur-3xl opacity-50 dark:opacity-30" />
         </div>
 
-        <Container className="relative">
-          <div className="mb-6 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={Building2} label="Campus Layout & Infrastructure Plan" />
-            <PageBadge page={1} />
+        <Container className="relative max-w-5xl">
+          
+          {/* Header Text Block */}
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.3em] text-primary-orange sm:text-sm">
+              Campus Layout & Infrastructure Plan
+            </p>
+            <h1 className="mt-4 text-4xl font-black uppercase tracking-wider text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
+              Durga Dulari
+            </h1>
+            <h2 className="mt-2 text-xl font-bold uppercase tracking-widest text-slate-700 dark:text-slate-200 sm:text-2xl md:text-3xl">
+              Textile Skill Development Institute
+            </h2>
+            <p className="mt-3 text-sm font-semibold italic text-amber-600 dark:text-amber-400 sm:text-base">
+              Centre of Excellence for Spinning · Maintenance · Automation
+            </p>
           </div>
 
-          <h1 className="mb-3 max-w-4xl text-4xl font-bold leading-[1.1] text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-            <span className="text-gradient-orange">Durga Dulari</span>{' '}
-            Textile Skill Development Institute
-          </h1>
-          <p className="mb-2 max-w-2xl text-lg font-medium text-slate-500 dark:text-slate-400 sm:text-xl">
-            Centre of Excellence for <span className="text-primary-orange">Spinning</span> · <span className="text-primary-orange">Maintenance</span> · <span className="text-primary-orange">Automation</span>
-          </p>
-          <p className="mb-12 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
-            This document presents the complete campus layout, space allocation, infrastructure specifications, and room-by-room design. Three layout models are presented: 1-Acre (Starter), 2-Acre (Standard), and 5-Acre (Full Campus).
-          </p>
+          {/* Separator Line */}
+          <div className="my-8 flex justify-center">
+            <div className="h-[2px] w-2/3 bg-gradient-to-r from-transparent via-amber-500/80 to-transparent" />
+          </div>
 
-          {/* Hero stat cards */}
+          {/* 6 Grid Cards */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {heroStats.map((stat) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={stat.label}
-                  className="group relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-primary-orange/30 hover:shadow-[0_12px_40px_rgba(244,121,31,0.1)] dark:border-slate-800 dark:bg-slate-900/60"
-                >
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary-orange/10 text-primary-orange transition-colors group-hover:bg-primary-orange group-hover:text-white">
-                    <Icon size={20} />
-                  </div>
-                  <p className="text-2xl font-bold text-slate-950 dark:text-white">{stat.value}</p>
-                  <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
-                    {stat.label}
-                  </p>
-                  {stat.sub && (
-                    <span className="mt-1 inline-block rounded-full bg-primary-orange/10 px-2 py-0.5 text-[10px] font-semibold text-primary-orange">
-                      {stat.sub}
-                    </span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      {/* ═══════════ DOCUMENT CONTENTS NAV ═══════════ */}
-      <section className="border-b border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/40">
-        <Container>
-          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">Document Contents</p>
-          <div className="flex flex-wrap gap-2">
             {[
-              { pg: 2, label: 'Model Comparison' },
-              { pg: 3, label: 'Master Layout' },
-              { pg: 4, label: 'Admin & Academic' },
-              { pg: 5, label: 'Lab Complex' },
-              { pg: 6, label: 'Hostel Block' },
-              { pg: 7, label: 'Infrastructure Specs' },
-              { pg: 8, label: '5-Acre Expansion' },
-            ].map((item) => (
-              <a
-                key={item.pg}
-                href={`#page-${item.pg}`}
-                className="group inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition-all hover:border-primary-orange/40 hover:bg-primary-orange/5 hover:text-primary-orange dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300 dark:hover:border-primary-orange/40 dark:hover:text-primary-orange"
+              { val: '2 Acres', lbl1: 'Campus Area', lbl2: '(Recommended)' },
+              { val: '5,000 sq.m.', lbl1: 'Total Built-Up', lbl2: 'Area' },
+              { val: '300', lbl1: 'Trainees', lbl2: 'Per Batch' },
+              { val: '12', lbl1: 'Labs &', lbl2: 'Workshops' },
+              { val: '300 Beds', lbl1: 'Hostel', lbl2: 'Capacity' },
+              { val: '8', lbl1: 'Training', lbl2: 'Courses' },
+            ].map((card, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:hover:shadow-lg"
               >
-                <span className="flex h-5 w-5 items-center justify-center rounded bg-slate-100 text-[10px] font-bold text-slate-500 transition-colors group-hover:bg-primary-orange group-hover:text-white dark:bg-slate-700 dark:text-slate-400">{item.pg}</span>
-                {item.label}
-                <ChevronRight size={14} className="opacity-0 transition-opacity group-hover:opacity-100" />
-              </a>
+                <p className="text-base font-black text-amber-600 dark:text-amber-400 sm:text-lg md:text-xl">
+                  {card.val}
+                </p>
+                <p className="mt-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                  {card.lbl1}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                  {card.lbl2}
+                </p>
+              </div>
             ))}
           </div>
+
+          {/* Centered Descriptive Paragraph */}
+          <div className="mt-10 text-center">
+            <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
+              This document presents the complete campus layout, space allocation, infrastructure specifications,
+              and room-by-room design for the Durga Dulari Textile Skill Development Institute.
+            </p>
+            <p className="mx-auto mt-2 max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
+              Three layout models are presented: 1-Acre (Starter), 2-Acre (Standard), and 5-Acre (Full Campus).
+            </p>
+          </div>
+
+          {/* DOCUMENT CONTENTS NAV BOX */}
+          <div className="mt-12 overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5 shadow-sm">
+            <div className="border-b border-slate-200 bg-slate-50 px-6 py-3 text-center dark:border-white/10 dark:bg-white/5">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400 sm:text-sm">
+                Document Contents
+              </p>
+            </div>
+            <div className="divide-y divide-slate-100 px-6 py-3 font-mono text-xs sm:px-8 dark:divide-white/5">
+              {[
+                { pg: 2, desc: 'Campus Overview — 3 Model Comparison (1, 2 & 5 Acre)' },
+                { pg: 3, desc: '2-Acre Standard Campus — Master Layout Plan' },
+                { pg: 4, desc: 'Administrative & Academic Block — Detailed Floor Plan' },
+                { pg: 5, desc: 'Laboratory Complex — All 12 Labs Layout' },
+                { pg: 6, desc: 'Hostel Block — Boys & Girls Residential Facility' },
+                { pg: 7, desc: 'Infrastructure Specifications — Equipment & Area Table' },
+                { pg: 8, desc: '5-Acre Full Campus — Expansion Layout' },
+              ].map((item) => (
+                <a
+                  key={item.pg}
+                  href={`#page-${item.pg}`}
+                  className="flex items-center justify-between py-2.5 transition-all hover:bg-amber-500/5 hover:px-3 rounded-lg dark:hover:bg-amber-500/10"
+                >
+                  <span className="font-bold text-primary-orange">Page {item.pg}</span>
+                  <span className="text-right text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors">{item.desc}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Promoted Footer */}
+          <div className="mt-12 text-center">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-primary-orange sm:text-xs">
+              Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | 2025–26 | Confidential
+            </p>
+          </div>
+
         </Container>
       </section>
 
