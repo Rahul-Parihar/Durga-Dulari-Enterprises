@@ -27,7 +27,6 @@ import {
   CheckCircle2,
   Star,
   Trophy,
-  Target,
 
 } from 'lucide-react';
 import { Container } from '@/components/common/Container';
@@ -1058,180 +1057,240 @@ export default function SchoolServicesPage() {
         </Container>
       </section>
 
-      {/* ═══════════ PAGE 6: HOSTEL BLOCK ═══════════ */}
+      {/* ═══════════ PAGE 6: HOSTEL BLOCK — BLUEPRINT ═══════════ */}
       <section id="page-6" className="py-20 sm:py-28">
         <Container>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={Bed} label="Hostel Block — Boys & Girls Residential Facility" />
-            <PageBadge page={6} />
-          </div>
-          <h2 className="mb-3 text-3xl font-bold text-slate-950 dark:text-white sm:text-4xl">
-            Residential Facility Layout
-          </h2>
-          <p className="mb-12 text-sm text-slate-500 dark:text-slate-400">
-            G+1 Structure · 500 sq.m. Built-Up · 300 Beds Total
-          </p>
+          {/* Floor Plan Blueprint Container */}
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* Boys Hostel */}
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/60">
-              <div className="bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-5">
-                <h3 className="text-xl font-bold text-white">Boys Hostel</h3>
-                <p className="text-sm text-white/80">150 Beds · 38 Rooms</p>
+            {/* ── Top Header Bar (Navy) ── */}
+            <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
+              <div>
+                <h2 className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl md:text-2xl">
+                  Durga Dulari Textile Skill Development Institute
+                </h2>
+                <p className="mt-0.5 text-sm font-bold uppercase tracking-wider text-primary-orange sm:text-base">
+                  Hostel Block — Boys & Girls Residential Facility
+                </p>
               </div>
-              <div className="p-6">
-                {/* Ground floor */}
-                <div className="mb-5">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Ground Floor — 19 Rooms (4-bed each = 74 beds)</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {Array.from({ length: 19 }, (_, i) => (
-                      <div key={`bg-${i}`} className="flex items-center justify-center rounded-md bg-cyan-50 px-1 py-2 text-[10px] font-bold text-cyan-700 dark:bg-cyan-900/20 dark:text-cyan-400">
-                        R-{i + 1}
-                      </div>
-                    ))}
+              <div className="shrink-0 text-right">
+                <p className="text-xs font-medium text-slate-300 sm:text-sm">Campus Layout & Infrastructure Plan</p>
+                <p className="text-[11px] italic text-slate-400">G+1 Structure | 500 sq.m. Built-Up | 300 Beds Total</p>
+              </div>
+            </div>
+
+            {/* ── Floor Plan Body ── */}
+            <div className="grid grid-cols-1 gap-0 lg:grid-cols-2">
+
+              {/* ━━━ BOYS HOSTEL (Left) ━━━ */}
+              <div className="border-b-2 border-r-0 border-slate-300 p-4 dark:border-slate-600 lg:border-b-0 lg:border-r-2 sm:p-5">
+                {/* Boys header bar */}
+                <div className="mb-4 rounded-t-lg bg-gradient-to-r from-cyan-600 to-blue-700 px-4 py-2.5">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white sm:text-base">
+                    Boys Hostel <span className="font-normal text-cyan-100">(150 Beds | 38 Rooms)</span>
+                  </h3>
+                </div>
+
+                <div className="space-y-4">
+                  {/* Ground floor */}
+                  <div className="rounded border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-900/40">
+                    <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Ground Floor — 19 Rooms (4-bed each = 74 beds)</p>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {Array.from({ length: 19 }, (_, i) => (
+                        <div key={`bg-${i}`} className="flex items-center justify-center rounded bg-cyan-50 py-1.5 text-[10px] font-bold text-cyan-700 hover:bg-cyan-100 transition-colors dark:bg-cyan-900/30 dark:text-cyan-300">
+                          R-{i + 1}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* First floor */}
+                  <div className="rounded border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-900/40">
+                    <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">First Floor — 19 Rooms (4-bed each = 76 beds)</p>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {Array.from({ length: 19 }, (_, i) => (
+                        <div key={`bf-${i}`} className="flex items-center justify-center rounded bg-blue-50 py-1.5 text-[10px] font-bold text-blue-700 hover:bg-blue-100 transition-colors dark:bg-blue-900/30 dark:text-blue-300">
+                          R-{i + 20}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Common Facilities */}
+                  <div className="rounded border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-900/40">
+                    <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Common Facilities</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {['Warden Room', 'Toilet Block 1', 'Toilet Block 2', 'Study Room', 'Store Room'].map((f) => (
+                        <span key={f} className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                {/* First floor */}
-                <div className="mb-5">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">First Floor — 19 Rooms (4-bed each = 76 beds)</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {Array.from({ length: 19 }, (_, i) => (
-                      <div key={`bf-${i}`} className="flex items-center justify-center rounded-md bg-blue-50 px-1 py-2 text-[10px] font-bold text-blue-700 dark:bg-blue-900/20 dark:text-blue-400">
-                        R-{i + 20}
-                      </div>
-                    ))}
-                  </div>
+              </div>
+
+              {/* ━━━ GIRLS HOSTEL (Right) ━━━ */}
+              <div className="p-4 sm:p-5">
+                {/* Girls header bar */}
+                <div className="mb-4 rounded-t-lg bg-gradient-to-r from-pink-600 to-rose-700 px-4 py-2.5">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white sm:text-base">
+                    Girls Hostel <span className="font-normal text-pink-100">(150 Beds | 38 Rooms)</span>
+                  </h3>
                 </div>
-                {/* Common Facilities */}
-                <div className="flex flex-wrap gap-2 border-t border-slate-100 pt-4 dark:border-slate-800">
-                  {['Warden Room', 'Toilet Block 1', 'Toilet Block 2', 'Study Room', 'Store Room'].map((f) => (
-                    <span key={f} className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                      {f}
-                    </span>
-                  ))}
+
+                <div className="space-y-4">
+                  {/* Ground floor */}
+                  <div className="rounded border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-900/40">
+                    <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Ground Floor — 19 Rooms (4-bed each = 74 beds)</p>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {Array.from({ length: 19 }, (_, i) => (
+                        <div key={`gg-${i}`} className="flex items-center justify-center rounded bg-pink-50 py-1.5 text-[10px] font-bold text-pink-700 hover:bg-pink-100 transition-colors dark:bg-pink-900/30 dark:text-pink-300">
+                          R-{i + 1}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* First floor */}
+                  <div className="rounded border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-[#1a3030]/40">
+                    <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">First Floor — 19 Rooms (4-bed each = 76 beds)</p>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {Array.from({ length: 19 }, (_, i) => (
+                        <div key={`gf-${i}`} className="flex items-center justify-center rounded bg-rose-50 py-1.5 text-[10px] font-bold text-rose-700 hover:bg-rose-100 transition-colors dark:bg-rose-900/30 dark:text-rose-300">
+                          R-{i + 20}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Common Facilities */}
+                  <div className="rounded border border-slate-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-900/40">
+                    <p className="mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Common Facilities</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {['Lady Warden Room', 'Toilet Block 1', 'Toilet Block 2', 'Study Room', 'Store Room', 'CCTV Monitoring', 'Separate Access Gate'].map((f) => (
+                        <span key={f} className="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Girls Hostel */}
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/60">
-              <div className="bg-gradient-to-r from-pink-500 to-rose-600 px-6 py-5">
-                <h3 className="text-xl font-bold text-white">Girls Hostel</h3>
-                <p className="text-sm text-white/80">150 Beds · 38 Rooms</p>
-              </div>
-              <div className="p-6">
-                {/* Ground floor */}
-                <div className="mb-5">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Ground Floor — 19 Rooms (4-bed each = 74 beds)</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {Array.from({ length: 19 }, (_, i) => (
-                      <div key={`gg-${i}`} className="flex items-center justify-center rounded-md bg-pink-50 px-1 py-2 text-[10px] font-bold text-pink-700 dark:bg-pink-900/20 dark:text-pink-400">
-                        R-{i + 1}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {/* First floor */}
-                <div className="mb-5">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">First Floor — 19 Rooms (4-bed each = 76 beds)</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {Array.from({ length: 19 }, (_, i) => (
-                      <div key={`gf-${i}`} className="flex items-center justify-center rounded-md bg-rose-50 px-1 py-2 text-[10px] font-bold text-rose-700 dark:bg-rose-900/20 dark:text-rose-400">
-                        R-{i + 20}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {/* Common Facilities */}
-                <div className="flex flex-wrap gap-2 border-t border-slate-100 pt-4 dark:border-slate-800">
-                  {['Lady Warden Room', 'Toilet Block 1', 'Toilet Block 2', 'Study Room', 'Store Room', 'CCTV', 'Separate Entry'].map((f) => (
-                    <span key={f} className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-                      {f}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            {/* ── Bottom Footer ── */}
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+              <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
+              <p className="font-bold text-slate-500 dark:text-slate-400">Page 6</p>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ═══════════ PAGE 7: INFRASTRUCTURE SPECS ═══════════ */}
+      {/* ═══════════ PAGE 7: INFRASTRUCTURE SPECS — BLUEPRINT ═══════════ */}
       <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-20 dark:border-slate-800 dark:bg-slate-900/30 sm:py-28">
         <Container>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <SectionBadge icon={Target} label="Infrastructure Specifications" />
-            <PageBadge page={7} />
-          </div>
-          <h2 className="mb-3 text-3xl font-bold text-slate-950 dark:text-white sm:text-4xl">
-            Equipment, Area & Facility Summary
-          </h2>
-          <p className="mb-10 text-sm text-slate-500 dark:text-slate-400">
-            Laboratory Complex — Area & Equipment Summary
-          </p>
+          {/* Blueprint Container */}
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
 
-          {/* Lab Specs Table */}
-          <div className="mb-12 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80">
-                    <th className="whitespace-nowrap px-5 py-3.5 font-bold text-slate-700 dark:text-slate-200">Lab / Area</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 font-bold text-slate-700 dark:text-slate-200">Description</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 text-center font-bold text-slate-700 dark:text-slate-200">Area (sq.m.)</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 text-center font-bold text-slate-700 dark:text-slate-200">Batch Cap.</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 font-bold text-slate-700 dark:text-slate-200">Key Equipment</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {infraTable.map((row, i) => (
-                    <tr
-                      key={row.lab}
-                      className={`border-b border-slate-100 transition-colors hover:bg-primary-orange/5 dark:border-slate-800 dark:hover:bg-primary-orange/5 ${i % 2 === 0 ? 'bg-white dark:bg-slate-900/40' : 'bg-slate-50/50 dark:bg-slate-900/20'
-                        }`}
-                    >
-                      <td className="whitespace-nowrap px-5 py-3 font-semibold text-slate-800 dark:text-white">{row.lab}</td>
-                      <td className="px-5 py-3 text-slate-600 dark:text-slate-400">{row.desc}</td>
-                      <td className="px-5 py-3 text-center font-bold text-primary-orange">{row.area}</td>
-                      <td className="px-5 py-3 text-center font-semibold text-slate-700 dark:text-slate-300">{row.batch}</td>
-                      <td className="px-5 py-3 text-slate-600 dark:text-slate-400">{row.equipment}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* ── Top Header Bar (Navy) ── */}
+            <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
+              <div>
+                <h2 className="text-lg font-extrabold uppercase tracking-wide text-white sm:text-xl md:text-2xl">
+                  Durga Dulari Textile Skill Development Institute
+                </h2>
+                <p className="mt-0.5 text-sm font-bold uppercase tracking-wider text-primary-orange sm:text-base">
+                  Equipment, Area & Facility Summary
+                </p>
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-xs font-medium text-slate-300 sm:text-sm">Campus Layout & Infrastructure Plan</p>
+                <p className="text-[11px] italic text-slate-400">Detailed Specifications | Lab & Block Breakdown</p>
+              </div>
             </div>
-          </div>
 
-          {/* Block-wise Summary */}
-          <h3 className="mb-6 text-2xl font-bold text-slate-950 dark:text-white">Block-wise Area & Facility Summary</h3>
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800/80">
-                    <th className="whitespace-nowrap px-5 py-3.5 font-bold text-slate-700 dark:text-slate-200">Block</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 text-center font-bold text-slate-700 dark:text-slate-200">Floors</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 text-center font-bold text-slate-700 dark:text-slate-200">Area (sq.m.)</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 text-center font-bold text-slate-700 dark:text-slate-200">Capacity</th>
-                    <th className="whitespace-nowrap px-5 py-3.5 font-bold text-slate-700 dark:text-slate-200">Key Facilities</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {blockSummary.map((row, i) => (
-                    <tr
-                      key={row.block}
-                      className={`border-b border-slate-100 transition-colors hover:bg-primary-orange/5 dark:border-slate-800 dark:hover:bg-primary-orange/5 ${i % 2 === 0 ? 'bg-white dark:bg-slate-900/40' : 'bg-slate-50/50 dark:bg-slate-900/20'
-                        }`}
-                    >
-                      <td className="whitespace-nowrap px-5 py-3 font-semibold text-slate-800 dark:text-white">{row.block}</td>
-                      <td className="px-5 py-3 text-center text-slate-600 dark:text-slate-400">{row.floors}</td>
-                      <td className="px-5 py-3 text-center font-bold text-primary-orange">{row.area}</td>
-                      <td className="px-5 py-3 text-center font-semibold text-slate-700 dark:text-slate-300">{row.capacity}</td>
-                      <td className="px-5 py-3 text-slate-600 dark:text-slate-400">{row.facilities}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* ── Floor Plan Body ── */}
+            <div className="p-4 sm:p-6 space-y-6">
+
+              {/* Lab Specs Table */}
+              <div>
+                <div className="mb-3 px-3 py-1.5 bg-primary-orange rounded-t-lg">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">
+                    Laboratory Complex — Area & Equipment Summary
+                  </h3>
+                </div>
+                <div className="overflow-x-auto rounded-b-lg border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-900/40">
+                  <table className="w-full text-left text-xs sm:text-sm">
+                    <thead>
+                      <tr className="border-b border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-800/80">
+                        <th className="whitespace-nowrap px-4 py-2.5 font-bold text-slate-700 dark:text-slate-200">Lab / Area</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 font-bold text-slate-700 dark:text-slate-200">Description</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 text-center font-bold text-slate-700 dark:text-slate-200">Area (sq.m.)</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 text-center font-bold text-slate-700 dark:text-slate-200">Batch Cap.</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 font-bold text-slate-700 dark:text-slate-200">Key Equipment</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {infraTable.map((row, i) => (
+                        <tr
+                          key={row.lab}
+                          className={`border-b border-slate-200/60 transition-colors hover:bg-primary-orange/5 dark:border-slate-800/40 dark:hover:bg-primary-orange/5 ${i % 2 === 0 ? 'bg-white dark:bg-slate-900/60' : 'bg-slate-50/50 dark:bg-slate-900/30'}`}
+                        >
+                          <td className="whitespace-nowrap px-4 py-2.5 font-semibold text-slate-800 dark:text-white">{row.lab}</td>
+                          <td className="px-4 py-2.5 text-slate-600 dark:text-slate-400">{row.desc}</td>
+                          <td className="px-4 py-2.5 text-center font-bold text-primary-orange">{row.area}</td>
+                          <td className="px-4 py-2.5 text-center font-semibold text-slate-700 dark:text-slate-300">{row.batch}</td>
+                          <td className="px-4 py-2.5 text-slate-600 dark:text-slate-400">{row.equipment}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Block-wise Summary */}
+              <div>
+                <div className="mb-3 px-3 py-1.5 bg-[#2b5797] rounded-t-lg">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-white sm:text-sm">
+                    Block-wise Area & Facility Summary
+                  </h3>
+                </div>
+                <div className="overflow-x-auto rounded-b-lg border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-900/40">
+                  <table className="w-full text-left text-xs sm:text-sm">
+                    <thead>
+                      <tr className="border-b border-slate-300 bg-slate-100 dark:border-slate-700 dark:bg-slate-800/80">
+                        <th className="whitespace-nowrap px-4 py-2.5 font-bold text-slate-700 dark:text-slate-200">Block</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 text-center font-bold text-slate-700 dark:text-slate-200">Floors</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 text-center font-bold text-slate-700 dark:text-slate-200">Area (sq.m.)</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 text-center font-bold text-slate-700 dark:text-slate-200">Capacity</th>
+                        <th className="whitespace-nowrap px-4 py-2.5 font-bold text-slate-700 dark:text-slate-200">Key Facilities</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {blockSummary.map((row, i) => (
+                        <tr
+                          key={row.block}
+                          className={`border-b border-slate-200/60 transition-colors hover:bg-primary-orange/5 dark:border-slate-800/40 dark:hover:bg-primary-orange/5 ${i % 2 === 0 ? 'bg-white dark:bg-slate-900/60' : 'bg-slate-50/50 dark:bg-slate-900/30'}`}
+                        >
+                          <td className="whitespace-nowrap px-4 py-2.5 font-semibold text-slate-800 dark:text-white">{row.block}</td>
+                          <td className="px-4 py-2.5 text-center text-slate-600 dark:text-slate-400">{row.floors}</td>
+                          <td className="px-4 py-2.5 text-center font-bold text-primary-orange">{row.area}</td>
+                          <td className="px-4 py-2.5 text-center font-semibold text-slate-700 dark:text-slate-300">{row.capacity}</td>
+                          <td className="px-4 py-2.5 text-slate-600 dark:text-slate-400">{row.facilities}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            {/* ── Bottom Footer ── */}
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+              <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
+              <p className="font-bold text-slate-500 dark:text-slate-400">Page 7</p>
             </div>
           </div>
         </Container>
