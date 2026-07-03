@@ -1,0 +1,32 @@
+# terraform.tfvars.example
+# Copy to terraform.tfvars and fill in your values
+# NEVER commit terraform.tfvars to git (add to .gitignore)
+
+# ── Core ─────────────────────────────────────────────────────
+region       = "ap-south-1"
+project_name = "durga-dulari"
+environment  = "production"
+
+# ── Networking ───────────────────────────────────────────────
+vpc_cidr           = "10.0.0.0/16"
+public_subnet_cidr = "10.0.1.0/24"
+availability_zone  = "ap-south-1a"
+
+# ── EC2 ─────────────────────────────────────────────────────
+instance_type    = "t3.small"
+allowed_ssh_cidr = "YOUR_IP/32"   # replace with your IP
+app_port         = 3000
+
+# ── GitHub OIDC ──────────────────────────────────────────────
+github_org        = "Rahul-Parihar"
+github_repository = "Durga-Dulari-Enterprises"
+github_branch     = "main"
+
+# ── ECR ─────────────────────────────────────────────────────
+ecr_image_retention_count = 10
+
+# ── Feature flags ────────────────────────────────────────────
+enable_alb        = false
+enable_cloudwatch = true
+enable_route53    = false
+domain_name       = ""   # set if enable_route53 = true

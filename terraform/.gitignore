@@ -1,0 +1,21 @@
+# Local terraform files
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+*.tfstate
+*.tfstate.backup
+*.tfplan
+tfplan
+
+# Generated SSH key
+*.pem
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# IDE
+.idea/
+.vscode/

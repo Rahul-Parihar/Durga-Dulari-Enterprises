@@ -1,0 +1,39 @@
+# .pre-commit-config.yaml
+# Pre-commit hooks for Terraform code quality
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # Terraform formatting and validation
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.94.0
+    hooks:
+      - id: terraform_fmt
+        name: Terraform fmt
+        description: Formats Terraform files
+
+      - id: terraform_validate
+        name: Terraform validate
+        description: Validates Terraform configuration
+
+      - id: terraform_tflint
+        name: TFLint
+        description: Lints Terraform files for best practices
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+
+      - id: terraform_tfsec
+        name: tfsec
+        description: Security scan for Terraform
+        args:
+          - --args=--minimum-severity=HIGH
+
+  # General file hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: detect-private-key        # prevent committing .pem files
