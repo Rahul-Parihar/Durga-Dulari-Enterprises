@@ -1,0 +1,369 @@
+name: Frontend - Build & Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ap-south-1
+  ECR_REPOSITORY: durga-dulari-production-frontend
+  IMAGE_TAG: ${{ github.sha }}
+  CONTAINER_NAME: durga-dulari-frontend
+  DEPLOY_PATH: /opt/durga-dulari
+  NODE_VERSION: '22'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  # ── Job 1: Lint & Test ─────────────────────────────────────
+  ci:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      # Fix 1: fetch-depth: 2 so git diff HEAD~1 works reliably
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint --if-present
+      - run: npm test --if-present
+
+  # ── Job 2: Build, Scan & Push ──────────────────────────────
+  build-and-push:
+    name: Build, Scan & Push
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: ci
+
+    outputs:
+      image: ${{ steps.meta.outputs.image }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2.0.1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.7.1
+
+      - name: Set image metadata
+        id: meta
+        run: |
+          echo "image=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}" >> $GITHUB_OUTPUT
+          echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
+      - name: Build & Push to ECR
+        uses: docker/build-push-action@v6.9.0
+        with:
+          context: ./frontend
+          push: true
+          tags: |
+            ${{ steps.meta.outputs.image }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.created=${{ steps.meta.outputs.created }}
+            org.opencontainers.image.version=${{ github.ref_name }}
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            NEXT_PUBLIC_WHATSAPP_NUMBER=${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+            NEXT_PUBLIC_PHONE_NUMBER=${{ secrets.NEXT_PUBLIC_PHONE_NUMBER }}
+            NEXT_PUBLIC_EMAIL=${{ secrets.NEXT_PUBLIC_EMAIL }}
+          cache-from: |
+            type=gha
+            type=registry,ref=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:cache
+          cache-to: |
+            type=gha,mode=max
+            type=registry,ref=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:cache,mode=max
+
+      - name: Trivy vulnerability scan
+        id: trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ steps.meta.outputs.image }}
+          format: table
+          exit-code: 1
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+
+      - name: Delete vulnerable image from ECR on scan failure
+        if: failure() && steps.trivy.outcome == 'failure'
+        run: |
+          aws ecr batch-delete-image \
+            --repository-name ${{ env.ECR_REPOSITORY }} \
+            --image-ids imageTag=${{ env.IMAGE_TAG }} \
+            --region ${{ env.AWS_REGION }}
+
+      - name: Install Cosign
+        if: success()
+        uses: sigstore/cosign-installer@v3.7.0
+
+      # Fix 5: Cosign keyless signing - permissions already set at workflow level
+      - name: Sign image with Cosign (keyless)
+        if: success()
+        run: cosign sign --yes ${{ steps.meta.outputs.image }}
+        env:
+          COSIGN_EXPERIMENTAL: 1
+
+  # ── Job 3: Deploy ──────────────────────────────────────────
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build-and-push
+    environment: production
+
+    steps:
+      # Fix 1: fetch-depth: 2 for reliable git diff
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # Fix 1: Use github.event.before as fallback for shallow clones
+      - name: Check if compose file changed
+        id: compose-changed
+        run: |
+          BASE="${{ github.event.before }}"
+          # Fallback to HEAD~1 if event.before is unavailable (e.g. workflow_dispatch)
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="HEAD~1"
+          fi
+          git diff --name-only "$BASE" HEAD | grep -q 'frontend/docker-compose.prod.yml' \
+            && echo "changed=true" >> $GITHUB_OUTPUT \
+            || echo "changed=false" >> $GITHUB_OUTPUT
+
+      - name: Copy docker-compose to EC2
+        if: steps.compose-changed.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: frontend/docker-compose.prod.yml
+          target: ${{ env.DEPLOY_PATH }}
+          strip_components: 1
+
+      - name: Deploy with rollback
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+            cd ${{ env.DEPLOY_PATH }}
+
+            # Fix 7: File-level deployment lock prevents overlapping deployments
+            exec 9>/tmp/durga-dulari-deploy.lock
+            if ! flock -n 9; then
+              echo "Another deployment is in progress. Exiting."
+              exit 1
+            fi
+
+            aws ecr get-login-password --region ${{ env.AWS_REGION }} | \
+              docker login --username AWS --password-stdin \
+              ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+
+            # Fix 6: Record deployment metadata
+            DEPLOY_META="SHA=${{ github.sha }} | Actor=${{ github.actor }} | Time=$(date -u)"
+            echo "$DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
+
+            # Save previous image for rollback
+            PREVIOUS_IMAGE=$(docker inspect \
+              --format='{{index .Config.Image}}' \
+              ${{ env.CONTAINER_NAME }} 2>/dev/null || echo "none")
+            echo "Previous image: $PREVIOUS_IMAGE"
+
+            NEW_IMAGE=${{ needs.build-and-push.outputs.image }}
+            echo "New image: $NEW_IMAGE"
+
+            # Fix 2: Pull image directly - no redundant docker compose pull
+            docker pull $NEW_IMAGE
+
+            export IMAGE=$NEW_IMAGE
+            export CONTAINER_NAME=${{ env.CONTAINER_NAME }}
+
+            # Fix 2: Use --force-recreate without pull (already pulled above)
+            docker compose -f docker-compose.prod.yml up -d --force-recreate --no-deps frontend
+
+            # Reusable health check function
+            # Fix 1: Works with or without Docker HEALTHCHECK defined
+            # Fix 4: Checks both container state AND HTTP endpoint
+            check_health() {
+              local container=$1
+              local label=$2
+              local max_attempts=30
+
+              echo "--- Health check: $label ---"
+              for i in $(seq 1 $max_attempts); do
+                # Check container is running
+                RUNNING=$(docker inspect \
+                  --format='{{.State.Running}}' \
+                  $container 2>/dev/null || echo "false")
+
+                if [ "$RUNNING" != "true" ]; then
+                  echo "[$i/$max_attempts] Not running yet..."
+                  sleep 2
+                  continue
+                fi
+
+                # Check Docker HEALTHCHECK if defined - gracefully handle missing
+                HEALTH=$(docker inspect \
+                  --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}no-healthcheck{{end}}' \
+                  $container 2>/dev/null || echo "unknown")
+
+                echo "[$i/$max_attempts] Running=true | Health=$HEALTH"
+
+                # Proceed if healthy or no HEALTHCHECK defined
+                if [ "$HEALTH" = "healthy" ] || [ "$HEALTH" = "no-healthcheck" ]; then
+                  # Fix 4: HTTP check - use / if /api/health not available
+                  if wget -qO- --timeout=5 http://localhost:3000/api/health > /dev/null 2>&1; then
+                    echo "HTTP health check passed on /api/health"
+                    return 0
+                  elif wget -qO- --timeout=5 http://localhost:3000/ > /dev/null 2>&1; then
+                    echo "HTTP health check passed on /"
+                    return 0
+                  fi
+                fi
+
+                sleep 2
+              done
+
+              echo "Health check failed after $((max_attempts * 2))s"
+              return 1
+            }
+
+            # Deploy health check
+            if check_health "${{ env.CONTAINER_NAME }}" "new deployment"; then
+              echo "Deployment successful!"
+              # Fix 4: Safe pruning - dangling images only, older than 72h
+              docker image prune -f --filter until=72h
+              echo "DEPLOYED: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
+            else
+              echo "Deployment failed - initiating rollback to: $PREVIOUS_IMAGE"
+
+              # Fix 3: Stop only frontend - not all services in compose file
+              docker compose -f docker-compose.prod.yml stop frontend
+              docker compose -f docker-compose.prod.yml rm -f frontend
+
+              if [ "$PREVIOUS_IMAGE" != "none" ]; then
+                # Fix 8: Verify previous image exists locally or pull from ECR
+                if ! docker image inspect "$PREVIOUS_IMAGE" > /dev/null 2>&1; then
+                  echo "Previous image not found locally - pulling from ECR..."
+                  docker pull "$PREVIOUS_IMAGE" || {
+                    echo "CRITICAL: Cannot pull previous image - manual intervention required"
+                    echo "ROLLBACK_PULL_FAILED: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
+                    exit 1
+                  }
+                fi
+
+                export IMAGE=$PREVIOUS_IMAGE
+                docker compose -f docker-compose.prod.yml up -d --force-recreate --no-deps frontend
+
+                # Fix 3: Same health check loop for rollback verification
+                if check_health "${{ env.CONTAINER_NAME }}" "rollback"; then
+                  echo "Rollback successful - previous version restored"
+                  echo "ROLLBACK_OK: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
+                else
+                  echo "CRITICAL: Rollback failed - manual intervention required"
+                  echo "ROLLBACK_FAILED: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
+                fi
+              else
+                echo "No previous image available - cannot rollback"
+              fi
+
+              exit 1
+            fi
+
+  # ── Job 4: Notify ──────────────────────────────────────────
+  notify:
+    name: Notify
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [ci, build-and-push, deploy]
+    if: always()
+
+    steps:
+      - name: Notify Slack - Success
+        if: needs.deploy.result == 'success'
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": "✅ *Deployment Successful* - Durga Dulari Enterprises",
+              "attachments": [{
+                "color": "good",
+                "fields": [
+                  { "title": "Repo",        "value": "${{ github.repository }}", "short": true },
+                  { "title": "Branch",      "value": "${{ github.ref_name }}",   "short": true },
+                  { "title": "SHA",         "value": "${{ github.sha }}",        "short": true },
+                  { "title": "Deployed by", "value": "${{ github.actor }}",      "short": true },
+                  { "title": "URL", "value": "${{ secrets.NEXT_PUBLIC_SITE_URL }}", "short": false }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        continue-on-error: true
+
+      - name: Notify Slack - Failure
+        if: |
+          needs.ci.result == 'failure' ||
+          needs.build-and-push.result == 'failure' ||
+          needs.deploy.result == 'failure'
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": "❌ *Deployment Failed* - Durga Dulari Enterprises",
+              "attachments": [{
+                "color": "danger",
+                "fields": [
+                  { "title": "Repo",   "value": "${{ github.repository }}", "short": true },
+                  { "title": "SHA",    "value": "${{ github.sha }}",        "short": true },
+                  { "title": "Actor",  "value": "${{ github.actor }}",      "short": true },
+                  { "title": "CI",     "value": "${{ needs.ci.result }}",             "short": true },
+                  { "title": "Build",  "value": "${{ needs.build-and-push.result }}", "short": true },
+                  { "title": "Deploy", "value": "${{ needs.deploy.result }}",         "short": true },
+                  { "title": "Logs", "value": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "short": false }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        continue-on-error: true
