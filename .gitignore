@@ -1,0 +1,9 @@
+﻿node_modules/
+.next/
+.env
+.env.local
+*.csv
+*.pem
+.vscode/
+.DS_Store
+next-env.d.ts
