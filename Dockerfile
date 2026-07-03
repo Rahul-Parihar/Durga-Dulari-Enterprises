@@ -32,6 +32,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
+RUN apk upgrade --no-cache
 RUN addgroup -S nodejs -g 1001 \
  && adduser -S nextjs -u 1001 \
  && apk add --no-cache wget
