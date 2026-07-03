@@ -34,9 +34,7 @@ jobs:
     name: Lint & Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    defaults:
-      run:
-        working-directory: ./frontend
+    
 
     steps:
       # Fix 1: fetch-depth: 2 so git diff HEAD~1 works reliably
@@ -48,7 +46,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-          cache-dependency-path: '**/package-lock.json'
+          cache-dependency-path: package-lock.json
 
       - run: npm ci
       - run: npm run lint --if-present
