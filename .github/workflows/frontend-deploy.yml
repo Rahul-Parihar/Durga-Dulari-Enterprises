@@ -89,7 +89,7 @@ jobs:
       - name: Build & Push to ECR
         uses: docker/build-push-action@v6.9.0
         with:
-          context: ./frontend
+          context: .
           push: true
           tags: |
             ${{ steps.meta.outputs.image }}
