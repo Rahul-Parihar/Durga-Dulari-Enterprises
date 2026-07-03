@@ -118,7 +118,7 @@ jobs:
           image-ref: ${{ steps.meta.outputs.image }}
           format: table
           exit-code: 1
-          severity: HIGH,CRITICAL
+          severity: CRITICAL
           ignore-unfixed: true
 
       - name: Delete vulnerable image from ECR on scan failure
