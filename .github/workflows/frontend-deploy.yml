@@ -174,9 +174,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: frontend/docker-compose.prod.yml
+          source: docker-compose.prod.yml
           target: ${{ env.DEPLOY_PATH }}
-          strip_components: 1
 
       - name: Deploy with rollback
         uses: appleboy/ssh-action@v1.1.0
