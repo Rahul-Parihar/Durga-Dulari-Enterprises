@@ -4,8 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'frontend/**'
-      - '.github/workflows/frontend-deploy.yml'
+  - 'src/**'
+  - 'public/**'
+  - 'package.json'
+  - 'next.config.js'
+  - 'Dockerfile'
+  - '.github/workflows/frontend-deploy.yml'
   workflow_dispatch:
 
 concurrency:
