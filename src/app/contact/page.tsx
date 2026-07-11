@@ -74,6 +74,7 @@ export default function ContactPage({
                   <div>
                     <p className="font-extrabold text-primary-navy text-sm uppercase tracking-wide">Service Area</p>
                     <p className="text-slate-700 font-bold text-sm mt-1">PAN India Operations</p>
+                    <p className="text-slate-700 font-semibold text-xs mt-1.5">Madhya Pradesh · Himachal Pradesh · Punjab · Gujarat</p>
                     <p className="text-xs text-slate-500 mt-1 font-medium">Multiple support centers across Coimbatore, Ludhiana, & Tirupur.</p>
                   </div>
                 </div>

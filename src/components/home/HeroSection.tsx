@@ -90,7 +90,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative text-white pt-20 pb-12 overflow-hidden bg-cover bg-center"
+      className="relative text-white pt-14 pb-12 overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: "url('/images/hero-spinning-mill.png')" }}
     >
       {/* Dark overlay with horizontal gradient to fade out towards the right */}

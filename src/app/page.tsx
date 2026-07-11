@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CampusPopupModal } from '@/components/home/CampusPopupModal';
+
 import { ScrollReveal } from '@/components/common/ScrollReveal';
 import { HeroSection } from '@/components/home/HeroSection';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <CampusPopupModal />
+
       <HeroSection />
       
       <ScrollReveal>
