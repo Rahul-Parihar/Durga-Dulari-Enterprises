@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { CampusPopupModal } from '@/components/home/CampusPopupModal';
+import { ScrollReveal } from '@/components/common/ScrollReveal';
 import { HeroSection } from '@/components/home/HeroSection';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { ServiceSnapshot } from '@/components/home/ServiceSnapshot';
@@ -22,15 +23,42 @@ export default function HomePage() {
     <>
       <CampusPopupModal />
       <HeroSection />
-      <WhyChooseUs />
-      <ServiceSnapshot />
-      <IndustriesPreview />
-      <ProcessSection />
-      <CaseStudiesPreview />
-      <TrainingPreview />
-      <ResourcesPreview />
-      <TestimonialsPreview />
-      <FinalCTA />
+      
+      <ScrollReveal>
+        <WhyChooseUs />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <ServiceSnapshot />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <IndustriesPreview />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <ProcessSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <CaseStudiesPreview />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <TrainingPreview />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <ResourcesPreview />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <TestimonialsPreview />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <FinalCTA />
+      </ScrollReveal>
     </>
   );
 }

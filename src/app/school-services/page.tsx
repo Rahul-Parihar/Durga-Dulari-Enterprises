@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { Button } from '@/components/common/Button';
+import { ScrollReveal } from '@/components/common/ScrollReveal';
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
@@ -282,7 +283,8 @@ export default function SchoolServicesPage() {
       </section>
 
       {/* ═══════════ PAGE 2: MODEL COMPARISON — BLUEPRINT ═══════════ */}
-      <section id="page-2" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-2" className="py-8 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -365,9 +367,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 3: MASTER LAYOUT PLAN — BLUEPRINT ═══════════ */}
-      <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
+      <ScrollReveal>
+        <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -613,9 +617,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 4: ADMIN & ACADEMIC BLOCK — FLOOR PLAN ═══════════ */}
-      <section id="page-4" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-4" className="py-8 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -771,9 +777,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 5: LABORATORY COMPLEX — FLOOR PLAN ═══════════ */}
-      <section id="page-5" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
+      <ScrollReveal>
+        <section id="page-5" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1049,9 +1057,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 6: HOSTEL BLOCK — BLUEPRINT ═══════════ */}
-      <section id="page-6" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-6" className="py-8 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1180,9 +1190,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 7: INFRASTRUCTURE SPECS — BLUEPRINT ═══════════ */}
-      <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
+      <ScrollReveal>
+        <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1288,9 +1300,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 8: 5-ACRE EXPANSION — BLUEPRINT ═══════════ */}
-      <section id="page-8" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-8" className="py-8 sm:py-12">
         <Container>
           {/* Blueprint Container */}
           <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
@@ -1501,9 +1515,11 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ CTA SECTION ═══════════ */}
-      <section className="border-y border-slate-100 bg-gradient-to-br from-primary-navy via-slate-900 to-slate-950 py-20 text-center sm:py-24">
+      <ScrollReveal>
+        <section className="border-y border-slate-100 bg-gradient-to-br from-primary-navy via-slate-900 to-slate-950 py-20 text-center sm:py-24">
         <Container>
           <div className="relative">
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -1536,6 +1552,7 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
+      </ScrollReveal>
     </main>
   );
 }
