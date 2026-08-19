@@ -30,7 +30,6 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-// Industry references section
 export const industryReferences = {
   spinning: '90+ spinning mills served across India',
   knitting: '45+ knitting mills and processing units',
