@@ -26,7 +26,6 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Company Overview */}
       <section className="py-24 bg-white">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
