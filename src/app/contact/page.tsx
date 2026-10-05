@@ -11,12 +11,13 @@ export const metadata: Metadata = {
   description: 'Get in touch with our team for manpower requirements, maintenance services, or custom solutions.',
 };
 
-export default function ContactPage({
+export default async function ContactPage({
   searchParams,
 }: {
-  searchParams?: { requirement?: string };
+  searchParams?: Promise<{ requirement?: string }>;
 }) {
-  const defaultRequirement = searchParams?.requirement;
+  const params = await searchParams;
+  const defaultRequirement = params?.requirement;
 
   return (
     <main className="bg-white">
@@ -125,3 +126,4 @@ export default function ContactPage({
     </main>
   );
 }
+

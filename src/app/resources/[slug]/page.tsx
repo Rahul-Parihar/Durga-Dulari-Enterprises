@@ -10,12 +10,13 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ResourceDetailPage({
+export default async function ResourceDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const resource = blogResources.find((r) => r.slug === params.slug);
+  const { slug } = await params;
+  const resource = blogResources.find((r) => r.slug === slug);
 
   if (!resource) {
     return (
@@ -85,3 +86,4 @@ export default function ResourceDetailPage({
     </main>
   );
 }
+
