@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: 'Get in touch with our team for manpower requirements, maintenance services, or custom solutions.',
 };
 
+<<<<<<< HEAD
 export default async function ContactPage({
   searchParams,
 }: {
@@ -18,6 +19,14 @@ export default async function ContactPage({
 }) {
   const params = await searchParams;
   const defaultRequirement = params?.requirement;
+=======
+export default function ContactPage({
+  searchParams,
+}: {
+  searchParams?: { requirement?: string };
+}) {
+  const defaultRequirement = searchParams?.requirement;
+>>>>>>> frontend
 
   return (
     <main className="bg-white">

@@ -17,8 +17,12 @@ export default async function ServiceDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+<<<<<<< HEAD
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
+=======
+  const service = services.find((s) => s.slug === params.slug);
+>>>>>>> frontend
   const consultationHref = `/contact?requirement=${encodeURIComponent(service?.slug || '')}`;
 
   if (!service) {
