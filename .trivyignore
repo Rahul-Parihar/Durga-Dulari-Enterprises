@@ -9,3 +9,6 @@ GHSA-qx2v-qp2m-jg93
 GHSA-6g55-p6wh-862q
 GHSA-fxqj-rqcc-2cmp
 GHSA-r28c-9q8g-f849
+
+# tar CVE in npm's own bundled node_modules - not in app code, no fix available without upgrading base image npm
+CVE-2026-59873
