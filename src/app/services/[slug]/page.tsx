@@ -17,7 +17,6 @@ export default async function ServiceDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-<<<<<<< HEAD
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
 =======
@@ -199,4 +198,5 @@ export default async function ServiceDetailPage({
     </main>
   );
 }
+
 

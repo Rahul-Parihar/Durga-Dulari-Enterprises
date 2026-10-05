@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description: 'Get in touch with our team for manpower requirements, maintenance services, or custom solutions.',
 };
 
-<<<<<<< HEAD
 export default async function ContactPage({
   searchParams,
 }: {
@@ -135,4 +134,5 @@ export default function ContactPage({
     </main>
   );
 }
+
 
