@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Container } from '@/components/common/Container';
 import { LeadForm } from '@/components/forms/LeadForm';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
@@ -37,7 +37,7 @@ export default function ContactPage({
             Contact Channels
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Get In Touch</h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium">Available 24×7 for your urgent requirements.</p>
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-medium">Available 24├ù7 for your urgent requirements.</p>
         </Container>
       </section>
 
@@ -60,7 +60,7 @@ export default function ContactPage({
                     <a href={`tel:${PHONE_NUMBER}`} className="text-primary-orange hover:underline text-lg font-bold block mt-1">
                       {PHONE_NUMBER}
                     </a>
-                    <p className="text-xs text-slate-500 font-semibold mt-1">24×7 Urgent Operations Support</p>
+                    <p className="text-xs text-slate-500 font-semibold mt-1">24├ù7 Urgent Operations Support</p>
                   </div>
                 </div>
 
