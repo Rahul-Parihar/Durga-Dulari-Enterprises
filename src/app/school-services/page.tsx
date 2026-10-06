@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { Button } from '@/components/common/Button';
+import { ScrollReveal } from '@/components/common/ScrollReveal';
 
 /* ─────────────────────────── DATA ─────────────────────────── */
 
@@ -171,85 +172,103 @@ const blockSummary = [
 export default function SchoolServicesPage() {
 
   return (
-    <main className="bg-white dark:bg-slate-950">
+    <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
 
-      {/* ═══════════ HERO COVER PAGE — BLUEPRINT ═══════════ */}
-      <section className="relative overflow-hidden bg-slate-50 py-16 text-slate-800 dark:bg-black dark:text-white sm:py-24">
-        {/* Decorative background glows */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -right-32 -top-32 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-primary-orange/20 to-amber-500/10 blur-3xl opacity-50 dark:opacity-30" />
-          <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 blur-3xl opacity-50 dark:opacity-30" />
-        </div>
-
-        <Container className="relative max-w-5xl">
-          
-          {/* Header Text Block */}
-          <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.3em] text-primary-orange sm:text-sm">
-              Campus Layout & Infrastructure Plan
-            </p>
-            <h1 className="mt-4 text-4xl font-black uppercase tracking-wider text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
-              Durga Dulari
-            </h1>
-            <h2 className="mt-2 text-xl font-bold uppercase tracking-widest text-slate-700 dark:text-slate-200 sm:text-2xl md:text-3xl">
-              Textile Skill Development Institute
-            </h2>
-            <p className="mt-3 text-sm font-semibold italic text-amber-600 dark:text-amber-400 sm:text-base">
-              Centre of Excellence for Spinning · Maintenance · Automation
-            </p>
-          </div>
-
-          {/* Separator Line */}
-          <div className="my-8 flex justify-center">
-            <div className="h-[2px] w-2/3 bg-gradient-to-r from-transparent via-amber-500/80 to-transparent" />
-          </div>
-
-          {/* 6 Grid Cards */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {[
-              { val: '2 Acres', lbl1: 'Campus Area', lbl2: '(Recommended)' },
-              { val: '5,000 sq.m.', lbl1: 'Total Built-Up', lbl2: 'Area' },
-              { val: '300', lbl1: 'Trainees', lbl2: 'Per Batch' },
-              { val: '12', lbl1: 'Labs &', lbl2: 'Workshops' },
-              { val: '300 Beds', lbl1: 'Hostel', lbl2: 'Capacity' },
-              { val: '8', lbl1: 'Training', lbl2: 'Courses' },
-            ].map((card, idx) => (
-              <div
-                key={idx}
-                className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:hover:shadow-lg"
-              >
-                <p className="text-base font-black text-amber-600 dark:text-amber-400 sm:text-lg md:text-xl">
-                  {card.val}
+      {/* ═══════════ HERO COVER PAGE — CSR DONATION POSTER ═══════════ */}
+      <section className="relative overflow-hidden bg-[#f3f2ef] py-10 text-slate-800 sm:py-14 dark:bg-slate-950 dark:text-slate-100">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-[#081d30] shadow-[0_25px_60px_rgba(8,29,48,0.18)] dark:border-slate-800">
+            <div className="grid gap-8 p-6 lg:grid-cols-[1.4fr_0.8fr] lg:p-10">
+              <div className="flex flex-col justify-center">
+                <p className="text-xs font-black uppercase tracking-[0.32em] text-primary-orange sm:text-sm">
+                  CSR & SOCIAL IMPACT
                 </p>
-                <p className="mt-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                  {card.lbl1}
+
+                <h1 className="mt-6 text-[2.5rem] font-black leading-[0.94] tracking-[-0.05em] text-white sm:text-[3.25rem] lg:text-[5rem]">
+                  Skill a child.
+                  <span className="mt-2 block">Shape a future.</span>
+                </h1>
+
+                <p className="mt-7 text-sm font-black uppercase tracking-[0.18em] text-slate-200 sm:text-lg lg:text-[1.4rem] lg:leading-[1.2]">
+                  Support the Durga Dulari Skill Mission
                 </p>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                  {card.lbl2}
+
+                <p className="mt-6 max-w-[680px] text-base leading-relaxed text-slate-300 sm:text-lg">
+                  Your CSR partnership can help us train youth in textile, maintenance,
+                  automation, and livelihood skills — turning potential into jobs,
+                  dignity, and long-term growth.
                 </p>
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Link href="#page-2" className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-orange px-6 py-4 text-base font-extrabold text-white shadow-lg shadow-primary-orange/20 transition-all hover:bg-primary-orange/90">
+                    Support a CSR Donation <ArrowRight size={18} />
+                  </Link>
+                  <Link href="#page-3" className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/5 px-6 py-4 text-base font-extrabold text-white/90 backdrop-blur-sm transition-all hover:border-slate-300/80 hover:bg-white/10">
+                    View the Campus Plan
+                  </Link>
+                </div>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    { value: '₹25K', label: 'Funds one trainee kit' },
+                    { value: '₹1L', label: 'Supports student placement' },
+                    { value: '₹5L+', label: 'Builds scalable training impact' },
+                  ].map((item) => (
+                    <div key={item.label} className="rounded-2xl border border-slate-200/20 bg-white/5 p-4 backdrop-blur-sm">
+                      <p className="text-2xl font-black text-primary-orange">{item.value}</p>
+                      <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
+                        {item.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+
+              <div className="relative flex min-h-[360px] items-end overflow-hidden rounded-[28px] bg-gradient-to-br from-[#071a2f] via-[#0b233d] to-[#d58a45] p-5 shadow-inner shadow-black/20 sm:min-h-[440px] lg:min-h-[540px]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.24),transparent_35%),linear-gradient(to_top,rgba(0,0,0,0.28),rgba(0,0,0,0.05))]" />
+                <div className="absolute right-4 top-4 rounded-md border border-white/15 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/80 backdrop-blur-sm">
+                  Donation Poster
+                </div>
+
+                <div className="relative w-full space-y-5">
+                  <div className="rounded-[18px] border border-white/15 bg-[#0c1e33]/70 p-4 backdrop-blur-sm">
+                    <p className="text-[10px] font-black uppercase tracking-[0.28em] text-orange-200">
+                      Together we can
+                    </p>
+                    <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-white sm:text-3xl">
+                      Empower rural youth through skilling and dignity.
+                    </h3>
+                  </div>
+
+                  <div className="rounded-[18px] border border-orange-200/40 bg-[#d88d4a]/20 p-4 backdrop-blur-sm">
+                    <p className="text-[10px] font-black uppercase tracking-[0.26em] text-orange-100">
+                      Impact areas
+                    </p>
+                    <ul className="mt-3 space-y-2 text-sm font-medium text-orange-50 sm:text-base">
+                      <li>• Skill-based education for underserved students</li>
+                      <li>• Hostel, training and tool support</li>
+                      <li>• Placement pathways and career readiness</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Centered Descriptive Paragraph */}
           <div className="mt-10 text-center">
-            <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
-              This document presents the complete campus layout, space allocation, infrastructure specifications,
-              and room-by-room design for the Durga Dulari Textile Skill Development Institute.
-            </p>
-            <p className="mx-auto mt-2 max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
-              Three layout models are presented: 1-Acre (Starter), 2-Acre (Standard), and 5-Acre (Full Campus).
+            <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base dark:text-slate-300">
+              This initiative is designed to create a self-sustaining ecosystem where quality training,
+              safe residential support, and industrial readiness transform lives across communities.
             </p>
           </div>
 
-          {/* DOCUMENT CONTENTS NAV BOX */}
-          <div className="mt-12 overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5 shadow-sm">
-            <div className="border-b border-slate-200 bg-slate-50 px-6 py-3 text-center dark:border-white/10 dark:bg-white/5">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400 sm:text-sm">
-                Document Contents
+          <div className="mt-12 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+            <div className="border-b border-slate-200 bg-slate-50 px-6 py-3 text-center dark:border-slate-800 dark:bg-slate-900">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600 dark:text-primary-orange sm:text-sm">
+                School Services Overview
               </p>
             </div>
-            <div className="divide-y divide-slate-100 px-6 py-3 font-mono text-xs sm:px-8 dark:divide-white/5">
+            <div className="divide-y divide-slate-100 px-6 py-3 font-mono text-xs dark:divide-slate-800 sm:px-8">
               {[
                 { pg: 2, desc: 'Campus Overview — 3 Model Comparison (1, 2 & 5 Acre)' },
                 { pg: 3, desc: '2-Acre Standard Campus — Master Layout Plan' },
@@ -262,30 +281,29 @@ export default function SchoolServicesPage() {
                 <a
                   key={item.pg}
                   href={`#page-${item.pg}`}
-                  className="flex items-center justify-between py-2.5 transition-all hover:bg-amber-500/5 hover:px-3 rounded-lg dark:hover:bg-amber-500/10"
+                  className="flex items-center justify-between py-2.5 transition-all hover:bg-amber-500/5 hover:px-3 rounded-lg dark:hover:bg-primary-orange/10"
                 >
                   <span className="font-bold text-primary-orange">Page {item.pg}</span>
-                  <span className="text-right text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors">{item.desc}</span>
+                  <span className="text-right text-slate-600 hover:text-slate-900 transition-colors dark:text-slate-300 dark:hover:text-white">{item.desc}</span>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Promoted Footer */}
           <div className="mt-12 text-center">
             <p className="text-[10px] font-bold uppercase tracking-widest text-primary-orange sm:text-xs">
-              Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | 2025–26 | Confidential
+              Durga Dulari Enterprises • CSR-led skill development for a stronger tomorrow
             </p>
           </div>
-
-        </Container>
+        </div>
       </section>
 
       {/* ═══════════ PAGE 2: MODEL COMPARISON — BLUEPRINT ═══════════ */}
-      <section id="page-2" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-2" className="py-8 sm:py-12 bg-white dark:bg-slate-950">
         <Container>
           {/* Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -358,19 +376,20 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 2</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 3: MASTER LAYOUT PLAN — BLUEPRINT ═══════════ */}
-      <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
+      <ScrollReveal>
+        <section id="page-3" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -606,19 +625,20 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 3</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
-      {/* ═══════════ PAGE 4: ADMIN & ACADEMIC BLOCK — FLOOR PLAN ═══════════ */}
-      <section id="page-4" className="py-8 sm:py-12">
+      {/* ═══════════ PAGE 4: ADMIN & ACADEMIC BLOCK — BLUEPRINT ═══════════ */}
+      <ScrollReveal>
+        <section id="page-4" className="py-8 sm:py-12 bg-white dark:bg-slate-950">
         <Container>
           {/* Floor Plan Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -764,19 +784,20 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 4</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 5: LABORATORY COMPLEX — FLOOR PLAN ═══════════ */}
-      <section id="page-5" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
+      <ScrollReveal>
+        <section id="page-5" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Floor Plan Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -1042,19 +1063,20 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 5</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 6: HOSTEL BLOCK — BLUEPRINT ═══════════ */}
-      <section id="page-6" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-6" className="py-8 sm:py-12 bg-white dark:bg-slate-950">
         <Container>
           {/* Floor Plan Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -1173,19 +1195,20 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 6</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 7: INFRASTRUCTURE SPECS — BLUEPRINT ═══════════ */}
-      <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
+      <ScrollReveal>
+        <section id="page-7" className="border-y border-slate-100 bg-slate-50/50 py-8 dark:border-slate-800 dark:bg-slate-900/30 sm:py-12">
         <Container>
           {/* Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -1281,19 +1304,20 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 7</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ PAGE 8: 5-ACRE EXPANSION — BLUEPRINT ═══════════ */}
-      <section id="page-8" className="py-8 sm:py-12">
+      <ScrollReveal>
+        <section id="page-8" className="py-8 sm:py-12 bg-white dark:bg-slate-950">
         <Container>
           {/* Blueprint Container */}
-          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="overflow-hidden rounded-xl border-2 border-slate-300 bg-[#e8e8e8] shadow-2xl dark:border-slate-700 dark:bg-slate-900/95">
 
             {/* ── Top Header Bar (Navy) ── */}
             <div className="flex flex-col items-start justify-between gap-2 bg-[#0b2545] px-5 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
@@ -1494,16 +1518,17 @@ export default function SchoolServicesPage() {
             </div>
 
             {/* ── Bottom Footer ── */}
-            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-600 dark:bg-slate-800/40 sm:px-8">
+            <div className="flex items-center justify-between border-t-2 border-slate-300 bg-[#f0f0f0] px-5 py-2.5 text-[10px] dark:border-slate-700 dark:bg-slate-950 sm:px-8">
               <p className="font-medium text-slate-500 dark:text-slate-400">Promoted by Durga Dulari Enterprises, Bhopal, Madhya Pradesh | Confidential</p>
-              <p className="font-bold text-slate-500 dark:text-slate-400">Page 8</p>
             </div>
           </div>
         </Container>
       </section>
+      </ScrollReveal>
 
       {/* ═══════════ CTA SECTION ═══════════ */}
-      <section className="border-y border-slate-100 bg-gradient-to-br from-primary-navy via-slate-900 to-slate-950 py-20 text-center sm:py-24">
+      <ScrollReveal>
+        <section className="border-y border-slate-100 bg-gradient-to-br from-primary-navy via-slate-900 to-slate-950 py-20 text-center sm:py-24">
         <Container>
           <div className="relative">
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -1536,6 +1561,7 @@ export default function SchoolServicesPage() {
           </div>
         </Container>
       </section>
-    </main>
+      </ScrollReveal>
+    </div>
   );
 }

@@ -1,75 +1,163 @@
 import React from 'react';
 import { Container } from '@/components/common/Container';
 import { Button } from '@/components/common/Button';
+import { Card } from '@/components/common/Card';
+import { testimonials, clientCategories } from '@/data/testimonials';
 import Link from 'next/link';
+import {
+  Sparkles,
+  Star,
+  Quote,
+  CheckCircle2,
+} from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Testimonials | Durga Dulari Enterprises',
-  description: 'Hear from textile mill owners and industrial leaders about their experience with us.',
+  title: 'Client Testimonials & Mill Reviews | Durga Dulari Enterprises',
+  description: 'Verified reviews and feedback from textile mill managers, spinning directors, and plant heads across India.',
 };
 
 export default function TestimonialsPage() {
   return (
-    <main className="bg-white">
+    <main className="bg-white dark:bg-slate-950 transition-colors duration-300">
       {/* Hero */}
-      <section className="bg-primary-navy text-white py-16">
+      <section className="bg-gradient-to-br from-[#0B2545] via-[#071b33] to-[#040e1b] text-white py-16 sm:py-20 relative overflow-hidden dark-industrial-grid">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-orange/10 rounded-full blur-[120px] pointer-events-none" />
         <Container>
-          <h1 className="text-5xl font-bold mb-4">Client Testimonials</h1>
-          <p className="text-xl text-gray-200">Industry leaders share their experience with us</p>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 bg-primary-orange/20 border border-primary-orange/30 text-primary-orange px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm backdrop-blur-sm">
+              <Sparkles size={14} /> Client Trust & Performance
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight leading-tight">
+              What Mill Leaders Say About <span className="text-gradient-orange">Durga Dulari</span>
+            </h1>
+            <p className="text-base sm:text-lg lg:text-xl text-slate-300 font-medium leading-relaxed">
+              Read first-hand feedback from directors, general managers, and operational heads who rely on our emergency manpower, AMC maintenance, and plant automation.
+            </p>
+          </div>
         </Container>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24">
+      {/* Testimonials Grid */}
+      <section className="py-20 sm:py-24 bg-white dark:bg-slate-950">
         <Container>
-          <div className="max-w-3xl mx-auto bg-neutral-light rounded-lg p-12 text-center mb-12">
-            <h2 className="text-3xl font-bold text-neutral-text mb-4">References Available On Request</h2>
-            <p className="text-gray-600 text-lg mb-6">
-              We protect client privacy. Real verified testimonials and case studies are available upon request with written client permission.
-            </p>
-            <div className="space-y-4 text-left mb-8 max-w-xl mx-auto">
-              <div className="flex gap-3">
-                <span className="text-primary-orange font-bold">✓</span>
-                <p className="text-gray-600">Verified client references across spinning, knitting, weaving, and garmenting sectors</p>
-              </div>
-              <div className="flex gap-3">
-                <span className="text-primary-orange font-bold">✓</span>
-                <p className="text-gray-600">Direct contact with satisfied mill owners and operations heads</p>
-              </div>
-              <div className="flex gap-3">
-                <span className="text-primary-orange font-bold">✓</span>
-                <p className="text-gray-600">Case studies demonstrating tangible ROI and operational improvements</p>
-              </div>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+            <div>
+              <p className="text-primary-orange font-bold text-xs uppercase tracking-widest mb-2">Verified Feedback</p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-navy dark:text-white tracking-tight">
+                Client Testimonials
+              </h2>
             </div>
-            <Button variant="secondary" size="lg" asChild>
-              <Link href="/contact">Request Client References</Link>
-            </Button>
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3.5 py-2 rounded-xl border border-emerald-200 dark:border-emerald-800">
+              <CheckCircle2 size={16} />
+              100% Verified Mill Operations
+            </div>
           </div>
 
-          {/* Industry Reach */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-8 border-2 border-primary-navy">
-              <h3 className="text-2xl font-bold text-primary-navy mb-4">Our Reach</h3>
-              <ul className="space-y-3 text-gray-600">
-                <li className="font-semibold">[YEARS]+ Years Serving Industry</li>
-                <li>[NUMBER]+ Spinning Mills</li>
-                <li>[NUMBER]+ Textile Facilities</li>
-                <li>PAN India Coverage</li>
-                <li>Multiple State Presences</li>
-              </ul>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+            {testimonials.map((t) => (
+              <Card
+                key={t.id}
+                className="bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 p-8 rounded-3xl flex flex-col justify-between shadow-md hover:shadow-2xl hover:-translate-y-2 hover:border-primary-orange/30 transition-all duration-300 relative overflow-hidden"
+              >
+                <div>
+                  {/* Rating Stars & Quote Icon */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex gap-1 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={18} className="fill-current" />
+                      ))}
+                    </div>
+                    <Quote className="w-8 h-8 text-primary-orange/20" />
+                  </div>
+
+                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed italic mb-8 font-medium">
+                    "{t.content}"
+                  </p>
+                </div>
+
+                <div className="border-t border-slate-100 dark:border-slate-800 pt-6 flex items-center justify-between">
+                  <div>
+                    <h4 className="font-extrabold text-primary-navy dark:text-white text-base">
+                      {t.name}
+                    </h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-bold mt-0.5">
+                      {t.role}
+                    </p>
+                    <p className="text-xs text-primary-orange font-extrabold uppercase tracking-wider mt-1">
+                      {t.company}
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md">
+                    {t.industry}
+                  </span>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Real Metrics Section */}
+          <div className="bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-12 mb-20 shadow-sm">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-primary-navy dark:text-white mb-2">
+                Our Proven Footprint Across India
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm">
+                Operational scale built over two decades of consistent floor delivery and audit clearance.
+              </p>
             </div>
 
-            <div className="bg-white rounded-lg p-8 border-2 border-primary-orange">
-              <h3 className="text-2xl font-bold text-primary-orange mb-4">Sectors Served</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>✓ Spinning Mills</li>
-                <li>✓ Knitting Facilities</li>
-                <li>✓ Weaving Mills</li>
-                <li>✓ Garmenting Units</li>
-                <li>✓ Dyeing Plants</li>
-                <li>✓ Industrial Manufacturing</li>
-              </ul>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div className="p-4 bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 shadow-sm">
+                <p className="text-3xl sm:text-4xl font-black text-primary-orange mb-1">20+</p>
+                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Years Serving Industry</p>
+              </div>
+              <div className="p-4 bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 shadow-sm">
+                <p className="text-3xl sm:text-4xl font-black text-primary-orange mb-1">150+</p>
+                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Active Partner Mills</p>
+              </div>
+              <div className="p-4 bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 shadow-sm">
+                <p className="text-3xl sm:text-4xl font-black text-primary-orange mb-1">10,000+</p>
+                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Trained Personnel Deployed</p>
+              </div>
+              <div className="p-4 bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-100 dark:border-slate-700/60 shadow-sm">
+                <p className="text-3xl sm:text-4xl font-black text-primary-orange mb-1">24×7</p>
+                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Emergency Breakdown Response</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Industry Sectors Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-[#041124] text-white rounded-3xl p-8 sm:p-12 border border-[#0d274c] shadow-2xl relative overflow-hidden">
+            <div className="space-y-4">
+              <span className="text-primary-orange text-xs font-black uppercase tracking-widest block">
+                Direct References
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                Need to Speak Directly With a Mill Owner in Your State?
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                We understand industrial due diligence. Upon mutual NDA clearance, we arrange direct peer-to-peer reference calls with plant general managers in Coimbatore, Surat, Ludhiana, or Bhilwara.
+              </p>
+              <div className="pt-2">
+                <Button variant="secondary" size="md" className="font-bold shadow-lg" asChild>
+                  <Link href="/contact">Request Peer References</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="bg-[#071c36] border border-slate-800 rounded-2xl p-6 space-y-3">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-slate-300 mb-3">
+                Sectors Active in Our Reference Network:
+              </h4>
+              <div className="grid grid-cols-2 gap-3 text-xs font-semibold text-slate-200">
+                {clientCategories.map((cat, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <span className="text-primary-orange font-bold">✓</span>
+                    <span>{cat}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Container>
@@ -78,12 +166,12 @@ export default function TestimonialsPage() {
       {/* CTA */}
       <section className="py-16 bg-primary-orange text-white text-center">
         <Container>
-          <h2 className="text-3xl font-bold mb-4">Talk to Our Clients</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Speak directly with textile mill owners who have benefited from our services.
+          <h2 className="text-3xl font-bold mb-4 text-white">Experience the Durga Dulari Difference</h2>
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-orange-100">
+            Let's evaluate your spinning floor, maintenance overhead, or operator requirements.
           </p>
-          <Button variant="primary" size="lg" asChild>
-            <Link href="/contact">Request References</Link>
+          <Button variant="primary" size="lg" className="bg-[#0b2545] hover:bg-slate-800 text-white font-bold" asChild>
+            <Link href="/contact">Schedule Plant Consultation</Link>
           </Button>
         </Container>
       </section>

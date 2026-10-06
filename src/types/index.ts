@@ -47,6 +47,11 @@ export interface CaseStudy {
   results: string;
   industry: string;
   services: string[];
+  clientName?: string;
+  location?: string;
+  establishedYear?: string;
+  keyMetric?: string;
+  metrics?: string[];
 }
 
 export interface BlogResource {
@@ -102,3 +107,21 @@ export interface ChatbotLead {
   urgency: 'immediate' | 'month' | 'exploring';
   timestamp: Date;
 }
+
+export interface ActivityCategory {
+  id: string;
+  label: string;
+  description: string;
+}
+
+export interface Activity {
+  id: string;
+  slug: string;
+  title: string;
+  category: 'erection-maintenance' | 'audits-efficiency' | 'cost-savings' | 'product-establishment' | 'consultation-manpower';
+  categoryLabel: string;
+  shortDescription: string;
+  icon: string;
+  deliverables?: string[];
+}
+

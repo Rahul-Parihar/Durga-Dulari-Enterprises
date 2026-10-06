@@ -25,6 +25,7 @@ export const mainNavigation: NavLink[] = [
       { label: 'Textile Spares Procurement', href: '/services/textile-spares-procurement' },
       { label: 'Sick Mill Revival', href: '/services/sick-mill-revival' },
       { label: 'Projects Division', href: '/services/projects-division' },
+      { label: '21 Specialized Activities', href: '/services#operational-activities' },
     ],
   },
   {
@@ -65,6 +66,7 @@ export const footerLinks = {
     { label: 'Utility Operations', href: '/services/utility-operations' },
     { label: 'Plant Installation', href: '/services/plant-installation' },
     { label: 'Consultancy', href: '/services/textile-consultancy' },
+    { label: '21 Specialized Activities', href: '/services#operational-activities' },
   ],
   company: [
     { label: 'About Us', href: '/about' },

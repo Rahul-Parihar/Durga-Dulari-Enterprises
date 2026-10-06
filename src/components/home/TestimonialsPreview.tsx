@@ -40,7 +40,7 @@ export function TestimonialsPreview() {
                 </p>
               </div>
 
-              <div className="border-t border-slate-100 dark:border-slate-850 pt-6 flex items-center justify-between">
+              <div className="border-t border-slate-100 dark:border-slate-800 pt-6 flex items-center justify-between">
                 <div>
                   <h4 className="font-extrabold text-primary-navy dark:text-white text-sm md:text-base">{t.name}</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-bold mt-0.5">{t.role}</p>

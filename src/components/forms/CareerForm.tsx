@@ -69,7 +69,15 @@ export function CareerForm({ onSuccess }: CareerFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    let finalVal = value;
+    if (name === 'phone') {
+      let cleaned = value.replace(/\D/g, '');
+      if (cleaned.length === 12 && cleaned.startsWith('91')) {
+        cleaned = cleaned.slice(2);
+      }
+      finalVal = cleaned.slice(0, 10);
+    }
+    setFormData((prev) => ({ ...prev, [name]: finalVal }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
@@ -168,12 +176,14 @@ export function CareerForm({ onSuccess }: CareerFormProps) {
         <Input
           label="Phone Number"
           type="tel"
+          inputMode="numeric"
+          maxLength={10}
           name="phone"
           value={formData.phone}
           onChange={handleChange}
           error={errors.phone}
           required
-          placeholder="10-digit number"
+          placeholder="10-digit mobile number"
         />
 
         <Select

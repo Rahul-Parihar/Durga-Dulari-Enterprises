@@ -7,7 +7,7 @@ import { Header } from '@/components/layout/Header';
 export function SiteHeader() {
   const bannerRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
-  
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [bannerHeight, setBannerHeight] = useState(0);
   const [navbarHeight, setNavbarHeight] = useState(0);
@@ -58,11 +58,10 @@ export function SiteHeader() {
     <>
       <div className="fixed left-0 right-0 top-0 z-50">
         <div
-          className={`grid transition-[grid-template-rows,opacity,transform] duration-300 ease-out ${
-            shouldHideEmergencyBanner
+          className={`grid transition-[grid-template-rows,opacity,transform] duration-300 ease-out ${shouldHideEmergencyBanner
               ? 'grid-rows-[0fr] opacity-0 -translate-y-2'
               : 'grid-rows-[1fr] opacity-100 translate-y-0'
-          }`}
+            }`}
         >
           <div className="min-h-0 overflow-hidden">
             <div ref={bannerRef}>

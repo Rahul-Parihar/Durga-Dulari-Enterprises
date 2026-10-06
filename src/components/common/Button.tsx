@@ -13,8 +13,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const variantClasses = {
   primary: 'bg-primary-navy hover:bg-slate-800 text-white shadow-md hover:shadow-lg hover:shadow-slate-900/10 active:scale-[0.98]',
   secondary: 'bg-primary-orange hover:bg-orange-600 text-white shadow-md hover:shadow-lg hover:shadow-orange-500/10 active:scale-[0.98]',
-  outline: 'border-2 border-primary-navy text-primary-navy hover:bg-primary-navy hover:text-white active:scale-[0.98]',
-  ghost: 'text-primary-navy hover:bg-neutral-light active:scale-[0.98]',
+  outline: 'border-2 border-primary-navy text-primary-navy hover:bg-primary-navy hover:text-white dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:border-slate-500 active:scale-[0.98]',
+  ghost: 'text-primary-navy hover:bg-neutral-light dark:text-slate-200 dark:hover:bg-slate-800 active:scale-[0.98]',
 };
 
 const sizeClasses = {

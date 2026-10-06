@@ -5,6 +5,7 @@ import { Card } from '@/components/common/Card';
 import { DynamicIcon } from '@/components/common/DynamicIcon';
 import { services } from '@/data/services';
 import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { ActivitiesSection } from '@/components/services/ActivitiesSection';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,18 +15,21 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="bg-white dark:bg-slate-950">
+    <main className="bg-white dark:bg-slate-950 transition-colors duration-300">
       {/* Hero */}
-      <section className="bg-white dark:bg-slate-950 py-16 sm:py-20 border-b border-slate-100 dark:border-slate-800">
+      <section className="bg-gradient-to-br from-[#0B2545] via-[#071b33] to-[#040e1b] text-white py-16 sm:py-20 relative overflow-hidden dark-industrial-grid">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-orange/10 rounded-full blur-[120px] pointer-events-none" />
         <Container>
           <div className="max-w-3xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-primary-orange/10 px-4 py-2 text-sm font-semibold text-primary-orange ring-1 ring-primary-orange/20">
+            <span className="inline-flex items-center gap-2 bg-primary-orange/20 border border-primary-orange/30 text-primary-orange px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm backdrop-blur-sm">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
-              Industrial support portfolio
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-5 leading-tight text-slate-950 dark:text-white">Our Services</h1>
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-              12 comprehensive solutions for textile mills and industrial facilities, from manpower deployment to maintenance, automation, consultancy, and turnkey projects.
+              Industrial Support Portfolio
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold mb-5 leading-tight text-white">
+              Our <span className="text-gradient-orange">Services</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-300 leading-relaxed font-medium">
+              12 comprehensive solutions for textile mills and industrial facilities, from emergency manpower deployment to preventive maintenance, automation, and turnkey projects.
             </p>
           </div>
         </Container>
@@ -67,6 +71,9 @@ export default function ServicesPage() {
           </div>
         </Container>
       </section>
+
+      {/* 21 Specialized Industrial Activities */}
+      <ActivitiesSection />
 
       {/* CTA */}
       <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/60 text-center border-y border-slate-100 dark:border-slate-800">

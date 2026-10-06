@@ -31,7 +31,7 @@ export function MobileMenu({ onClose }: MobileMenuProps) {
   if (!mounted) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] lg:hidden" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-[100] xl:hidden" role="dialog" aria-modal="true">
       <button
         type="button"
         className="absolute inset-0 z-0 bg-black/45"

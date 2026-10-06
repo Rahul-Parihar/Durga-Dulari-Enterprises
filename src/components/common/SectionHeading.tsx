@@ -20,11 +20,11 @@ export function SectionHeading({
           {subtitle}
         </p>
       )}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-text mb-4 leading-tight break-words text-balance">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 dark:text-white mb-4 leading-tight break-words text-balance">
         {title}
       </h2>
       {description && (
-        <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed break-words">
+        <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed break-words">
           {description}
         </p>
       )}

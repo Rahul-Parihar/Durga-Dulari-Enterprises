@@ -65,7 +65,15 @@ export function VendorForm({ onSuccess }: VendorFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, type } = e.target;
-    const value = type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value;
+    let value = type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value;
+
+    if (name === 'phone' && typeof value === 'string') {
+      let cleaned = value.replace(/\D/g, '');
+      if (cleaned.length === 12 && cleaned.startsWith('91')) {
+        cleaned = cleaned.slice(2);
+      }
+      value = cleaned.slice(0, 10);
+    }
 
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
@@ -182,12 +190,14 @@ export function VendorForm({ onSuccess }: VendorFormProps) {
         <Input
           label="Phone Number"
           type="tel"
+          inputMode="numeric"
+          maxLength={10}
           name="phone"
           value={formData.phone}
           onChange={handleChange}
           error={errors.phone}
           required
-          placeholder="+91-XXXXXXXXXX"
+          placeholder="10-digit mobile number"
         />
 
         <Input

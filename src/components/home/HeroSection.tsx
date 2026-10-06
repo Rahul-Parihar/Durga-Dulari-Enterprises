@@ -90,7 +90,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative text-white pt-20 pb-12 overflow-hidden bg-cover bg-center"
+      className="relative text-white pt-14 pb-12 overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: "url('/images/hero-spinning-mill.png')" }}
     >
       {/* Dark overlay with horizontal gradient to fade out towards the right */}
@@ -346,7 +346,7 @@ export function HeroSection() {
                   20+ Years of Textile Industry Expertise
                 </span>
 
-                <ul className="mt-3.5 space-y-2 text-[9px] sm:text-[10px] lg:text-[11px] font-bold text-slate-350">
+                <ul className="mt-3.5 space-y-2 text-[9px] sm:text-[10px] lg:text-[11px] font-bold text-slate-300">
                   {[
                     'PV Dyed Yarn & Compact Siro Expert',
                     'Plant Maintenance & Operations Specialist',

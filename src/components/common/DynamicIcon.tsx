@@ -22,6 +22,16 @@ import {
   MapPin,
   Award,
   Settings,
+  Activity,
+  Gauge,
+  Layers,
+  Search,
+  FileText,
+  Sparkles,
+  BatteryCharging,
+  Leaf,
+  Briefcase,
+  Target,
   LucideProps,
 } from 'lucide-react';
 
@@ -48,6 +58,17 @@ const iconMap: Record<string, React.ComponentType<LucideProps>> = {
   TrendingUp,
   MapPin,
   Award,
+  Settings,
+  Activity,
+  Gauge,
+  Layers,
+  Search,
+  FileText,
+  Sparkles,
+  BatteryCharging,
+  Leaf,
+  Briefcase,
+  Target,
 };
 
 interface DynamicIconProps {

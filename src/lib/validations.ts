@@ -6,8 +6,14 @@ export const validateEmail = (email: string): boolean => {
 export const validateIndianPhone = (phone: string): boolean => {
   // Remove all non-digit characters
   const cleaned = phone.replace(/\D/g, '');
-  // Indian phone numbers should be 10 digits or 12 with 91 prefix
-  return cleaned.length === 10 || (cleaned.length === 12 && cleaned.startsWith('91'));
+  // Indian phone numbers should be 10 digits starting with 6-9, or 12 digits with 91 prefix
+  if (cleaned.length === 10) {
+    return /^[6-9]\d{9}$/.test(cleaned);
+  }
+  if (cleaned.length === 12 && cleaned.startsWith('91')) {
+    return /^[6-9]\d{9}$/.test(cleaned.slice(2));
+  }
+  return false;
 };
 
 export const validateRequired = (value: string): boolean => {

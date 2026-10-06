@@ -20,6 +20,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   background-color: var(--color-neutral-white);
   color: var(--color-neutral-text);
@@ -33,68 +43,17 @@ body {
   color: #e2e8f0;
 }
 
-/* Dark-mode compatibility for pages that were built before explicit dark classes. */
-.dark main.bg-white,
-.dark main .bg-white {
-  background-color: #020617;
+/* Case studies and landing page gradient backgrounds with full dark mode support */
+.case-studies-bg {
+  background: radial-gradient(circle at top, rgba(249, 115, 22, 0.15), transparent 26%),
+              linear-gradient(180deg, #f8fafc 0%, #fff7ed 32%, #f8fafc 100%);
+  background-color: #f8fafc;
 }
 
-.dark main .bg-neutral-light,
-.dark main .bg-slate-50,
-.dark main .bg-gray-50,
-.dark main .bg-blue-50,
-.dark main .bg-green-50,
-.dark main .bg-green-50\/50 {
-  background-color: #0f172a;
-}
-
-.dark main .bg-blue-50,
-.dark main .bg-green-50,
-.dark main .bg-green-50\/50 {
-  border-color: #1e293b;
-}
-
-.dark main .text-neutral-text,
-.dark main .text-gray-700,
-.dark main .text-slate-700,
-.dark main .text-slate-650,
-.dark main .text-slate-655 {
-  color: #e2e8f0;
-}
-
-.dark main .text-gray-600,
-.dark main .text-slate-600,
-.dark main .text-gray-500,
-.dark main .text-slate-500 {
-  color: #cbd5e1;
-}
-
-.dark main .text-gray-200,
-.dark main .text-slate-300 {
-  color: #cbd5e1;
-}
-
-.dark main .border-gray-300,
-.dark main .border-gray-200,
-.dark main .border-slate-100,
-.dark main .border-slate-200,
-.dark main .border-blue-200,
-.dark main .border-green-100,
-.dark main .border-green-200 {
-  border-color: #1e293b;
-}
-
-.dark main input,
-.dark main select,
-.dark main textarea {
-  background-color: #0f172a;
-  border-color: #334155;
-  color: #e2e8f0;
-}
-
-.dark main input::placeholder,
-.dark main textarea::placeholder {
-  color: #94a3b8;
+.dark .case-studies-bg {
+  background: radial-gradient(circle at top, rgba(249, 115, 22, 0.10), transparent 26%),
+              linear-gradient(180deg, #020617 0%, #07101e 35%, #020617 100%);
+  background-color: #020617 !important;
 }
 
 h1,

@@ -21,19 +21,20 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className={clsx(fullWidth && 'w-full')}>
         {label && (
-          <label className="block text-sm font-medium text-neutral-text mb-2">
+          <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
             {label}
-            {props.required && <span className="text-red-500">*</span>}
+            {props.required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
         <div className="relative">
           <select
             ref={ref}
             className={clsx(
-              'w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg font-body appearance-none',
-              'focus:outline-none focus:border-primary-navy focus:ring-2 focus:ring-blue-100',
-              'transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed bg-white cursor-pointer',
-              error && 'border-red-500 focus:ring-red-100',
+              'w-full px-4 py-3 pr-10 border border-slate-200 dark:border-slate-700/80 rounded-xl font-body appearance-none',
+              'bg-white dark:bg-slate-900/80 text-slate-900 dark:text-slate-100',
+              'focus:outline-none focus:border-primary-orange focus:ring-2 focus:ring-orange-500/20',
+              'transition-all duration-200 disabled:bg-slate-100 dark:disabled:bg-slate-800 disabled:cursor-not-allowed cursor-pointer shadow-sm',
+              error && 'border-red-500 dark:border-red-500 focus:ring-red-500/20 focus:border-red-500',
               className,
             )}
             {...props}
