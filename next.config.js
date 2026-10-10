@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-<<<<<<< HEAD
   output: 'standalone',
-=======
   reactStrictMode: true,
-  swcMinify: true,
   compress: true,
->>>>>>> origin/frontend
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -18,4 +14,3 @@ const nextConfig = {
   },
 };
 module.exports = nextConfig;
-
