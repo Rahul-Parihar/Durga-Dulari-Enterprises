@@ -21,8 +21,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['Outfit', 'var(--font-poppins)', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ['var(--font-outfit)', 'Outfit', 'sans-serif'],
+        body: ['var(--font-inter)', 'Inter', 'sans-serif'],
       },
       backgroundImage: {
         'grid-pattern': 'linear-gradient(to right, #E7EEF5 1px, transparent 1px), linear-gradient(to bottom, #E7EEF5 1px, transparent 1px)',

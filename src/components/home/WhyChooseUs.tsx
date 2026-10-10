@@ -40,7 +40,7 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <SectionWrapper bgColor="light" className="industrial-grid">
+    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid py-10 sm:py-12">
       <Container>
         <SectionHeading
           subtitle="Why Textile Mills Trust Us"

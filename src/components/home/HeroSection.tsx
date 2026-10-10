@@ -18,11 +18,14 @@ import {
   Clock,
   ShieldCheck,
   Globe,
-  ShieldAlert,
   Gauge,
   Building2,
   Layers,
-  X
+  X,
+  Package,
+  Shirt,
+  Droplets,
+  Grid3x3,
 } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
 
@@ -46,52 +49,62 @@ export function HeroSection() {
     { value: '30%', change: 'up', desc: 'Faster Response & Support', icon: <PhoneCall size={16} className="text-emerald-400" /> },
   ];
 
+  const industriesList = [
+    { title: 'Spinning Mills', href: '/industries/spinning', icon: <Factory size={18} /> },
+    { title: 'Knitting Mills', href: '/industries/knitting', icon: <Package size={18} /> },
+    { title: 'Garmenting Units', href: '/industries/garmenting', icon: <Shirt size={18} /> },
+    { title: 'Fibre Dyeing', href: '/industries/fibre-dyeing', icon: <Droplets size={18} /> },
+    { title: 'Weaving Mills', href: '/industries/weaving', icon: <Grid3x3 size={18} /> },
+    { title: 'Industrial Mfg', href: '/industries/industrial-manufacturing', icon: <Wrench size={18} /> },
+  ];
+
   const slantedPanels = [
     {
       title: 'Machine Erection',
       subtitle: '& Installation',
-      img: '/images/hero-spinning-mill.png',
+      img: '/images/hero-spinning-mill.webp',
       icon: <Factory size={16} />
     },
     {
       title: 'Mechanical',
       subtitle: 'Maintenance',
-      img: '/images/hero-maintenance.png',
+      img: '/images/hero-maintenance.webp',
       icon: <Wrench size={16} />
     },
     {
       title: 'Electrical &',
       subtitle: 'Electronics Repair',
-      img: '/images/hero-electronics.png',
+      img: '/images/hero-electronics.webp',
       icon: <Zap size={16} />
     },
     {
       title: 'Utility Operator',
       subtitle: 'Reading & Monitoring',
-      img: '/images/hero-spinning-operator.png',
+      img: '/images/hero-spinning-operator.webp',
       icon: <Gauge size={16} />
     },
     {
       title: 'Spinning',
       subtitle: 'Operators',
-      img: '/images/hero-spinning-operator.png',
+      img: '/images/hero-spinning-operator.webp',
       icon: <Users size={16} />
     }
   ];
 
   const trustedMills = [
-    { name: 'KPR MILL LIMITED', icon: <Factory size={14} className="text-primary-orange group-hover:scale-110 transition-transform duration-300" /> },
-    { name: 'VARDHMAN TEXTILES', icon: <Layers size={14} className="text-sky-400 group-hover:scale-110 transition-transform duration-300" /> },
-    { name: 'GOKALDAS EXPORTS', icon: <Globe size={14} className="text-emerald-400 group-hover:scale-110 transition-transform duration-300" /> },
-    { name: 'RKG TEXTILE MILLS', icon: <Building2 size={14} className="text-primary-orange group-hover:scale-110 transition-transform duration-300" /> },
-    { name: 'SURYALAXMI GROUP', icon: <Award size={14} className="text-amber-400 group-hover:scale-110 transition-transform duration-300" /> },
-    { name: 'NITIN SPINNERS LTD.', icon: <Cpu size={14} className="text-sky-400 group-hover:scale-110 transition-transform duration-300" /> }
+    { name: 'VARDHMAN TEXTILE LIMITED', icon: <Layers size={14} className="text-sky-400 group-hover:scale-110 transition-transform duration-300" /> },
+    { name: 'TRIDENT INDIA LIMITED', icon: <Factory size={14} className="text-primary-orange group-hover:scale-110 transition-transform duration-300" /> },
+    { name: 'WELSPUN LIVING', icon: <Building2 size={14} className="text-emerald-400 group-hover:scale-110 transition-transform duration-300" /> },
+    { name: 'NAHAR INDUSTRIES', icon: <Award size={14} className="text-amber-400 group-hover:scale-110 transition-transform duration-300" /> },
+    { name: 'ARVIND LIMITED', icon: <Globe size={14} className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" /> },
+    { name: 'SITARAM SPINNERS', icon: <Cpu size={14} className="text-indigo-400 group-hover:scale-110 transition-transform duration-300" /> },
+    { name: 'RELIANCE INDUSTRIES', icon: <ShieldCheck size={14} className="text-rose-400 group-hover:scale-110 transition-transform duration-300" /> }
   ];
 
   return (
     <section
       className="relative text-white pt-14 pb-12 overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/hero-spinning-mill.png')" }}
+      style={{ backgroundImage: "url('/images/hero-spinning-mill.webp')" }}
     >
       {/* Dark overlay with horizontal gradient to fade out towards the right */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#020813] via-[#020813]/95 to-[#020813]/60 z-0 pointer-events-none" />
@@ -184,7 +197,7 @@ export function HeroSection() {
             {/* 4 Core Stats Row */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80">
               {[
-                { label: 'Skilled Professionals', val: '250+', icon: <Users size={18} /> },
+                { label: 'Skilled Professionals', val: '500+', icon: <Users size={18} /> },
                 { label: 'Years of Experience', val: '20+', icon: <Award size={18} /> },
                 { label: 'Emergency Support', val: '24x7', icon: <PhoneCall size={18} className="animate-pulse" /> },
                 { label: 'Service Network', val: 'PAN India', icon: <MapPin size={18} /> },
@@ -257,6 +270,41 @@ export function HeroSection() {
               </div>
             </div>
 
+            {/* Industries We Serve Box */}
+            <div className="bg-[#041124]/80 backdrop-blur-md border border-[#0d274c] rounded-2xl p-4 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <div className="h-[1px] w-8 bg-slate-800" />
+                <Link
+                  href="/industries"
+                  className="text-emerald-400 hover:text-emerald-300 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-1.5"
+                  title="View all industries"
+                >
+                  Industries We Serve
+                </Link>
+                <div className="h-[1px] w-8 bg-slate-800" />
+              </div>
+
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 justify-items-center text-center">
+                {industriesList.map((industry, index) => (
+                  <Link
+                    key={index}
+                    href={industry.href}
+                    className="flex flex-col items-center group cursor-pointer rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400/80 focus:ring-offset-2 focus:ring-offset-[#041124]"
+                    aria-label={`Open ${industry.title} details page`}
+                  >
+                    <div className="w-9 h-9 rounded-full bg-[#081b33] border border-[#0d2c52] flex items-center justify-center text-slate-300 group-hover:text-emerald-400 group-hover:bg-emerald-500/20 group-hover:border-emerald-500/50 group-hover:scale-110 transition-all duration-300 shadow-sm">
+                      {industry.icon}
+                    </div>
+                    <span className="text-slate-400 group-hover:text-white text-[8px] sm:text-[9px] font-bold mt-1.5 leading-tight max-w-[85px] transition-colors duration-200">
+                      {industry.title.toUpperCase()}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
           </div>
 
           {/* Right Column (Futuristic Slanted Collage and Helpline Card) */}
@@ -278,6 +326,10 @@ export function HeroSection() {
                       <img
                         src={panel.img}
                         alt={panel.title}
+                        width={400}
+                        height={120}
+                        loading="eager"
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
@@ -323,13 +375,17 @@ export function HeroSection() {
               {/* Photo on the Left */}
               <button
                 type="button"
-                onClick={() => setPreviewImage({ src: '/images/founder.png', alt: 'Vijay Kumar Ojha' })}
+                onClick={() => setPreviewImage({ src: '/images/founder.webp', alt: 'Vijay Kumar Ojha' })}
                 className="w-[35%] shrink-0 select-none flex items-stretch py-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-orange/80 focus:ring-offset-2 focus:ring-offset-[#020813] rounded-xl"
                 aria-label="View Vijay Kumar Ojha image"
               >
                 <img
-                  src="/images/founder.png"
+                  src="/images/founder-thumb.webp"
                   alt="Vijay Kumar Ojha"
+                  width={336}
+                  height={336}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top rounded-xl border border-white/10 shadow-sm transition-transform duration-300 hover:scale-[1.02]"
                 />
               </button>
@@ -382,50 +438,21 @@ export function HeroSection() {
             <div className="flex-1 h-[1px] bg-slate-800/60" />
           </div>
 
-          {/* Grid of Logos & Pillars */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
-
-            {/* Logos Grid Column (7 cols) */}
-            <div className="lg:col-span-7">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-[10px] sm:text-xs font-black tracking-wider text-slate-300">
-                {trustedMills.map((mill, index) => (
-                  <div
-                    key={index}
-                    className="group flex items-center gap-2 bg-[#041124]/40 border border-slate-800/40 hover:border-slate-800 hover:bg-[#03152d]/60 rounded-2xl py-2.5 px-3 hover:text-white transition-all duration-300 cursor-default shadow-sm hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
-                  >
-                    <div className="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800/60 group-hover:border-slate-700 shrink-0">
-                      {mill.icon}
-                    </div>
-                    <span className="truncate">{mill.name}</span>
-                  </div>
-                ))}
+          {/* 7 Trusted Mill Brands in Requested Sequence */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-[10px] sm:text-xs font-black tracking-wider text-slate-300">
+            {trustedMills.map((mill, index) => (
+              <div
+                key={index}
+                className="group flex items-center gap-2 bg-[#041124]/50 border border-slate-800/60 hover:border-primary-orange/50 hover:bg-[#03152d]/90 rounded-2xl py-2 px-3 sm:py-2.5 sm:px-3.5 hover:text-white transition-all duration-300 cursor-default shadow-sm hover:shadow-[0_4px_16px_rgba(244,121,31,0.15)]"
+              >
+                <div className="bg-slate-900/80 p-1.5 rounded-lg border border-slate-800/60 group-hover:border-primary-orange/30 shrink-0">
+                  {mill.icon}
+                </div>
+                <span className="whitespace-nowrap text-slate-200 group-hover:text-white">
+                  {mill.name}
+                </span>
               </div>
-            </div>
-
-            {/* Core Pillars Column (5 cols) */}
-            <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-4 lg:pt-0 lg:pl-5">
-              <div className="grid grid-cols-2 gap-2.5">
-                {[
-                  { label: 'PAN India Operations', icon: <Globe size={18} className="text-sky-400" /> },
-                  { label: 'Certified & Compliant', icon: <ShieldCheck size={18} className="text-emerald-400" /> },
-                  { label: 'Safe & Trained Workforce', icon: <ShieldAlert size={18} className="text-red-400" /> },
-                  { label: 'Advanced Tools & Tech', icon: <Cpu size={18} className="text-amber-400" /> },
-                ].map((pillar, index) => (
-                  <div
-                    key={index}
-                    className="group flex items-center gap-2.5 p-2.5 bg-[#041124]/20 border border-slate-900/60 rounded-2xl hover:border-slate-800/80 hover:bg-[#03152d]/40 transition-all duration-300 text-slate-400 hover:text-white"
-                  >
-                    <div className="bg-slate-900/50 p-2 rounded-xl border border-slate-800/60 shrink-0">
-                      {pillar.icon}
-                    </div>
-                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider leading-tight">
-                      {pillar.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
 

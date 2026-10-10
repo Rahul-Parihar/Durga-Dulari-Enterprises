@@ -5,6 +5,7 @@ interface SectionHeadingProps {
   subtitle?: string;
   description?: string;
   centered?: boolean;
+  className?: string;
 }
 
 export function SectionHeading({
@@ -12,9 +13,10 @@ export function SectionHeading({
   subtitle,
   description,
   centered = true,
+  className,
 }: SectionHeadingProps) {
   return (
-    <div className={`mb-12 ${centered ? 'text-center' : ''}`}>
+    <div className={className || `mb-8 sm:mb-10 ${centered ? 'text-center' : ''}`}>
       {subtitle && (
         <p className="text-primary-orange font-semibold text-sm sm:text-base md:text-lg mb-2 break-words">
           {subtitle}

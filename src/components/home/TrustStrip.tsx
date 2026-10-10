@@ -6,7 +6,7 @@ export function TrustStrip() {
   const stats = [
     {
       icon: <Award className="w-7 h-7 text-primary-orange" />,
-      value: '15+',
+      value: '20+',
       label: 'Years of Industry Experience',
     },
     {

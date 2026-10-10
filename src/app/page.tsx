@@ -4,11 +4,7 @@ import { ScrollReveal } from '@/components/common/ScrollReveal';
 import { HeroSection } from '@/components/home/HeroSection';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { ServiceSnapshot } from '@/components/home/ServiceSnapshot';
-import { IndustriesPreview } from '@/components/home/IndustriesPreview';
-import { ProcessSection } from '@/components/home/ProcessSection';
 import { CaseStudiesPreview } from '@/components/home/CaseStudiesPreview';
-import { TrainingPreview } from '@/components/home/TrainingPreview';
-import { ResourcesPreview } from '@/components/home/ResourcesPreview';
 import { TestimonialsPreview } from '@/components/home/TestimonialsPreview';
 import { FinalCTA } from '@/components/home/FinalCTA';
 import { ActivitiesSection } from '@/components/services/ActivitiesSection';
@@ -38,23 +34,7 @@ export default function HomePage() {
       </ScrollReveal>
       
       <ScrollReveal>
-        <IndustriesPreview />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <ProcessSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
         <CaseStudiesPreview />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <TrainingPreview />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <ResourcesPreview />
       </ScrollReveal>
       
       <ScrollReveal>

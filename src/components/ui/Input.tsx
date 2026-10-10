@@ -1,5 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -11,7 +11,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, hint, fullWidth = true, className, ...props }, ref) => {
     return (
-      <div className={clsx(fullWidth && 'w-full')}>
+      <div className={cn(fullWidth && 'w-full')}>
         {label && (
           <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
             {label}
@@ -20,7 +20,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         <input
           ref={ref}
-          className={clsx(
+          className={cn(
             'w-full px-4 py-3 border border-slate-200 dark:border-slate-700/80 rounded-xl font-body',
             'bg-white dark:bg-slate-900/80 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500',
             'focus:outline-none focus:border-primary-orange focus:ring-2 focus:ring-orange-500/20',

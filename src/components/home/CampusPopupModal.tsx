@@ -46,11 +46,11 @@ export function CampusPopupModal() {
 
         <Link href="/school-services" onClick={() => setIsOpen(false)} className="group block relative cursor-pointer overflow-hidden aspect-[4/3] w-full">
           <Image
-            src="/images/DDTSDI_Campus_image.jpeg"
+            src="/images/DDTSDI_Campus_image.webp"
             alt="CSR donation poster for skills and education"
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
-            priority
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent" />
           <div className="absolute left-3 top-3 rounded-md bg-primary-orange px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest">

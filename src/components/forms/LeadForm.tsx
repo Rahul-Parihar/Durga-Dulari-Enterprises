@@ -122,23 +122,25 @@ function FormDropdown({
 
   return (
     <div ref={dropdownRef} className="relative w-full">
-      <label className="block text-sm font-medium text-neutral-text mb-2">
-        {label}<span className="text-red-500">*</span>
+      <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+        {label}<span className="text-red-500 ml-1">*</span>
       </label>
       <button
         type="button"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        className={`relative w-full px-4 py-3 pr-10 border rounded-lg font-body bg-white text-left transition-all duration-200 focus:outline-none focus:border-primary-navy focus:ring-2 ${
-          error ? 'border-red-500 focus:ring-red-100' : 'border-gray-300 focus:ring-blue-100'
+        className={`relative w-full px-4 py-3 pr-10 border rounded-xl font-body text-left transition-all duration-200 focus:outline-none focus:border-primary-orange focus:ring-2 focus:ring-orange-500/20 shadow-sm ${
+          error
+            ? 'border-red-500 dark:border-red-500 bg-white dark:bg-slate-900/80 focus:ring-red-100 dark:focus:ring-red-950'
+            : 'border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-900/80 text-slate-900 dark:text-slate-100'
         }`}
         onClick={() => setIsOpen((current) => !current)}
       >
-        <span className={selectedOption?.value ? 'text-gray-900' : 'text-gray-500'}>
+        <span className={selectedOption?.value ? 'text-slate-900 dark:text-slate-100 font-medium' : 'text-slate-400 dark:text-slate-500 font-normal'}>
           {selectedOption?.label || placeholder}
         </span>
         <ChevronDown
-          className={`absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           size={20}
         />
       </button>
@@ -146,19 +148,21 @@ function FormDropdown({
       {isOpen && (
         <div
           data-lenis-prevent-wheel
-          className="absolute left-0 right-0 top-full z-50 mt-2 max-h-64 overflow-y-auto overscroll-contain rounded-lg border border-gray-200 bg-white shadow-xl"
+          className="absolute left-0 right-0 top-full z-50 mt-2 max-h-64 overflow-y-auto overscroll-contain rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl backdrop-blur-xl"
           onWheel={handleDropdownWheel}
           onWheelCapture={(event) => event.stopPropagation()}
         >
-          <div role="listbox" className="py-1">
+          <div role="listbox" className="py-1.5 p-1">
             {options.map((option) => (
               <button
                 key={option.value}
                 type="button"
                 role="option"
                 aria-selected={option.value === value}
-                className={`flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-orange-50 ${
-                  option.value === value ? 'bg-orange-50 text-primary-orange font-semibold' : 'text-gray-700'
+                className={`flex w-full items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left text-sm transition-colors ${
+                  option.value === value
+                    ? 'bg-orange-50 dark:bg-primary-orange/20 text-primary-orange dark:text-primary-orange font-bold'
+                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium'
                 }`}
                 onClick={() => {
                   onChange(option.value);
@@ -303,15 +307,15 @@ export function LeadForm({
 
   if (submitted) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-8 md:p-10 text-center shadow-sm">
-        <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80 rounded-2xl p-8 md:p-10 text-center shadow-sm">
+        <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
           <Check size={28} />
         </div>
-        <h3 className="text-2xl font-extrabold text-green-900 mb-2">Thank You!</h3>
-        <p className="text-green-800 font-medium mb-3">
+        <h3 className="text-2xl font-extrabold text-emerald-900 dark:text-emerald-100 mb-2">Thank You!</h3>
+        <p className="text-emerald-800 dark:text-emerald-200 font-medium mb-3">
           Your inquiry has been sent directly to our operations team.
         </p>
-        <p className="text-sm text-slate-600 max-w-md mx-auto">
+        <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
           We will review your requirements and reach out to you within <strong>2 hours</strong> during operational shifts.
         </p>
       </div>
@@ -322,7 +326,7 @@ export function LeadForm({
     <>
       <form onSubmit={handleSubmit} className="space-y-6">
         {apiError && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+          <div className="p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 rounded-xl text-rose-700 dark:text-rose-300 text-sm font-medium">
             {apiError}
           </div>
         )}
@@ -425,9 +429,9 @@ export function LeadForm({
             type="checkbox"
             checked={formData.consent}
             onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-            className="mt-1 w-5 h-5 cursor-pointer"
+            className="mt-1 w-5 h-5 cursor-pointer accent-primary-orange rounded"
           />
-          <label htmlFor="consent" className="text-sm text-gray-600 cursor-pointer">
+          <label htmlFor="consent" className="text-sm text-slate-600 dark:text-slate-300 cursor-pointer font-medium">
             I agree to be contacted regarding my inquiry by Durga Dulari Enterprises.
             {errors.consent && <p className="text-red-500 text-sm mt-1">{errors.consent}</p>}
           </label>
@@ -439,11 +443,12 @@ export function LeadForm({
           size="lg"
           fullWidth
           disabled={isLoading}
+          className="shadow-lg shadow-orange-500/25 hover:shadow-orange-500/35 font-bold btn-premium"
         >
           {isLoading ? 'Submitting...' : submitButtonText}
         </Button>
 
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-slate-500 dark:text-slate-400 text-center font-medium">
           Your information is safe with us. We never spam.
         </p>
       </form>

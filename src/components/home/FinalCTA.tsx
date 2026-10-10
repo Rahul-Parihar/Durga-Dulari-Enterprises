@@ -6,20 +6,21 @@ import { ArrowRight, PhoneCall } from 'lucide-react';
 
 export function FinalCTA() {
   return (
-    <section className="bg-gradient-to-br from-[#0B2545] to-[#040e1b] py-16 sm:py-20 text-white relative overflow-hidden dark-industrial-grid">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-orange/5 rounded-full blur-[140px] pointer-events-none animate-glow-drift-2" />
+    <section className="bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-[#0B2545] dark:to-[#040e1b] pt-10 sm:pt-12 pb-5 sm:pb-6 text-slate-900 dark:text-white relative overflow-hidden transition-colors duration-300 border-t border-slate-200/80 dark:border-slate-800/80">
+      <div className="absolute inset-0 industrial-grid dark:dark-industrial-grid opacity-20 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-orange/5 dark:bg-primary-orange/10 rounded-full blur-[140px] pointer-events-none animate-glow-drift-2" />
 
-      <Container>
+      <Container className="relative z-10">
         <div className="text-center space-y-7 sm:space-y-8 max-w-4xl mx-auto min-w-0">
           <div className="space-y-4">
-            <span className="inline-flex max-w-full items-center gap-1.5 bg-primary-orange/15 border border-primary-orange/30 px-3 py-1.5 sm:px-3.5 rounded-full text-[10px] sm:text-xs font-bold uppercase text-primary-orange leading-snug">
+            <span className="inline-flex max-w-full items-center gap-1.5 bg-primary-orange/10 dark:bg-primary-orange/15 border border-primary-orange/30 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase text-primary-orange leading-snug shadow-sm">
               Immediate Capacity Available
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight break-words text-balance">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary-navy dark:text-white leading-tight break-words text-balance transition-colors duration-300">
               Need Skilled Textile Manpower or <br className="hidden sm:block" />
-              <span className="text-gradient-orange">Emergency Maintenance</span> This Week?
+              <span className="text-primary-orange">Emergency Maintenance</span> This Week?
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed break-words">
+            <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed break-words transition-colors duration-300">
               Don't let production bottlenecks, machine breakdowns, or labor shortages disrupt your spinning or weaving schedules. Deploy pre-vetted teams instantly.
             </p>
           </div>
@@ -28,7 +29,7 @@ export function FinalCTA() {
             <Button
               variant="secondary"
               size="lg"
-              className="w-full sm:w-auto flex items-center gap-2 shadow-lg font-bold group btn-premium"
+              className="w-full sm:w-auto flex items-center gap-2 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 font-bold group btn-premium"
               asChild
             >
               <Link href="/contact">
@@ -39,18 +40,18 @@ export function FinalCTA() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto flex items-center gap-2 border-2 border-black bg-white text-primary-navy hover:bg-primary-orange hover:border-primary-orange hover:text-white dark:border-white/35 dark:bg-white/10 dark:text-white dark:hover:bg-primary-orange dark:hover:border-primary-orange font-bold btn-premium shadow-none hover:shadow-none"
+              className="group w-full sm:w-auto flex items-center gap-2 border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-primary-navy dark:text-white hover:bg-primary-orange hover:border-primary-orange hover:text-white dark:hover:bg-primary-orange dark:hover:border-primary-orange dark:hover:text-white font-bold btn-premium shadow-sm hover:shadow-lg transition-all duration-300"
               asChild
             >
               <Link href="/#request-callback">
-                <PhoneCall size={18} className="shrink-0" />
-                <span>Request Callback</span>
+                <PhoneCall size={18} className="shrink-0 text-primary-orange group-hover:text-white transition-colors" />
+                <span className="transition-colors group-hover:text-white">Request Callback</span>
               </Link>
             </Button>
           </div>
 
-          <div className="pt-8 border-t border-slate-800">
-            <p className="text-slate-400 text-[11px] sm:text-xs md:text-sm font-semibold uppercase leading-relaxed break-words">
+          <div className="pt-5 sm:pt-6 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+            <p className="text-slate-500 dark:text-slate-400 text-[11px] sm:text-xs md:text-sm font-semibold uppercase tracking-wider leading-relaxed break-words transition-colors duration-300">
               Available 24×7 • Pan India Service • Local Cluster-based Support
             </p>
           </div>

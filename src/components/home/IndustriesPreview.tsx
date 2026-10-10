@@ -85,7 +85,7 @@ export function IndustriesPreview() {
                 </Button>
 
                 <Link
-                  href="/industries"
+                  href={`/industries/${industry.slug}`}
                   className="group/link inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary-orange hover:text-primary-orange"
                 >
                   <span>Learn More</span>

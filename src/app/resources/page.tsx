@@ -84,8 +84,6 @@ export default function ResourcesPage() {
             {blogResources.slice(0, 12).map((resource) => (
               <Link key={resource.id} href={`/resources/${resource.slug}`} className="group h-full">
                 <Card className="relative h-full overflow-hidden border-slate-200/80 bg-white/90 p-0 shadow-[0_12px_35px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_45px_rgba(15,23,42,0.08)] dark:border-slate-800 dark:bg-slate-900/80">
-                  <div className="h-1.5 bg-gradient-to-r from-primary-orange via-orange-400 to-amber-300" aria-hidden="true" />
-
                   <div className="p-6">
                     <div className="mb-5 flex items-start justify-between gap-4">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-orange/10 text-primary-orange ring-1 ring-primary-orange/15">

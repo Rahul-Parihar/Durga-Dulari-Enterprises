@@ -24,6 +24,17 @@ import {
 export function IndustriesContent() {
   const [activeSector, setActiveSector] = useState<string>('all');
 
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '');
+      const searchParams = new URLSearchParams(window.location.search);
+      const sectorParam = searchParams.get('sector') || hash;
+      if (sectorParam && industries.some((ind) => ind.slug === sectorParam)) {
+        setActiveSector(sectorParam);
+      }
+    }
+  }, []);
+
   const isSingleSector = activeSector !== 'all';
 
   const filteredIndustries =
@@ -48,7 +59,7 @@ export function IndustriesContent() {
         {/* Ambient background plant image with dark overlay & subtle blur */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-luminosity filter blur-[1px] scale-105 pointer-events-none"
-          style={{ backgroundImage: "url('/images/industries-hero.jpg')" }}
+          style={{ backgroundImage: "url('/images/industries-hero.webp')" }}
         />
 
         {/* Gradient dark overlays to maintain high contrast and readability */}
@@ -124,7 +135,7 @@ export function IndustriesContent() {
                 {/* Image Container */}
                 <div className="relative rounded-xl overflow-hidden bg-slate-900 aspect-[16/11] sm:aspect-[16/10] lg:aspect-[4/3] w-full">
                   <Image
-                    src="/images/industries-hero.jpg"
+                    src="/images/industries-hero.webp"
                     alt="Industrial Floor Operations - Durga Dulari Enterprises Engineers & Technicians on Production Floor"
                     fill
                     priority
@@ -329,6 +340,13 @@ export function IndustriesContent() {
                           <span>Inquire for {industry.name}</span>
                           <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
                         </Link>
+                        <Link
+                          href={`/industries/${industry.slug}`}
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-primary-orange hover:text-orange-600 transition-colors py-1"
+                        >
+                          <span>Dedicated Detail Page</span>
+                          <ArrowRight size={13} />
+                        </Link>
                         <button
                           onClick={() => setActiveSector('all')}
                           className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-primary-navy dark:hover:text-white transition-colors py-1"
@@ -518,9 +536,13 @@ export function IndustriesContent() {
                           <ArrowRight size={13} className="group-hover/btn:translate-x-1.5 transition-transform duration-200" />
                         </Link>
 
-                        <span className="text-xs text-slate-400 font-semibold">
-                          PAN India Service
-                        </span>
+                        <Link
+                          href={`/industries/${industry.slug}`}
+                          className="text-xs font-bold text-primary-orange hover:text-orange-600 transition-colors inline-flex items-center gap-1 group/details"
+                        >
+                          <span>Full Details</span>
+                          <ArrowRight size={12} className="group-hover/details:translate-x-1 transition-transform" />
+                        </Link>
                       </div>
                     </div>
                   </div>

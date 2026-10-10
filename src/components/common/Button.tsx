@@ -1,5 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
+import { cn } from '@/lib/utils';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -34,7 +34,7 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const classes = clsx(
+  const classes = cn(
     'inline-flex max-w-full items-center justify-center text-center leading-snug transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed',
     variantClasses[variant],
     sizeClasses[size],
@@ -46,7 +46,7 @@ export function Button({
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children, {
       ...props,
-      className: clsx(classes, children.props.className),
+      className: cn(classes, children.props.className),
       'aria-disabled': isDisabled || undefined,
     });
   }

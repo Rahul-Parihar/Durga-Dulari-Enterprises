@@ -14,7 +14,7 @@ export function ResourcesPreview() {
   const featuredResources = blogResources.slice(0, 3);
 
   return (
-    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid pt-16 md:pt-24 lg:pt-32 pb-6 md:pb-8 lg:pb-10">
+    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid py-8 sm:py-12">
       <Container>
         <SectionHeading
           title="Industry Resources"
@@ -22,12 +22,10 @@ export function ResourcesPreview() {
           description="Access practical guides, industry reports, and best practices that help textile mills improve uptime, manpower planning, and operational control."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8 sm:mb-10">
           {featuredResources.map((resource) => (
             <Link key={resource.id} href={`/resources/${resource.slug}`} className="group h-full">
               <Card className="relative h-full cursor-pointer p-6 flex flex-col border-slate-200/80 dark:border-slate-800">
-                <div className="absolute inset-x-0 top-0 h-1 bg-primary-orange opacity-80" />
-
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary-orange/10 text-primary-orange shadow-sm border border-primary-orange/10 dark:border-primary-orange/20">
                     <FileText className="h-5 w-5" aria-hidden="true" />

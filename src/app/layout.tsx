@@ -1,10 +1,25 @@
 import type { Metadata } from 'next';
+import { Outfit, Inter } from 'next/font/google';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { SplashScreen } from '@/components/ui/SplashScreen';
 import { SmoothScroll } from '@/components/common/SmoothScroll';
 import './globals.css';
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-outfit',
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+  weight: ['300', '400', '500', '600', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'Durga Dulari Enterprises | Textile Manpower & Industrial Solutions',
@@ -17,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
+    <html lang="en" className={`${outfit.variable} ${inter.variable}`} suppressHydrationWarning style={{ colorScheme: 'dark' }}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -40,10 +55,8 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
       </head>
-      <body className="font-body text-neutral-text bg-white dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+      <body suppressHydrationWarning className="font-body text-neutral-text bg-white dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
         <SmoothScroll />
         <SplashScreen />
         <SiteHeader />

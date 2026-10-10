@@ -8,7 +8,7 @@ import { testimonials } from '@/data/testimonials';
 
 export function TestimonialsPreview() {
   return (
-    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 lg:pb-32">
+    <SectionWrapper bgColor="light" hasPadding={false} className="industrial-grid pt-6 md:pt-8 lg:pt-10 pb-8 md:pb-10 lg:pb-12">
       <Container>
         <SectionHeading
           title="Our Impact"
@@ -34,7 +34,7 @@ export function TestimonialsPreview() {
                   </div>
                   <Quote className="w-8 h-8 text-primary-orange/20" />
                 </div>
-                
+
                 <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed italic mb-8 font-medium">
                   "{t.content}"
                 </p>
@@ -59,39 +59,21 @@ export function TestimonialsPreview() {
           ))}
         </div>
 
-        {/* Info Strip and Confidentiality Statement */}
-        <div className="grid lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
-          {/* Reach Stats */}
-          <div className="lg:col-span-5 grid grid-cols-3 gap-4">
-            <div className="bg-[#0b2545] border border-slate-800 text-center py-6 px-3 rounded-2xl shadow-sm">
-              <div className="text-2xl md:text-3xl font-black text-white">150+</div>
-              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Mills Served</div>
-            </div>
-            
-            <div className="bg-[#0b2545] border border-slate-800 text-center py-6 px-3 rounded-2xl shadow-sm">
-              <div className="text-2xl md:text-3xl font-black text-white">PAN</div>
-              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">India Reach</div>
-            </div>
-
-            <div className="bg-[#0b2545] border border-slate-800 text-center py-6 px-3 rounded-2xl shadow-sm">
-              <div className="text-2xl md:text-3xl font-black text-white">15+</div>
-              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">Years Exp</div>
-            </div>
+        {/* Reach Stats */}
+        <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto">
+          <div className="bg-[#0b2545] border border-slate-800 text-center py-6 px-3 rounded-2xl shadow-sm">
+            <div className="text-2xl md:text-3xl font-black text-white">150+</div>
+            <div className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Mills Served</div>
           </div>
 
-          {/* Audit Verification */}
-          <div className="lg:col-span-7">
-            <div className="bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row gap-4 items-start">
-              <div className="w-12 h-12 rounded-xl bg-primary-orange/10 flex items-center justify-center text-primary-orange flex-shrink-0">
-                <CheckCircle2 size={24} />
-              </div>
-              <div>
-                <h4 className="font-extrabold text-primary-navy dark:text-white mb-1.5">Direct References Available Under NDA</h4>
-                <p className="text-slate-600 dark:text-slate-300 text-xs md:text-sm font-medium leading-relaxed">
-                  We respect client privacy. Detailed case study audits, system logs, and direct contact details of our active mill managers can be shared with qualified prospects upon request.
-                </p>
-              </div>
-            </div>
+          <div className="bg-[#0b2545] border border-slate-800 text-center py-6 px-3 rounded-2xl shadow-sm">
+            <div className="text-2xl md:text-3xl font-black text-white">PAN</div>
+            <div className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">India Reach</div>
+          </div>
+
+          <div className="bg-[#0b2545] border border-slate-800 text-center py-6 px-3 rounded-2xl shadow-sm">
+            <div className="text-2xl md:text-3xl font-black text-white">20+</div>
+            <div className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Years Exp</div>
           </div>
         </div>
       </Container>

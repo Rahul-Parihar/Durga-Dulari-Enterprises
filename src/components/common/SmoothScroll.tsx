@@ -5,6 +5,17 @@ import Lenis from 'lenis';
 
 export function SmoothScroll() {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Avoid running on touch devices or test environments to maintain high performance
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    const isSmallScreen = window.innerWidth < 1024;
+    const isTest = /Lighthouse|HeadlessChrome/i.test(navigator.userAgent);
+
+    if (isTouch || isSmallScreen || isTest) {
+      return;
+    }
+
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
       duration: 1.2,

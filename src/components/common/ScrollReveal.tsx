@@ -33,7 +33,7 @@ export function ScrollReveal({
       },
       {
         threshold,
-        rootMargin: '0px 0px -50px 0px', // Trigger slightly before full entrance
+        rootMargin: '200px 0px 0px 0px', // Trigger very early — 200px before element enters viewport
       }
     );
 
@@ -60,8 +60,8 @@ export function ScrollReveal({
       style={transitionStyles}
       className={`transform transition-all ease-out ${
         isVisible
-          ? 'translate-y-0 opacity-100 blur-none scale-100'
-          : 'translate-y-8 opacity-0 blur-md scale-[0.98]'
+          ? 'translate-y-0 opacity-100'
+          : 'translate-y-2 opacity-0'
       } ${className}`}
     >
       {children}
