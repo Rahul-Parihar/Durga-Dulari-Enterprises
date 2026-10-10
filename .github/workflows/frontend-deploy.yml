@@ -64,9 +64,25 @@ jobs:
       - name: Clear Next.js cache
         run: rm -rf .next
 
-      - run: npm ci
-      - run: npm run lint --if-present
-      - run: npm test --if-present
+      
+      - name: Verify package files
+        run: |
+          pwd
+          git rev-parse --show-toplevel
+          ls -la
+          test -f package.json
+          test -f package-lock.json
+          node -p "require('./package-lock.json').lockfileVersion"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Test
+        run: npm test --if-present
+
 
   # ── Job 2: Build, Scan & Push ──────────────────────────────
   build-and-push:
