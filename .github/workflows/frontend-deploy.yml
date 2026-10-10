@@ -1,15 +1,28 @@
 name: Frontend - Build & Deploy to EC2
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.js'
+      - 'Dockerfile'
+      - '.github/workflows/**'
+
   push:
     branches: [main, frontend]
     paths:
       - 'src/**'
       - 'public/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'next.config.js'
       - 'Dockerfile'
-      - '.github/workflows/frontend-deploy.yml'
+      - '.github/workflows/**'
+
   workflow_dispatch:
 
 concurrency:
@@ -369,7 +382,7 @@ jobs:
               }]
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         continue-on-error: true
         
