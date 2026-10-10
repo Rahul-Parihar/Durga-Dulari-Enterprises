@@ -374,6 +374,7 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         continue-on-error: true
 
+      
       - name: Notify Slack - Failure
         if: |
           needs.ci.result == 'failure' ||
@@ -383,23 +384,24 @@ jobs:
         with:
           payload: |
             {
-              "text": "❌ *Deployment Failed* - Durga Dulari Enterprises",
+              "text": "❌ Deployment Failed - Durga Dulari Enterprises",
               "attachments": [{
                 "color": "danger",
                 "fields": [
-                  { "title": "Repo",   "value": "${{ github.repository }}", "short": true },
-                  { "title": "SHA",    "value": "${{ github.sha }}",        "short": true },
-                  { "title": "Actor",  "value": "${{ github.actor }}",      "short": true },
-                  { "title": "CI",     "value": "${{ needs.ci.result }}",             "short": true },
-                  { "title": "Build",  "value": "${{ needs.build-and-push.result }}", "short": true },
-                  { "title": "Deploy", "value": "${{ needs.deploy.result }}",         "short": true },
+                  { "title": "Repo", "value": "${{ github.repository }}", "short": true },
+                  { "title": "SHA", "value": "${{ github.sha }}", "short": true },
+                  { "title": "Actor", "value": "${{ github.actor }}", "short": true },
+                  { "title": "CI", "value": "${{ needs.ci.result }}", "short": true },
+                  { "title": "Build", "value": "${{ needs.build-and-push.result }}", "short": true },
+                  { "title": "Deploy", "value": "${{ needs.deploy.result }}", "short": true },
                   { "title": "Logs", "value": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "short": false }
                 ]
               }]
             }
         env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         continue-on-error: true
+
         
 
