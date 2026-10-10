@@ -1,15 +1,28 @@
 name: Frontend - Build & Deploy to EC2
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.js'
+      - 'Dockerfile'
+      - '.github/workflows/**'
+
   push:
     branches: [main, frontend]
     paths:
       - 'src/**'
       - 'public/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'next.config.js'
       - 'Dockerfile'
-      - '.github/workflows/frontend-deploy.yml'
+      - '.github/workflows/**'
+
   workflow_dispatch:
 
 concurrency:
@@ -51,9 +64,25 @@ jobs:
       - name: Clear Next.js cache
         run: rm -rf .next
 
-      - run: npm ci
-      - run: npm run lint --if-present
-      - run: npm test --if-present
+      
+      - name: Verify package files
+        run: |
+          pwd
+          git rev-parse --show-toplevel
+          ls -la
+          test -f package.json
+          test -f package-lock.json
+          node -p "require('./package-lock.json').lockfileVersion"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Test
+        run: npm test --if-present
+
 
   # ── Job 2: Build, Scan & Push ──────────────────────────────
   build-and-push:
@@ -345,6 +374,7 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         continue-on-error: true
 
+      
       - name: Notify Slack - Failure
         if: |
           needs.ci.result == 'failure' ||
@@ -354,16 +384,16 @@ jobs:
         with:
           payload: |
             {
-              "text": "❌ *Deployment Failed* - Durga Dulari Enterprises",
+              "text": "❌ Deployment Failed - Durga Dulari Enterprises",
               "attachments": [{
                 "color": "danger",
                 "fields": [
-                  { "title": "Repo",   "value": "${{ github.repository }}", "short": true },
-                  { "title": "SHA",    "value": "${{ github.sha }}",        "short": true },
-                  { "title": "Actor",  "value": "${{ github.actor }}",      "short": true },
-                  { "title": "CI",     "value": "${{ needs.ci.result }}",             "short": true },
-                  { "title": "Build",  "value": "${{ needs.build-and-push.result }}", "short": true },
-                  { "title": "Deploy", "value": "${{ needs.deploy.result }}",         "short": true },
+                  { "title": "Repo", "value": "${{ github.repository }}", "short": true },
+                  { "title": "SHA", "value": "${{ github.sha }}", "short": true },
+                  { "title": "Actor", "value": "${{ github.actor }}", "short": true },
+                  { "title": "CI", "value": "${{ needs.ci.result }}", "short": true },
+                  { "title": "Build", "value": "${{ needs.build-and-push.result }}", "short": true },
+                  { "title": "Deploy", "value": "${{ needs.deploy.result }}", "short": true },
                   { "title": "Logs", "value": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}", "short": false }
                 ]
               }]
@@ -372,5 +402,6 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
         continue-on-error: true
+
         
 

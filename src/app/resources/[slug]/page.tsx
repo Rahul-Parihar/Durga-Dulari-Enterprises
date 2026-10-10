@@ -86,4 +86,3 @@ export default async function ResourceDetailPage({
     </main>
   );
 }
-
