@@ -1,0 +1,36 @@
+# Dependencies
+node_modules
+.npm
+
+# Build output
+.next
+out
+
+# Frontend subfolder (dev artifacts)
+frontend/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Git
+.git
+.gitignore
+
+# Terraform
+terraform/
+
+# Development files
+*.md
+.vscode
+.eslintrc.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
