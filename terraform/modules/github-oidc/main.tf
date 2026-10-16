@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "github_assume_role" {
 resource "aws_iam_role" "github_actions" {
   name                 = "${var.name_prefix}-github-actions-role"
   assume_role_policy   = data.aws_iam_policy_document.github_assume_role.json
-  description = "Role for GitHub Actions OIDC - Rahul-Parihar/Durga-Dulari-Enterprises"
+  description          = "Role for GitHub Actions OIDC - Rahul-Parihar/Durga-Dulari-Enterprises"
   max_session_duration = 3600 # 1 hour max — minimum needed for deployment
 
   tags = { Name = "${var.name_prefix}-github-actions-role" }

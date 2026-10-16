@@ -180,3 +180,27 @@ variable "owner" {
     error_message = "Owner cannot be empty."
   }
 }
+
+variable "github_token" {
+  description = "GitHub Personal Access Token with repo and admin permissions"
+  type        = string
+  sensitive   = true
+}
+
+variable "resend_api_key" {
+  description = "Resend API key for email service"
+  type        = string
+  sensitive   = true
+}
+
+variable "resend_from_email" {
+  description = "From email address for Resend"
+  type        = string
+  default     = ""
+}
+
+variable "contact_notification_email" {
+  description = "Email to receive contact form notifications"
+  type        = string
+  default     = ""
+}

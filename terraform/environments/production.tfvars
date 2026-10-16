@@ -15,8 +15,10 @@ github_org        = "Rahul-Parihar"
 github_repository = "Durga-Dulari-Enterprises"
 github_branch     = "main"
 
-ecr_image_retention_count = 10
-enable_cloudwatch         = true
-enable_alb                = false
-enable_route53            = false
-domain_name               = ""
+ecr_image_retention_count  = 10
+enable_cloudwatch          = true
+enable_alb                 = false
+enable_route53             = false
+domain_name                = ""
+resend_from_email          = "Durga Dulari Enterprises <onboarding@resend.dev>"
+contact_notification_email = "anandcoder0@gmail.com"
