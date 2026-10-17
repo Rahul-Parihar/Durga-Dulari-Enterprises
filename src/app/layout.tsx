@@ -1,5 +1,4 @@
-```tsx
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
@@ -61,4 +60,4 @@ export default function RootLayout({
     </html>
   );
 }
-```
+
