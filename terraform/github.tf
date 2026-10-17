@@ -46,3 +46,4 @@ resource "github_actions_secret" "contact_notification_email" {
   secret_name = "CONTACT_NOTIFICATION_EMAIL"
   value       = var.contact_notification_email
 }
+

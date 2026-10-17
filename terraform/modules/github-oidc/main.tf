@@ -40,9 +40,9 @@ data "aws_iam_policy_document" "github_assume_role" {
 
     # Restrict to specific repo and branch — least privilege
     condition {
-      test     = "StringLike"
+      test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_org}/${var.github_repository}:ref:refs/heads/${var.github_branch}"]
+      values   = ["repo:Rahul-Parihar/Durga-Dulari-Enterprises:environment:production"]
     }
   }
 }
@@ -60,6 +60,7 @@ resource "aws_iam_role" "github_actions" {
 # Least privilege policy for GitHub Actions:
 # - ECR: push images, read/delete for lifecycle management
 # - Cannot touch EC2, VPC, IAM — only the container registry
+
 data "aws_iam_policy_document" "github_actions" {
   # ECR authentication
   statement {
@@ -68,7 +69,7 @@ data "aws_iam_policy_document" "github_actions" {
     resources = ["*"]
   }
 
-  # ECR image operations (push, pull, scan results)
+  # ECR image operations
   statement {
     effect = "Allow"
     actions = [
@@ -79,16 +80,38 @@ data "aws_iam_policy_document" "github_actions" {
       "ecr:PutImage",
       "ecr:UploadLayerPart",
       "ecr:BatchGetImage",
-      "ecr:BatchDeleteImage", # for deleting vulnerable images
+      "ecr:BatchDeleteImage",
       "ecr:DescribeImages",
     ]
     resources = [var.ecr_repository]
   }
 
-  # CloudWatch — publish pipeline metrics (optional)
+  # CloudWatch metrics
   statement {
     effect    = "Allow"
     actions   = ["cloudwatch:PutMetricData"]
+    resources = ["*"]
+  }
+
+  # Allow SSM commands only on the production EC2 instance
+  statement {
+    sid     = "SSMDeployToProductionInstance"
+    effect  = "Allow"
+    actions = ["ssm:SendCommand"]
+    resources = [
+      "arn:aws:ssm:ap-south-1::document/AWS-RunShellScript",
+      "arn:aws:ec2:ap-south-1:311752058356:instance/i-022c734cc8fde1498"
+    ]
+  }
+
+  # Read SSM command results
+  statement {
+    sid    = "SSMReadDeploymentResults"
+    effect = "Allow"
+    actions = [
+      "ssm:GetCommandInvocation",
+      "ssm:ListCommandInvocations"
+    ]
     resources = ["*"]
   }
 }
