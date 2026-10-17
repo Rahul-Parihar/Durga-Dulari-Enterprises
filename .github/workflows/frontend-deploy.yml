@@ -361,10 +361,13 @@ jobs:
 
           if os.environ["UPDATE_COMPOSE"].lower() == "true":
               compose = os.environ["COMPOSE_B64"]
-              commands.append(
-                  "printf '%s' " + shlex.quote(compose) +
-                  " | base64 -d > /opt/durga-dulari/docker-compose.prod.yml"
-              )
+                        commands.append(
+              "printf '%s' " + shlex.quote(script_b64)
+              + " | base64 -d > /tmp/durga-dulari-deploy.sh"
+              + " && chmod 700 /tmp/durga-dulari-deploy.sh"
+              + " && " + env_prefix
+              + " bash /tmp/durga-dulari-deploy.sh"
+          )
 
           script_b64 = os.environ["DEPLOY_SCRIPT_B64"]
           exports = {
