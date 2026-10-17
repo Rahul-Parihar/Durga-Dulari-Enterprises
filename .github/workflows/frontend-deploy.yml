@@ -11,6 +11,7 @@ on:
       - 'package-lock.json'
       - 'next.config.js'
       - 'Dockerfile'
+      - 'docker-compose.prod.yml'
       - '.github/workflows/**'
       - 'terraform/**'
 
@@ -23,6 +24,7 @@ on:
       - 'package-lock.json'
       - 'next.config.js'
       - 'Dockerfile'
+      - 'docker-compose.prod.yml'
       - '.github/workflows/**'
       - 'terraform/**'
 
@@ -94,6 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: ci
+    environment: production
 
     outputs:
       image: ${{ steps.meta.outputs.image }}
@@ -189,7 +192,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-
+      
+     
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -365,15 +369,13 @@ jobs:
 
           if os.environ["UPDATE_COMPOSE"].lower() == "true":
               compose = os.environ["COMPOSE_B64"]
-                        commands.append(
-              "printf '%s' " + shlex.quote(script_b64)
-              + " | base64 -d > /tmp/durga-dulari-deploy.sh"
-              + " && chmod 700 /tmp/durga-dulari-deploy.sh"
-              + " && " + env_prefix
-              + " bash /tmp/durga-dulari-deploy.sh"
-          )
+              commands.append(
+                  "printf '%s' " + shlex.quote(compose)
+                  + " | base64 -d > /opt/durga-dulari/docker-compose.prod.yml"
+              )
 
           script_b64 = os.environ["DEPLOY_SCRIPT_B64"]
+
           exports = {
               "NEW_IMAGE": os.environ["NEW_IMAGE"],
               "AWS_REGION": os.environ["AWS_REGION"],
@@ -382,14 +384,18 @@ jobs:
               "DEPLOY_ACTOR": os.environ["DEPLOY_ACTOR"],
               "CONTAINER_NAME": os.environ["CONTAINER_NAME"],
           }
+
           env_prefix = " ".join(
-              f"{key}={shlex.quote(value)}" for key, value in exports.items()
+              f"{key}={shlex.quote(value)}"
+              for key, value in exports.items()
           )
+
           commands.append(
-              "printf '%s' " + shlex.quote(script_b64) +
-              " | base64 -d > /tmp/durga-dulari-deploy.sh && "
-              "chmod 700 /tmp/durga-dulari-deploy.sh && "
-              + env_prefix + " bash /tmp/durga-dulari-deploy.sh"
+              "printf '%s' " + shlex.quote(script_b64)
+              + " | base64 -d > /tmp/durga-dulari-deploy.sh"
+              + " && chmod 700 /tmp/durga-dulari-deploy.sh"
+              + " && " + env_prefix
+              + " bash /tmp/durga-dulari-deploy.sh"
           )
 
           with open("ssm-parameters.json", "w", encoding="utf-8") as handle:
