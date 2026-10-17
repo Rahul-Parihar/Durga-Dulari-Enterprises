@@ -50,7 +50,6 @@ jobs:
     
 
     steps:
-      # Fix 1: fetch-depth: 2 so git diff HEAD~1 works reliably
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
@@ -87,6 +86,7 @@ jobs:
   # ── Job 2: Build, Scan & Push ──────────────────────────────
   build-and-push:
     name: Build, Scan & Push
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: ci
@@ -175,172 +175,264 @@ jobs:
   # ── Job 3: Deploy ──────────────────────────────────────────
   deploy:
     name: Deploy to EC2
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: build-and-push
     environment: production
 
     steps:
-      # Fix 1: fetch-depth: 2 for reliable git diff
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      # Fix 1: Use github.event.before as fallback for shallow clones
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Check if compose file changed
         id: compose-changed
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
         run: |
-          BASE="${{ github.event.before }}"
-          # Fallback to HEAD~1 if event.before is unavailable (e.g. workflow_dispatch)
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          BASE="$EVENT_BEFORE"
           if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
             BASE="HEAD~1"
           fi
-          git diff --name-only "$BASE" HEAD | grep -q 'docker-compose.prod.yml' \
-            && echo "changed=true" >> $GITHUB_OUTPUT \
-            || echo "changed=false" >> $GITHUB_OUTPUT
 
-      - name: Copy docker-compose to EC2
-        if: steps.compose-changed.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: docker-compose.prod.yml
-          target: ${{ env.DEPLOY_PATH }}
-          strip_components: 1
-
-      - name: Deploy with rollback
-        uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            set -e
-            cd ${{ env.DEPLOY_PATH }}
-
-            # Fix 7: File-level deployment lock prevents overlapping deployments
-            exec 9>/tmp/durga-dulari-deploy.lock
-            if ! flock -n 9; then
-              echo "Another deployment is in progress. Exiting."
-              exit 1
+          if git rev-parse --verify "$BASE" >/dev/null 2>&1; then
+            if git diff --name-only "$BASE" HEAD | grep -qx 'docker-compose.prod.yml'; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "changed=false" >> "$GITHUB_OUTPUT"
             fi
+          else
+            # If the base commit is unavailable, send the current compose file safely.
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
-            aws ecr get-login-password --region ${{ env.AWS_REGION }} | \
-              docker login --username AWS --password-stdin \
-              ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+      - name: Prepare SSM deployment payload
+        id: prepare-deploy
+        env:
+          UPDATE_COMPOSE: ${{ steps.compose-changed.outputs.changed }}
+        run: |
+          set -euo pipefail
 
-            # Fix 6: Record deployment metadata
-            DEPLOY_META="SHA=${{ github.sha }} | Actor=${{ github.actor }} | Time=$(date -u)"
-            echo "$DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
+          cat > deploy-ssm.sh <<'REMOTE_SCRIPT'
+          #!/usr/bin/env bash
+          set -Eeuo pipefail
 
-            # Save previous image for rollback
-            PREVIOUS_IMAGE=$(docker inspect \
-              --format='{{index .Config.Image}}' \
-              ${{ env.CONTAINER_NAME }} 2>/dev/null || echo "none")
-            echo "Previous image: $PREVIOUS_IMAGE"
+          cd /opt/durga-dulari
+          exec 9>/tmp/durga-dulari-deploy.lock
+          flock -n 9 || {
+            echo "Another deployment is in progress. Exiting."
+            exit 1
+          }
 
-            NEW_IMAGE=${{ needs.build-and-push.outputs.image }}
-            echo "New image: $NEW_IMAGE"
+          aws ecr get-login-password --region "$AWS_REGION" |
+            docker login --username AWS --password-stdin \
+              "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
 
-            # Fix 2: Pull image directly - no redundant docker compose pull
-            docker pull $NEW_IMAGE
+          DEPLOY_META="SHA=${DEPLOY_SHA} | Actor=${DEPLOY_ACTOR} | Time=$(date -u)"
+          echo "$DEPLOY_META" >> deployments.log
 
-            export IMAGE=$NEW_IMAGE
-            export CONTAINER_NAME=${{ env.CONTAINER_NAME }}
+          PREVIOUS_IMAGE=$(docker inspect \
+            --format='{{index .Config.Image}}' \
+            "$CONTAINER_NAME" 2>/dev/null || echo "none")
+          echo "Previous image: $PREVIOUS_IMAGE"
+          echo "New image: $NEW_IMAGE"
 
-            # Fix 2: Use --force-recreate without pull (already pulled above)
-            docker compose -f docker-compose.prod.yml up -d --force-recreate --no-deps frontend
+          docker pull "$NEW_IMAGE"
+          export IMAGE="$NEW_IMAGE" CONTAINER_NAME
 
-            # Reusable health check function
-            # Fix 1: Works with or without Docker HEALTHCHECK defined
-            # Fix 4: Checks both container state AND HTTP endpoint
-            check_health() {
-              local container=$1
-              local label=$2
-              local max_attempts=30
+          check_health() {
+            local container="$1"
+            local label="$2"
+            local running health
+            echo "--- Health check: $label ---"
 
-              echo "--- Health check: $label ---"
-              for i in $(seq 1 $max_attempts); do
-                # Check container is running
-                RUNNING=$(docker inspect \
-                  --format='{{.State.Running}}' \
-                  $container 2>/dev/null || echo "false")
+            for i in $(seq 1 30); do
+              running=$(docker inspect --format='{{.State.Running}}' \
+                "$container" 2>/dev/null || echo false)
 
-                if [ "$RUNNING" != "true" ]; then
-                  echo "[$i/$max_attempts] Not running yet..."
-                  sleep 2
-                  continue
-                fi
-
-                # Check Docker HEALTHCHECK if defined - gracefully handle missing
-                HEALTH=$(docker inspect \
+              if [ "$running" = "true" ]; then
+                health=$(docker inspect \
                   --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}no-healthcheck{{end}}' \
-                  $container 2>/dev/null || echo "unknown")
+                  "$container" 2>/dev/null || echo unknown)
 
-                echo "[$i/$max_attempts] Running=true | Health=$HEALTH"
-
-                # Proceed if healthy or no HEALTHCHECK defined
-                if [ "$HEALTH" = "healthy" ] || [ "$HEALTH" = "no-healthcheck" ]; then
-                  # Fix 4: HTTP check - use / if /api/health not available
-                  if wget -qO- --timeout=5 http://localhost:3000/api/health > /dev/null 2>&1; then
-                    echo "HTTP health check passed on /api/health"
-                    return 0
-                  elif wget -qO- --timeout=5 http://localhost:3000/ > /dev/null 2>&1; then
-                    echo "HTTP health check passed on /"
+                if [ "$health" = "healthy" ] || [ "$health" = "no-healthcheck" ]; then
+                  if wget -qO- --timeout=5 http://localhost:3000/api/health >/dev/null 2>&1 || \
+                     wget -qO- --timeout=5 http://localhost:3000/ >/dev/null 2>&1; then
+                    echo "HTTP health check passed."
                     return 0
                   fi
                 fi
-
-                sleep 2
-              done
-
-              echo "Health check failed after $((max_attempts * 2))s"
-              return 1
-            }
-
-            # Deploy health check
-            if check_health "${{ env.CONTAINER_NAME }}" "new deployment"; then
-              echo "Deployment successful!"
-              # Fix 4: Safe pruning - dangling images only, older than 72h
-              docker image prune -f --filter until=72h
-              echo "DEPLOYED: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
-            else
-              echo "Deployment failed - initiating rollback to: $PREVIOUS_IMAGE"
-
-              # Fix 3: Stop only frontend - not all services in compose file
-              docker compose -f docker-compose.prod.yml stop frontend
-              docker compose -f docker-compose.prod.yml rm -f frontend
-
-              if [ "$PREVIOUS_IMAGE" != "none" ]; then
-                # Fix 8: Verify previous image exists locally or pull from ECR
-                if ! docker image inspect "$PREVIOUS_IMAGE" > /dev/null 2>&1; then
-                  echo "Previous image not found locally - pulling from ECR..."
-                  docker pull "$PREVIOUS_IMAGE" || {
-                    echo "CRITICAL: Cannot pull previous image - manual intervention required"
-                    echo "ROLLBACK_PULL_FAILED: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
-                    exit 1
-                  }
-                fi
-
-                export IMAGE=$PREVIOUS_IMAGE
-                docker compose -f docker-compose.prod.yml up -d --force-recreate --no-deps frontend
-
-                # Fix 3: Same health check loop for rollback verification
-                if check_health "${{ env.CONTAINER_NAME }}" "rollback"; then
-                  echo "Rollback successful - previous version restored"
-                  echo "ROLLBACK_OK: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
-                else
-                  echo "CRITICAL: Rollback failed - manual intervention required"
-                  echo "ROLLBACK_FAILED: $DEPLOY_META" >> ${{ env.DEPLOY_PATH }}/deployments.log
-                fi
-              else
-                echo "No previous image available - cannot rollback"
               fi
 
+              echo "Attempt $i/30: waiting for application health..."
+              sleep 2
+            done
+
+            echo "Health check failed."
+            return 1
+          }
+
+          # Do not let a compose error bypass the rollback path; health check decides.
+          docker compose -f docker-compose.prod.yml \
+            up -d --force-recreate --no-deps frontend || \
+            echo "Compose up returned non-zero; checking deployment health."
+
+          if check_health "$CONTAINER_NAME" "new deployment"; then
+            echo "DEPLOYED: $DEPLOY_META" >> deployments.log
+            docker image prune -f --filter until=72h
+            echo "Deployment successful."
+            exit 0
+          fi
+
+          echo "Deployment failed. Starting rollback."
+          docker compose -f docker-compose.prod.yml stop frontend || true
+          docker compose -f docker-compose.prod.yml rm -f frontend || true
+
+          if [ "$PREVIOUS_IMAGE" = "none" ]; then
+            echo "No previous image available for rollback."
+            echo "ROLLBACK_FAILED: $DEPLOY_META" >> deployments.log
+            exit 1
+          fi
+
+          if ! docker image inspect "$PREVIOUS_IMAGE" >/dev/null 2>&1; then
+            docker pull "$PREVIOUS_IMAGE" || {
+              echo "ROLLBACK_PULL_FAILED: $DEPLOY_META" >> deployments.log
               exit 1
-            fi
+            }
+          fi
+
+          export IMAGE="$PREVIOUS_IMAGE"
+          docker compose -f docker-compose.prod.yml \
+            up -d --force-recreate --no-deps frontend || \
+            echo "Rollback compose command returned non-zero; checking health."
+
+          if check_health "$CONTAINER_NAME" "rollback"; then
+            echo "ROLLBACK_OK: $DEPLOY_META" >> deployments.log
+            echo "Previous version restored."
+          else
+            echo "ROLLBACK_FAILED: $DEPLOY_META" >> deployments.log
+            exit 1
+          fi
+
+          # Return failure so GitHub Actions correctly reports the failed new release.
+          exit 1
+          REMOTE_SCRIPT
+
+          echo "script_b64=$(base64 -w 0 deploy-ssm.sh)" >> "$GITHUB_OUTPUT"
+          if [ "$UPDATE_COMPOSE" = "true" ]; then
+            echo "compose_b64=$(base64 -w 0 docker-compose.prod.yml)" >> "$GITHUB_OUTPUT"
+          else
+            echo "compose_b64=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy through AWS Systems Manager
+        env:
+          NEW_IMAGE: ${{ needs.build-and-push.outputs.image }}
+          DEPLOY_SCRIPT_B64: ${{ steps.prepare-deploy.outputs.script_b64 }}
+          COMPOSE_B64: ${{ steps.prepare-deploy.outputs.compose_b64 }}
+          UPDATE_COMPOSE: ${{ steps.compose-changed.outputs.changed }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          DEPLOY_SHA: ${{ github.sha }}
+          DEPLOY_ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          export AWS_REGION="${{ env.AWS_REGION }}"
+          export CONTAINER_NAME="${{ env.CONTAINER_NAME }}"
+
+          python3 <<'PYTHON'
+          import json
+          import os
+          import shlex
+
+          commands = ["mkdir -p /opt/durga-dulari"]
+
+          if os.environ["UPDATE_COMPOSE"].lower() == "true":
+              compose = os.environ["COMPOSE_B64"]
+              commands.append(
+                  "printf '%s' " + shlex.quote(compose) +
+                  " | base64 -d > /opt/durga-dulari/docker-compose.prod.yml"
+              )
+
+          script_b64 = os.environ["DEPLOY_SCRIPT_B64"]
+          exports = {
+              "NEW_IMAGE": os.environ["NEW_IMAGE"],
+              "AWS_REGION": os.environ["AWS_REGION"],
+              "AWS_ACCOUNT_ID": os.environ["AWS_ACCOUNT_ID"],
+              "DEPLOY_SHA": os.environ["DEPLOY_SHA"],
+              "DEPLOY_ACTOR": os.environ["DEPLOY_ACTOR"],
+              "CONTAINER_NAME": os.environ["CONTAINER_NAME"],
+          }
+          env_prefix = " ".join(
+              f"{key}={shlex.quote(value)}" for key, value in exports.items()
+          )
+          commands.append(
+              "printf '%s' " + shlex.quote(script_b64) +
+              " | base64 -d > /tmp/durga-dulari-deploy.sh && "
+              "chmod 700 /tmp/durga-dulari-deploy.sh && "
+              + env_prefix + " bash /tmp/durga-dulari-deploy.sh"
+          )
+
+          with open("ssm-parameters.json", "w", encoding="utf-8") as handle:
+              json.dump({"commands": commands}, handle)
+          PYTHON
+
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids i-022c734cc8fde1498 \
+            --document-name AWS-RunShellScript \
+            --parameters file://ssm-parameters.json \
+            --comment "Durga Dulari deployment $GITHUB_SHA" \
+            --region "$AWS_REGION" \
+            --query 'Command.CommandId' \
+            --output text)
+
+          echo "SSM command ID: $COMMAND_ID"
+
+          for attempt in $(seq 1 90); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$COMMAND_ID" \
+              --instance-id i-022c734cc8fde1498 \
+              --region "$AWS_REGION" \
+              --query 'Status' --output text 2>/dev/null || echo Pending)
+
+            echo "SSM status: $STATUS"
+            case "$STATUS" in
+              Success)
+                aws ssm get-command-invocation \
+                  --command-id "$COMMAND_ID" \
+                  --instance-id i-022c734cc8fde1498 \
+                  --region "$AWS_REGION" \
+                  --query 'StandardOutputContent' --output text
+                exit 0
+                ;;
+              Failed|Cancelled|TimedOut|Cancelling)
+                aws ssm get-command-invocation \
+                  --command-id "$COMMAND_ID" \
+                  --instance-id i-022c734cc8fde1498 \
+                  --region "$AWS_REGION" \
+                  --query '[StatusDetails,StandardOutputContent,StandardErrorContent]' \
+                  --output json
+                exit 1
+                ;;
+            esac
+
+            sleep 5
+          done
+
+          echo "Timed out waiting for SSM command completion."
+          exit 1
 
   # ── Job 4: Notify ──────────────────────────────────────────
   notify:
